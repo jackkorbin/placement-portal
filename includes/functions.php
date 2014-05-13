@@ -1,6 +1,6 @@
 <?php
-	
-	function getuserProfileDetails(rollno){
+	/*
+	function getuserProfileDetails($rollno){
 	
 		$rollno = "'".$rollno."'";
 		$query = "SELECT * FROM studentsdata WHERE rollno = ".$rollno." WHERE isDeleted = 0 LIMIT 1" ;
@@ -14,7 +14,7 @@
 	
 	
 	
-	function saveUserProfile( $rollno,$name,CGPA,Age,Sex,qualifications,$institute,$alternareEmailid,$currentSemester){
+	function saveUserProfile( $rollnum,$name,$CGPA,$age,$sex,$qualifications,$institute,$alternareEmailid,$currentSemester){
 	
 		
 		$query = "INSERT INTO studentsdata (rollnum ,name ,CGPA,institute ,age ,sex ,alternareEmailid ,CurrnetSemester,isProfileComplete  ) 
@@ -27,7 +27,7 @@
 		
 	}
 	
-	function updateUserProfile( $rollno,$name,CGPA,Age,Sex,qualifications,$institute,$alternareEmailid,$currentSemester){
+	function updateUserProfile( $rollno,$name,$cgpa,$age,Sex,qualifications,$institute,$alternareEmailid,$currentSemester){
 	
 		
 		$query = "UPDATE studentsdata SET (name ,CGPA,institute ,age ,sex ,alternareEmailid ,CurrnetSemester ) 
@@ -42,15 +42,55 @@
 		
 	}
 	
-	
+	*/
 	function authenticateUser( $rollnum,$pass ) {
-	
-		return 1;
+        
+        $_SESSION = array();
+		
+        if(strlen($rollnum) == 10 ){
+			     $_SESSION['name']= $rollnum;
+                
+                $result = checkisProfileComplete($rollnum);
+                if($result){
+                    
+                     header("Location:mydashboard.php");
+                     exit;
+                }
+                else{
+                    header("Location:editprofile.php");
+                    exit;
+                }
+                
+               
+            }
+        else {
+            $message = "invalid rollnum";
+            return $message;
+        }
+        
+            
 		
 	}
+
+
+    function checkisProfileComplete($rollnum){
+        $query = "SELECT isProfileComplete , name FROM studentsdata WHERE rollnum = '{$rollnum}'";
+        $result = mysql_query($query);
+        
+        if (mysql_num_rows($result) == 1){
+            $fuser = mysql_fetch_array($result);
+            if( $fuser['isProfileComplete'] == 0 ){
+                return 0;
+            }
+            else if ( $fuser['isProfileComplete'] == 1 ){
+                $_SESSION['name'] = $fuser['name'];
+                return 1;
+            }
+        }
+    }
 	
 	
-	
+	/*
 	
 	
 	function getCompanyList(){
@@ -169,5 +209,6 @@
 		}
 	
 	}
+    */
 
 ?>

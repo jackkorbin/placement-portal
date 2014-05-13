@@ -10,8 +10,9 @@
 
 .singinbar{
     margin:10em auto;
+    margin-bottom: 0em;
     
-    height:25em;
+    
     width:33em;
     background-color:white;
     padding:40px;

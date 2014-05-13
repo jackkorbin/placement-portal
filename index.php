@@ -1,3 +1,36 @@
+<?php session_start(); ?>
+
+<?php
+	
+	$result = isset($_SESSION['name']);
+		if($result){
+			header("Location:mydashboard.php");
+            exit;
+		}
+?>
+<?php require_once("includes/functions.php"); ?>
+<?php require_once("includes/connection.php"); ?>
+
+<?php
+	
+	$message="";
+	
+	
+	if(isset($_POST['signin'])){
+		
+		$usern = $_POST['rollnum'];
+		$pas = $_POST['password'];
+		
+		$message = authenticateUser( $usern , $pas );
+        
+        
+		
+	}
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -48,20 +81,25 @@
             <div class="row signinrowheading">
                 <p>Sign in to <font color="#447fc8">Portal</font></p>
             </div>
-            <div class="row signinmiddle">
-                <form role="form">
-                      <div class="form-group">
-                        <input type="email" class="form-control formfix" id="exampleInputEmail1" placeholder="Username">
-                      </div>
-                      <div class="form-group">
-                        <input type="password" class="form-control formfix" id="exampleInputPassword1" placeholder="Password">
-                      </div>
-                </form>
-            </div>
-            <div class="row signinfooter">
-                <a href="mydashboard.php"><button class="btn btn-primary btn-signin">Sign In</button></a>
-            </div>
+            <form role="form" action="index.php" method="post">
+                <div class="row signinmiddle">
+
+                          <div class="form-group">
+                            <input type="text" class="form-control formfix" id="exampleInputEmail1" placeholder="Username" name="rollnum">
+                          </div>
+                          <div class="form-group">
+                            <input type="password" class="form-control formfix" id="exampleInputPassword1" placeholder="Password" name="password">
+                          </div>
+                          <font color="red"><?php echo $message; ?></font>
+                    
+                </div>
+                
+                <div class="signinfooter">
+                    <input type="submit" name="signin" class="btn btn-primary btn-signin" value="Sign In">
+                </div>
+            </form>
         </div>
+      
         
         <footer class="navbar navbar-fixed-bottom signinpagefooterbaap">
             <p class="small signinpagefooter">Placement Portal By <a href="https://www.facebook.com/tanuj304" target="_blank">Jack korbin</a></p>

@@ -1,3 +1,16 @@
+<?php session_start(); ?>
+<?php
+    if(isset($_SESSION["name"])){
+        $name = $_SESSION["name"];
+    }
+    else {
+        header("Location:index.php");
+        exit;
+    }
+?>
+<?php require_once("includes/functions.php"); ?>
+<?php require_once("includes/connection.php"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -42,7 +55,7 @@
       
         <header class="navbar navbar-fixed-top mydashboardpageheader">
             <div class="container">
-                <p class="navbar-brand mdb-p-header">Hi <font color="#447fc8">Jack Korbin</font></p>
+                <p class="navbar-brand mdb-p-header">Hi <font color="#447fc8"><?php echo $name ?></font></p>
 
                 <button class="navbar-toggle" data-toggle="collapse" data-target=".mybuttonid" style="background-color:black;">
                     <span class="icon-bar" style="background-color:white;"></span>
@@ -54,7 +67,7 @@
                     <ui class="nav navbar-nav navbar-right">
                         <li><a href="mydashboard.php" class="mdb-menutext">My Dashboard</a></li>
                         <li><a href="viewprofile.php" class="mdb-menutext">view profile</a></li>
-                         <li><a href="index.php" class="mdb-menutext">Logout</a></li>
+                         <li><a href="logout.php" class="mdb-menutext">Logout</a></li>
                     </ui>
                 </div>
             </div>
