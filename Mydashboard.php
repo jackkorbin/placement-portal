@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,7 +8,7 @@
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.css" rel="stylesheet">
-      <link href="style.css" rel="stylesheet">
+      <link href="css/style.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -53,10 +52,9 @@
 
                  <div class="collapse navbar-collapse mybuttonid"> 
                     <ui class="nav navbar-nav navbar-right">
-                        <li><a href="mydashboard.html" class="mdb-menutext-active">My Dashboard</a></li>
-                        <li><a href="editprofile.html" class="mdb-menutext">Edit profile</a></li>
-                        <li><a href="viewprofile.html" class="mdb-menutext">view profile</a></li>
-                         <li><a href="index.html" class="mdb-menutext">Logout</a></li>
+                        <li><a href="mydashboard.php" class="mdb-menutext-active">My Dashboard</a></li>
+                        <li><a href="viewprofile.php" class="mdb-menutext">view profile</a></li>
+                         <li><a href="index.php" class="mdb-menutext">Logout</a></li>
                     </ui>
                 </div>
             </div>
@@ -73,7 +71,8 @@
                           <div class="form-group-option">
                                 <div class="mdb-show-label">Show</div>
                                 <select class="form-control mdb-select">
-                                  <option selected >All</option>
+                                  <option selected>Active</option>
+                                  <option  >All</option>
                                   <option>Applied</option>
                                   <option>Unapplied</option>
                                 </select>
@@ -81,34 +80,32 @@
                       
                       
                           
-                          
                             <div class="row">
                                 <div class="thumbnail mdb-company-div">
                                     <div class="mdb-company-name text-center">
                                         <a href="" >Facebook</a>
                                     </div>
-                                    <div class="mdb-company-name mdb-details1">
-                                        <span class="mdb-appliedusers pull-left">Last date to apply : <font color="#447fc8">8-2-2014</font></span>
-                                        <span class="mdb-appliedusers">Applied users : <font color="#447fc8">843</font></span>
-                                    </div>
+                                    
                                     
                                     <div class="mdb-company-content">
-                                       <span class="mdb-appliedusers pull-left">Job Profile : 
-                                           <font color="#447fc8">Developer, Coder, etc.Developer, Coder, etc.</font>
+                                        <span class="mdb-appliedusers">Last date to apply : 
+                                            <font color="#447fc8">8-2-2014</font>
+                                        </span>
+                                        <span class="mdb-appliedusers pull-right">Min CGPA :
+                                            <font color="#447fc8">8.5</font>
                                         </span>
                                     </div>
                                     <div class="mdb-company-footer">
                                         
                                         <div class="row">
-                                            <div class="col-xs-7 mdb-com-footer-content">
-                                                    Min CGPA : <span class="mdb-mincgpanum">8.5</span>
+                                            <div class="col-xs-6 ">
+                                                <button class="btn btn-danger company-btn pull-left" data-toggle="modal" data-target="#com-rm-modal">
+                                                    Read more
+                                                </button>
                                             </div>
-                                            <div class="col-xs-5 ">
+                                            <div class="col-xs-6 ">
                                                 <button class="btn btn-success company-btn pull-right" id="apply">
                                                     Apply
-                                                </button>
-                                                <button class="btn btn-danger company-btn pull-right" data-toggle="modal" data-target="#com-rm-modal">
-                                                    Read more
                                                 </button>
                                             </div>
                                         </div>
@@ -127,27 +124,25 @@
                                     <div class="mdb-company-name text-center">
                                         <a href="" >Google</a>
                                     </div>
-                                    <div class="mdb-company-name mdb-details1">
-                                        <span class="mdb-appliedusers pull-left">Last date to apply : <font color="#447fc8">5-3-2614</font></span>
-                                        <span class="mdb-appliedusers">Applied users : <font color="#447fc8">129</font></span>
-                                    </div>
-                                    
                                     <div class="mdb-company-content">
-                                       <span class="mdb-appliedusers pull-left">Job Profile : 
-                                           <font color="#447fc8">Teacher, peon, etc.</font>
+                                        <span class="mdb-appliedusers">Last date to apply : 
+                                            <font color="#447fc8">8-2-2014</font>
+                                        </span>
+                                        <span class="mdb-appliedusers pull-right">Min CGPA :
+                                            <font color="#447fc8">8.5</font>
                                         </span>
                                     </div>
                                     <div class="mdb-company-footer">
+                                        
                                         <div class="row">
-                                            <div class="col-xs-7 mdb-com-footer-content">
-                                                    Min CGPA : <span class="mdb-mincgpanum">2.5</span>
+                                            <div class="col-xs-6 ">
+                                                <button class="btn btn-danger company-btn pull-left" data-toggle="modal" data-target="#com-rm-modal">
+                                                    Read more
+                                                </button>
                                             </div>
-                                            <div class="col-xs-5 ">
+                                            <div class="col-xs-6 ">
                                                 <button class="btn btn-success company-btn pull-right" id="apply">
                                                     Apply
-                                                </button>
-                                                <button class="btn btn-danger company-btn pull-right" data-toggle="modal" data-target="#com-rm-modal">
-                                                    Read more
                                                 </button>
                                             </div>
                                         </div>
@@ -160,28 +155,25 @@
                                     <div class="mdb-company-name text-center">
                                         <a href="" >Microsoft</a>
                                     </div>
-                                    <div class="mdb-company-name mdb-details1">
-                                        <span class="mdb-appliedusers pull-left">Last date to apply : <font color="#447fc8">1-24-2914</font></span>
-                                        <span class="mdb-appliedusers">Applied users : <font color="#447fc8">84345</font></span>
-                                    </div>
-                                    
                                     <div class="mdb-company-content">
-                                       <span class="mdb-appliedusers pull-left">Job Profile : 
-                                           <font color="#447fc8">etc.</font>
+                                        <span class="mdb-appliedusers">Last date to apply : 
+                                            <font color="#447fc8">8-2-2014</font>
+                                        </span>
+                                        <span class="mdb-appliedusers pull-right">Min CGPA :
+                                            <font color="#447fc8">8.5</font>
                                         </span>
                                     </div>
                                     <div class="mdb-company-footer">
                                         
                                         <div class="row">
-                                            <div class="col-xs-7 mdb-com-footer-content">
-                                                    Min CGPA : <span class="mdb-mincgpanum">9.5</span>
+                                            <div class="col-xs-6 ">
+                                                <button class="btn btn-danger company-btn pull-left" data-toggle="modal" data-target="#com-rm-modal">
+                                                    Read more
+                                                </button>
                                             </div>
-                                            <div class="col-xs-5 ">
+                                            <div class="col-xs-6 ">
                                                 <button class="btn btn-success company-btn pull-right" id="apply">
                                                     Apply
-                                                </button>
-                                                <button class="btn btn-danger company-btn pull-right" data-toggle="modal" data-target="#com-rm-modal">
-                                                    Read more
                                                 </button>
                                             </div>
                                         </div>
@@ -193,30 +185,27 @@
                             <div class="row">
                                 <div class="thumbnail mdb-company-div">
                                     <div class="mdb-company-name text-center">
-                                        <a href="" >Facebook</a>
+                                        <a href="" >Nasa</a>
                                     </div>
-                                    <div class="mdb-company-name mdb-details1">
-                                        <span class="mdb-appliedusers pull-left">Last date to apply : <font color="#447fc8">8-2-2014</font></span>
-                                        <span class="mdb-appliedusers">Applied users : <font color="#447fc8">843</font></span>
-                                    </div>
-                                    
                                     <div class="mdb-company-content">
-                                       <span class="mdb-appliedusers pull-left">Job Profile : 
-                                           <font color="#447fc8">Developer, Coder, etc.Developer, Coder, etc.</font>
+                                        <span class="mdb-appliedusers">Last date to apply : 
+                                            <font color="#447fc8">8-2-2014</font>
+                                        </span>
+                                        <span class="mdb-appliedusers pull-right">Min CGPA :
+                                            <font color="#447fc8">8.5</font>
                                         </span>
                                     </div>
                                     <div class="mdb-company-footer">
                                         
                                         <div class="row">
-                                            <div class="col-xs-7 mdb-com-footer-content">
-                                                    Min CGPA : <span class="mdb-mincgpanum">8.5</span>
+                                            <div class="col-xs-6 ">
+                                                <button class="btn btn-danger company-btn pull-left" data-toggle="modal" data-target="#com-rm-modal">
+                                                    Read more
+                                                </button>
                                             </div>
-                                            <div class="col-xs-5 ">
+                                            <div class="col-xs-6 ">
                                                 <button class="btn btn-success company-btn pull-right" id="apply">
                                                     Apply
-                                                </button>
-                                                <button class="btn btn-danger company-btn pull-right" data-toggle="modal" data-target="#com-rm-modal">
-                                                    Read more
                                                 </button>
                                             </div>
                                         </div>
@@ -295,20 +284,7 @@
                                                       <div class="vpp-content-text">4-2-2014</div>
                                                 </div>
                                               </div>
-                                            
-                                              <div class="col-sm-6">
-                                                  <div class="form-group">
-                                                      <label class="vpp-labelname">Applied users</label>
-                                                      <div class="vpp-content-text">127</div>
-                                                  </div>
-                                              </div>
-                                            
-                                              <div class="col-sm-6">
-                                                  <div class="form-group">
-                                                      <label class="vpp-labelname">Last date to UnApply</label>
-                                                      <div class="vpp-content-text">30-2-2014</div>
-                                                  </div>
-                                              </div>
+                                              
                                               <div class="col-sm-6"> 
                                                   <div class="form-group">
                                                       <label class="vpp-labelname">Discription</label>
@@ -325,6 +301,16 @@
                                                       </div>
                                                   </div>
                                               </div>
+                                            
+                                              <div class="col-sm-6">
+                                                  <div class="form-group">
+                                                      <label class="vpp-labelname">Applied users</label>
+                                                      <div class="vpp-content-text">127</div>
+                                                  </div>
+                                              </div>
+                                            
+                                              
+                                              
                                               <div class="col-sm-6">
                                                   <div class="form-group">
                                                       <label class="vpp-labelname">job profile offered</label>

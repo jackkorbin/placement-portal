@@ -59,7 +59,7 @@
                 </form>
             </div>
             <div class="row signinfooter">
-                <a href="mydashboard.html"><button class="btn btn-primary btn-signin">Sign In</button></a>
+                <a href="mydashboard.php"><button class="btn btn-primary btn-signin">Sign In</button></a>
             </div>
         </div>
         

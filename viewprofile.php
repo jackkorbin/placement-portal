@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>IIT2013113</title>
+    <title>My Profile</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -52,8 +52,9 @@
 
                  <div class="collapse navbar-collapse mybuttonid"> 
                     <ui class="nav navbar-nav navbar-right">
-                        <li><a href="mydashboard.html" class="mdb-menutext">My Dashboard</a></li>
-                         <li><a href="index.html" class="mdb-menutext">Logout</a></li>
+                        <li><a href="mydashboard.php" class="mdb-menutext">My Dashboard</a></li>
+                        <li><a href="viewprofile.php" class="mdb-menutext-active">view profile</a></li>
+                         <li><a href="index.php" class="mdb-menutext">Logout</a></li>
                     </ui>
                 </div>
             </div>
@@ -68,6 +69,11 @@
                               <div class="form-group">
                                   <label class="vpp-labelname">Name</label>
                                   <div class="vpp-content-text">jack</div>
+                              </div>
+                      
+                              <div class="form-group">
+                                  <label class="vpp-labelname">Roll num</label>
+                                  <div class="vpp-content-text">IIT2013113</div>
                               </div>
                           
                               <div class="form-group">
@@ -113,14 +119,22 @@
                           <div class="thumbnail mpp-divs">
                               <div class="form-group">
                                     <a href="#" class="btn btn-block btn-lg btn-danger">
-                                        Download resume 
+                                        Download your Current resume 
                                         <span class="glyphicon glyphicon-cloud-download"></span>
                                     </a>
                               </div>
                             </div>
                       </div>
                       
-                     
+                      <div class="col-md-12 text-center">
+                          <div class="thumbnail mpp-divs">
+                              <div class="form-group">
+                                  <a href="editprofile.php" class="btn btn-block btn-lg btn-primary">
+                                      Edit your Profile <span class="glyphicon glyphicon-cog"></span>
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
                   </div>
               </div>
               <div class="col-md-4 ">

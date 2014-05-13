@@ -52,8 +52,8 @@
 
                  <div class="collapse navbar-collapse mybuttonid"> 
                     <ui class="nav navbar-nav navbar-right">
-                        <li><a href="admin-dashboard.html" class="mdb-menutext">My Dashboard</a></li>
-                         <li><a href="admin-login.html" class="mdb-menutext">Logout</a></li>
+                        <li><a href="admin-dashboard.php" class="mdb-menutext">My Dashboard</a></li>
+                         <li><a href="admin-login.php" class="mdb-menutext">Logout</a></li>
                     </ui>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                                   </div>
                               </div>
                               <div class="col-lg-6">
-                                  <a href="admin-dashboard.html" class="btn btn-primary a-add-btn">
+                                  <a href="admin-dashboard.php" class="btn btn-primary a-add-btn">
                                       Back to Companies
                                   </a>
                               </div>
@@ -101,82 +101,35 @@
                                     <tbody>
                                         <tr>
                                             <td>1</td>
-                                            <td><a href="studentprofile.html?rol=IIT2013113" target="_blank">Jack</a></td>
+                                            <td><a href="studentprofile.php?rol=IIT2013113" target="_blank">Jack</a></td>
                                             <td>IIT2013113</td>
                                             <td>3.5</td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
-                                            <td><a href="studentprofile.html?rol=IIT2013113" target="_blank">Korbin</a></td>
+                                            <td><a href="studentprofile.php?rol=IIT2013113" target="_blank">Korbin</a></td>
                                             <td>IIT2014197</td>
                                             <td>9.9</td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
-                                            <td><a href="studentprofile.html?rol=IIT2013113" target="_blank">Jack</a></td>
+                                            <td><a href="studentprofile.php?rol=IIT2013113" target="_blank">Jack</a></td>
                                             <td>IIT2014197</td>
                                             <td>9.9</td>
                                         </tr>
                                         <tr>
                                             <td>4</td>
-                                            <td><a href="studentprofile.html?rol=IIT2013113" target="_blank">Jack</a></td>
+                                            <td><a href="studentprofile.php?rol=IIT2013113" target="_blank">Jack</a></td>
                                             <td>IIT2013113</td>
                                             <td>3.5</td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
-                                            <td><a href="studentprofile.html?rol=IIT2013113" target="_blank">Jack</a></td>
+                                            <td><a href="studentprofile.php?rol=IIT2013113" target="_blank">Jack</a></td>
                                             <td>IIT2014197</td>
                                             <td>9.9</td>
                                         </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td><a href="studentprofile.html?rol=IIT2013113" target="_blank">Jack</a></td>
-                                            <td>IIT2014197</td>
-                                            <td>9.9</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td><a href="studentprofile.html?rol=IIT2013113" target="_blank">Jack</a></td>
-                                            <td>IIT2013113</td>
-                                            <td>3.5</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td><a href="studentprofile.html?rol=IIT2013113" target="_blank">Jack</a></td>
-                                            <td>IIT2014197</td>
-                                            <td>9.9</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <<td><a href="studentprofile.html?rol=IIT2013113" target="_blank">Jack</a></td>
-                                            <td>IIT2014197</td>
-                                            <td>9.9</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td><a href="studentprofile.html?rol=IIT2013113" target="_blank">Jack</a></td>
-                                            <td>IIT2013113</td>
-                                            <td>3.5</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td><a href="studentprofile.html?rol=IIT2013113" target="_blank">Jack</a></td>
-                                            <td>IIT2014197</td>
-                                            <td>9.9</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td><a href="studentprofile.html?rol=IIT2013113" target="_blank">Jack</a></td>
-                                            <td>IIT2014197</td>
-                                            <td>9.9</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td><a href="studentprofile.html?rol=IIT2013113" target="_blank">Jack</a></td>
-                                            <td>IIT2013113</td>
-                                            <td>3.5</td>
-                                        </tr>
+                                        
                                     </tbody>
                                    
                                 </table>

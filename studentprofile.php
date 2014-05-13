@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My Profile</title>
+    <title>IIT2013113</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -52,9 +52,8 @@
 
                  <div class="collapse navbar-collapse mybuttonid"> 
                     <ui class="nav navbar-nav navbar-right">
-                        <li><a href="mydashboard.html" class="mdb-menutext">My Dashboard</a></li>
-                        <li><a href="viewprofile.html" class="mdb-menutext">view profile</a></li>
-                         <li><a href="index.html" class="mdb-menutext">Logout</a></li>
+                        <li><a href="mydashboard.php" class="mdb-menutext">My Dashboard</a></li>
+                         <li><a href="index.php" class="mdb-menutext">Logout</a></li>
                     </ui>
                 </div>
             </div>
@@ -65,60 +64,40 @@
               
               <div class="col-md-4 ">
                   <div class="thumbnail mpp-divs">
-                    
-                      <form class="" role="form">
                             
                               <div class="form-group">
-                                  <label class="mpp-labelname">Name</label>
-                                  <input type="text" class="form-control" id="name" placeholder="Name">
+                                  <label class="vpp-labelname">Name</label>
+                                  <div class="vpp-content-text">jack</div>
                               </div>
                           
                               <div class="form-group">
-                                  <label class="mpp-labelname">Birth date</label>
-                                <input type="date" class="form-control" id="" placeholder="">
+                                  <label class="vpp-labelname">Birth Date</label>
+                                  <div class="vpp-content-text">1st Feb 1996</div>
                               </div>
                           
                               <div class="form-group">
-                                  <label class="mpp-labelname">Sex</label>
-                                    <select class="form-control">
-                                      <option>Male</option>
-                                      <option>Female</option>
-                                      <option>Other</option>
-                                    </select>
+                                  <label class="vpp-labelname">Sex</label>
+                                  <div class="vpp-content-text">Male</div>
                               </div>
                           
                               <div class="form-group">
-                                  <label class="mpp-labelname"> Alternate Email id</label>
-                                <input type="email" class="form-control" id="" placeholder="Alternate Email">
+                                  <label class="vpp-labelname"> Alternate Email id</label>
+                                  <div class="vpp-content-text">jackkorbin@gmail.com</div>
                               </div>
                           
                               <div class="form-group">
-                                  <label class="mpp-labelname">Institute</label>
-                                <select class="form-control">
-                                  <option>IIITA</option>
-                                  <option>RGIT</option>
-                                </select>
+                                  <label class="vpp-labelname">Institute</label>
+                                  <div class="vpp-content-text">IIITA</div>
                               </div>
                           
                               <div class="form-group">
-                                  <label class="mpp-labelname">Current semester</label>
-                                <select class="form-control">
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
-                                  <option>6</option>
-                                  <option>7</option>
-                                  <option>8</option>
-                                </select>
+                                  <label class="vpp-labelname">Current semester</label>
+                                  <div class="vpp-content-text">1st sem</div>
                               </div>
                               <div class="form-group">
-                                  <label class="mpp-labelname">CGPA</label>
-                                  <input type="number" class="form-control" id="" placeholder="Avrage till now">
+                                  <label class="vpp-labelname">CGPA</label>
+                                  <div class="vpp-content-text">8.9</div>
                               </div>
-                          
-                        </form>
                       
                   </div>
               </div>
@@ -127,30 +106,21 @@
                       <div class="col-md-12">
                           <div class="thumbnail mpp-divs">
                               <img class="img-responsive thumbnail vpp-customimg" src="images/pp.jpg">
-                              <a href=""><div class="mpp-chngepic">Change your photo</div></a>
+                              
                           </div>
                       </div>
                       <div class="col-md-12">
                           <div class="thumbnail mpp-divs">
                               <div class="form-group">
                                     <a href="#" class="btn btn-block btn-lg btn-danger">
-                                        Upload your resume 
-                                        <span class="glyphicon glyphicon-cloud-upload"></span>
+                                        Download resume 
+                                        <span class="glyphicon glyphicon-cloud-download"></span>
                                     </a>
                               </div>
                             </div>
                       </div>
                       
-                      <div class="col-md-12 text-center">
-                          <div class="thumbnail mpp-divs">
-                              <div class="form-group">
-                                  <a href="#" class="btn btn-block btn-lg btn-primary">
-                                      Update Profile <span class="glyphicon glyphicon-flash"></span>
-                                  </a>
-                                  
-                              </div>
-                          </div>
-                      </div>
+                     
                   </div>
               </div>
               <div class="col-md-4 ">
@@ -158,22 +128,34 @@
                        <form class="" role="form">
                       
                              <div class="form-group">
-                                  <label class="mpp-labelname">Education</label>
-                                <textarea class="form-control" rows="3" id="" placeholder="Write about your education.."></textarea>
+                                <label class="vpp-labelname">Education</label>
+                                <div class="vpp-content-text">
+                                    I did my schooling from MIT university and den got into harvard by having a 
+                                    total emorality rate of 602.<br>Now i am in IIITA.
+                                 </div>
                               </div>
                           
                               <div class="form-group">
-                                  <label class="mpp-labelname">Technical Experience</label>
-                                <textarea class="form-control" rows="3" id="" placeholder="write about your technical experience.."></textarea>
+                                <label class="vpp-labelname">Technical Experience</label>
+                                <div class="vpp-content-text">
+                                    I did my schooling from MIT <br>university and den got into harvard by having a 
+                                    total emorality rate of 602 Now i am in IIITA.
+                                 </div>
                               </div>
                           
                               <div class="form-group">
-                                  <label class="mpp-labelname">Projects</label>
-                                <textarea class="form-control" rows="3" id="" placeholder="what projects hav you worked on?"></textarea>
+                                <label class="vpp-labelname">Projects</label>
+                                <div class="vpp-content-text">
+                                    I did my schooling from MIT university and den got into harvard <br>by having a 
+                                    total emorality rate of 602.Now i am in IIITA.
+                                 </div>
                               </div>
                               <div class="form-group">
-                                  <label class="mpp-labelname">Area of Intrest</label>
-                                <textarea class="form-control" rows="3" id="" placeholder="Write about your Area of intrest.."></textarea>
+                                <label class="vpp-labelname">Area of Intrest</label>
+                                <div class="vpp-content-text">
+                                    I did my schooling from MIT university and den got into harvard by having a 
+                                    total emorality <br>rate of 602.<br>Now i am in IIITA.
+                                 </div>
                               </div>
                           
                         </form>

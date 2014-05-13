@@ -52,8 +52,8 @@
 
                  <div class="collapse navbar-collapse mybuttonid"> 
                     <ui class="nav navbar-nav navbar-right">
-                        <li><a href="admin-dashboard.html" class="mdb-menutext-active">My Dashboard</a></li>
-                         <li><a href="admin-login.html" class="mdb-menutext">Logout</a></li>
+                        <li><a href="admin-dashboard.php" class="mdb-menutext-active">My Dashboard</a></li>
+                         <li><a href="admin-login.php" class="mdb-menutext">Logout</a></li>
                     </ui>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                                                 </button>
                                             </div>
                                             <div class="col-xs-3 text-center">
-                                                <a href="students-list.html" class="btn btn-success company-btn">
+                                                <a href="students-list.php" class="btn btn-success company-btn">
                                                     Students list
                                                 </a>
                                             </div>
@@ -155,7 +155,7 @@
                                                 </button>
                                             </div>
                                             <div class="col-xs-3 text-center">
-                                                <a href="students-list.html" class="btn btn-success company-btn">
+                                                <a href="students-list.php" class="btn btn-success company-btn">
                                                     Students list
                                                 </a>
                                             </div>
@@ -195,7 +195,7 @@
                                                 </button>
                                             </div>
                                             <div class="col-xs-3 text-center">
-                                                <a href="students-list.html" class="btn btn-success company-btn">
+                                                <a href="students-list.php" class="btn btn-success company-btn">
                                                     Students list
                                                 </a>
                                             </div>
@@ -235,7 +235,7 @@
                                                 </button>
                                             </div>
                                             <div class="col-xs-3 text-center">
-                                                <a href="students-list.html" class="btn btn-success company-btn">
+                                                <a href="students-list.php" class="btn btn-success company-btn">
                                                     Students list
                                                 </a>
                                             </div>
