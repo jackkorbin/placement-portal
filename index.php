@@ -2,7 +2,7 @@
 
 <?php
 	
-	$result = isset($_SESSION['name']);
+	$result = isset($_SESSION['rollnum']);
 		if($result){
 			header("Location:mydashboard.php");
             exit;

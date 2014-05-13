@@ -1,7 +1,12 @@
 <?php session_start(); ?>
 <?php
+
     if(isset($_SESSION["name"])){
         $name = $_SESSION["name"];
+    }
+    else if(isset($_SESSION["rollnum"])){
+        header("Location:editprofile.php");
+        exit;
     }
     else {
         header("Location:index.php");

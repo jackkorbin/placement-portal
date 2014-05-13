@@ -1,3 +1,24 @@
+<?php session_start(); ?>
+<?php
+
+    if(isset($_SESSION["name"])){
+        $name = $_SESSION["name"];
+    }
+    else if(isset($_SESSION["rollnum"])){
+        header("Location:editprofile.php");
+        exit;
+    }
+    else {
+        header("Location:index.php");
+        exit;
+    }
+?>
+<?php require_once("includes/functions.php"); ?>
+<?php require_once("includes/connection.php"); ?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -42,7 +63,7 @@
       
         <header class="navbar navbar-fixed-top mydashboardpageheader">
             <div class="container">
-                <p class="navbar-brand mdb-p-header">Hi <font color="#447fc8">Jack Korbin</font></p>
+                <p class="navbar-brand mdb-p-header">Hi <font color="#447fc8"><?php echo $name; ?></font></p>
 
                 <button class="navbar-toggle" data-toggle="collapse" data-target=".mybuttonid" style="background-color:black;">
                     <span class="icon-bar" style="background-color:white;"></span>

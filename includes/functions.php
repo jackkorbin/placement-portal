@@ -1,9 +1,28 @@
 <?php
-	/*
-	function getuserProfileDetails($rollno){
+
+    function check_input( $value ) {
+		/* $magic_quotes_active = get_magic_quotes_gpc();
+		$new_enough_php = function_exists( "mysql_real_escape_string" ); // i.e. PHP >= v4.3.0
+		if( $new_enough_php ) { // PHP v4.3.0 or higher
+			// undo any magic quote effects so mysql_real_escape_string can do the work
+			if( $magic_quotes_active ) { $value = stripslashes( $value ); }
+			
+		} else { // before PHP v4.3.0
+			// if magic quotes aren't already on then add slashes manually
+			if( !$magic_quotes_active ) { $value = addslashes( $value ); }
+			// if magic quotes are active, then the slashes already exist
+		}
+        */
+        
+        $value = mysql_real_escape_string( $value );
+        $value = htmlentities($value);
+		return $value;
+	}
 	
-		$rollno = "'".$rollno."'";
-		$query = "SELECT * FROM studentsdata WHERE rollno = ".$rollno." WHERE isDeleted = 0 LIMIT 1" ;
+	function getuserProfileDetails($rollnum){
+	
+		
+		$query = "SELECT * FROM studentsdata WHERE rollnum = '{$rollnum}' LIMIT 1" ;
 		$result = mysql_query($query);
 		
 		$array = mysql_fetch_array($result);
@@ -12,7 +31,7 @@
 		
 	}
 	
-	
+	/*
 	
 	function saveUserProfile( $rollnum,$name,$CGPA,$age,$sex,$qualifications,$institute,$alternareEmailid,$currentSemester){
 	
@@ -26,29 +45,37 @@
 		return $array;
 		
 	}
+    
+    */
 	
-	function updateUserProfile( $rollno,$name,$cgpa,$age,Sex,qualifications,$institute,$alternareEmailid,$currentSemester){
+	function updateUserProfile( $rollnum,$name,$birthDate,$sex,$alternateEmail,$currentsem,$institute,$cgpa,$education,$technicalExp,$projects, $areaofint){
 	
 		
-		$query = "UPDATE studentsdata SET (name ,CGPA,institute ,age ,sex ,alternareEmailid ,CurrnetSemester ) 
-					= ('{$name}','{$CGPA}','{$institute}','{$Age}','{$Sex}','{$alternareEmailid}','{$currentSemester}'  ) WHERE rollno = '.$rollno.'";
+		$query = "UPDATE studentsdata SET 
+                (name,birthdate,sex,alternateEmail,currentSemester,institute,cgpa,education,technicalExperience,projects,areaOfIntrest) 
+					= ('{$name}','{$birthDate}','{$sex}','{$alternateEmail}','{$currentsem}','{$institute}','{$cgpa}','{$education}','{$technicalExp}','{$projects}',
+                    '{$areaofint}') WHERE rollum = '{$rollnum}' ";
 		$result = mysql_query($query);
-		if($result){
-			//added
-		}
-		else {
-			//failed
-		}
+        
+        if (mysql_affected_rows() == 1) {
+            header("Location:hogya.php");
+            exit;
+        }
+        else{
+            header("Location:editprofile.php?nope");
+            exit;
+        }
+        
 		
 	}
 	
-	*/
+	
 	function authenticateUser( $rollnum,$pass ) {
         
         $_SESSION = array();
 		
         if(strlen($rollnum) == 10 ){
-			     $_SESSION['name']= $rollnum;
+			     $_SESSION['rollnum']= $rollnum;
                 
                 $result = checkisProfileComplete($rollnum);
                 if($result){
@@ -86,6 +113,8 @@
                 $_SESSION['name'] = $fuser['name'];
                 return 1;
             }
+        } else {
+            return 0;
         }
     }
 	
