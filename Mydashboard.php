@@ -3,6 +3,7 @@
 
     if(isset($_SESSION["name"])){
         $name = $_SESSION["name"];
+        $rollnum = $_SESSION['rollnum'];
     }
     else if(isset($_SESSION["rollnum"])){
         header("Location:editprofile.php");
@@ -84,10 +85,10 @@
           <div class="row">
               
               <div class="col-sm-8 " > <!-- start of companies div -->
-                  <div class="mdb-company thumbnail">
+                  <div class="mdb-company thumbnail" >
                     <div class="mdb-heading">Apply to <font color="#447fc8">Companies</font></div>
                       
-                          <div class="form-group-option">
+                          <div class="form-group-option" >
                                 <div class="mdb-show-label">Show</div>
                                 <select class="form-control mdb-select">
                                   <option selected>Active</option>
@@ -108,8 +109,11 @@
 
                             while($array = mysql_fetch_array($result)) {
                                 
+                                $companyid = $array['id'];
+                                $comid = "'".$companyid."'";
+                                $app = checkappliedornot($companyid,$rollnum);
+                                $ap =  "'".$app."'";
                                 
-		
                                 $com = '<div class="row">
                                 <div class="thumbnail mdb-company-div">
                                     <div class="mdb-company-name text-center">
@@ -124,10 +128,26 @@
                                 $com .= '</font></span></div><div class="mdb-company-footer"><div class="row"><div class="col-xs-6 ">
                                                 <button class="btn btn-danger company-btn pull-left" data-toggle="modal" data-target="#com-rm-modal">
                                                     Read more
-                                                </button></div><div class="col-xs-6 ">
-                                                <button class="btn btn-success company-btn pull-right" id="apply">
-                                                    Apply
-                                                </button></div></div></div></div></div>';
+                                                </button></div><div class="col-xs-6 ">';
+                                if ( $app == 1 ){
+                                    $com .= '<button class="btn btn-primary company-btn 
+                                    pull-right" id="'.$companyid.'" onClick="javascript:applytoggle('.$comid.');">';
+                                    $com .= 'Unapply';
+                                }
+                                else if ($app == 2 ){
+                                    $com .= '<button class="btn btn-success company-btn 
+                                    pull-right" id="'.$companyid.'" onClick="javascript:applytoggle('.$comid.');">';
+                                    $com .= 'Apply again';
+                                }
+                                else if ($app == 0){
+                                    $com .= '<button class="btn btn-success company-btn 
+                                    pull-right" id="'.$companyid.'" onClick="javascript:applytoggle('.$comid.');">';
+                                    $com .= 'Apply';
+                                }
+                                else {
+                                    $com .= "error";
+                                }
+                                $com .= '</button></div></div></div></div></div>';
                                 
                                echo $com;
 
@@ -331,7 +351,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>  
-      <script>
+            
+<script>
           
           $(document).ready(function(){
                 $('#apply').click(function(){  
@@ -344,10 +365,89 @@
                     }
 
                 });
+              
+              
           });
           
-      </script>
+    function applytoggle(comid){
+        
+	    $('#'+comid).addClass('btn-danger');  
+        $('#'+comid).html('Wait..');
+        
+            $.ajax({
+                type:'POST',
+
+                url:'applytoggle.php',
+
+                data:{
+                id : comid
+                },
+                success: function(app){
+                    
+
+                   if(app === '1' ){
+                       
+                       $('#'+comid).removeClass('btn-success');
+                       $('#'+comid).removeClass('btn-danger');
+                       $('#'+comid).addClass('btn-primary');
+                       $('#'+comid).html('Unapply');
+                      
+                   }
+                   else if (app === '2') {
+                       $('#'+comid).removeClass('btn-primary');
+                       $('#'+comid).removeClass('btn-danger');
+                       $('#'+comid).addClass('btn-success');
+                       $('#'+comid).html('Apply again');
+                    }
+                    else {
+                        $('#'+comid).html('Reload Page');
+                        $('#'+comid).removeClass('btn-danger');
+                        $('#'+comid).addClass('btn-danger');
+                    }
+
+                }
+
+            });
+    }
+          
+</script>
     
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
     
   </body>
 </html>

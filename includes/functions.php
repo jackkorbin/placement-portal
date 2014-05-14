@@ -143,6 +143,25 @@
 		
 		return $result;
     }
+
+    function checkappliedornot($companyid,$rollnum){
+        $query = "SELECT * FROM relationship WHERE StuRollNum = '{$rollnum}' AND companyid = '{$companyid}'";
+        $result = mysql_query($query);
+        $array = mysql_fetch_array($result);
+        if (mysql_num_rows($result)==1){
+            
+            if( $array['isActive'] == 1 ){
+                return 1; // Applied.
+            }
+            else {
+                return 2; // unapplied but not First time.. has applied earlier
+            }
+            
+        }
+        else {
+            return 0; // unnapplid and First time entry
+        }
+    }
 	/*
 	
 	
