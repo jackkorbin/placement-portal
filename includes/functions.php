@@ -13,9 +13,9 @@
 			// if magic quotes are active, then the slashes already exist
 		}
         */
-        
-        //$value = mysql_real_escape_string( $value );
-       // $value = htmlentities($value);
+        $value = htmlentities($value);
+      // $value = mysql_real_escape_string( $value );
+       
 		return $value;
 	}
 	
@@ -50,7 +50,7 @@
 	
 	function updateUserProfile( $rollnum,$name,$birthDate,$sex,$alternateEmail,$currentsem,$institute,$cgpa,$education,$technicalExp,$projects, $areaofint){
 	
-		
+		$currenttime = date('Y-m-d H-i-s');
 		$query = "UPDATE studentsdata SET 
                 name='{$name}',
                 birthdate='{$birthDate}',
@@ -62,16 +62,17 @@
                 education='{$education}',
                 technicalExperience='{$technicalExp}',
                 projects='{$projects}',
-                areaOfIntrest='{$areaofint}' 
+                areaOfIntrest='{$areaofint}',
+                modified_on = '{$currenttime}'
                 WHERE rollnum = '{$rollnum}' ";
 		$result = mysql_query($query);
         
         if (mysql_affected_rows() == 1) {
-            header("Location:editprofile.php");
+            header("Location:editprofile.php?message=Updated");
             exit;
         }
         else{
-            header("Location:editprofile.php?nope");
+            header("Location:editprofile.php?message=Error");
             exit;
         }
         

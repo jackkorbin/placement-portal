@@ -18,7 +18,7 @@
 	
 	if(isset($_POST['signin'])){
 		
-		$usern = $_POST['rollnum'];
+		$usern = strtoupper($_POST['rollnum']);
 		$pas = $_POST['password'];
 		
 		$message = authenticateUser( $usern , $pas );

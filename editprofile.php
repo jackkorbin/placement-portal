@@ -3,22 +3,24 @@
 <?php require_once("includes/connection.php"); ?>
 <?php
     if(isset($_SESSION["name"])){
+        $message = "<font color='#447fc8'>Update Profile</font>";
         $pc = 1;
         $name = $_SESSION["name"];
         $rollnum = $_SESSION["rollnum"];
         
         $details = getuserProfileDetails($rollnum);
         
-        $birthDate = $details['birthdate'];
-        $sex = $details['sex'];
-        $alternateEmail = $details['alternateEmail'];
-        $currentsem = $details['currentSemester'];
-        $institute = $details['institute'];
-        $cgpa = $details['cgpa'];
-        $education = $details['education']; 
-        $technicalExp = $details['technicalExperience'];
-        $projects = $details['projects'];
-        $areaofint = $details['areaOfIntrest'];
+        $name = check_input($details['name']);
+        $birthDate = check_input($details['birthdate']);
+        $sex = check_input($details['sex']);
+        $alternateEmail = check_input($details['alternateEmail']);
+        $currentsem = check_input($details['currentSemester']);
+        $institute = check_input($details['institute']);
+        $cgpa = check_input($details['cgpa']);
+        $education = check_input($details['education']); 
+        $technicalExp = check_input($details['technicalExperience']);
+        $projects = check_input($details['projects']);
+        $areaofint = check_input($details['areaOfIntrest']);
         
        if(isset($_POST['updateprofile'])){
             $name = check_input($_POST['name']);
@@ -34,14 +36,14 @@
             $areaofint = check_input($_POST['areaofint']);
            
            updateUserProfile($rollnum,$name,$birthDate,$sex,$alternateEmail,$currentsem,$institute,$cgpa,$education,$technicalExp,$projects, $areaofint);
-           header("Location:editprofile.php");
-           exit;
+           
            
        }
         
             
     }
     else if(isset($_SESSION["rollnum"])){
+        $message = "Complete your Profile to proceed";
         $pc = 0;
         $rollnum = $_SESSION["rollnum"];
         $name = "";
@@ -61,6 +63,11 @@
         header("Location:index.php");
         exit;
     }
+
+    if(isset($_GET['message'])){
+               $message = $_GET['message'];
+                $message = "<font color='#447fc8'>".$message."</font>";
+           }
     
     
 
@@ -136,7 +143,7 @@
           
               
               <div class='mpp-compl-profl text-center'>
-                  <?php if( $pc == 0 ) echo "Complete your Profile to proceed"; else echo "<font color='#447fc8'>Update Profile</font>";?>
+                  <?php echo $message; ?>
               </div>
           
           <form action="editprofile.php" method="post" role="form" id="epp-form">
