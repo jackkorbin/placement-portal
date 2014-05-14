@@ -14,8 +14,8 @@
 		}
         */
         
-        $value = mysql_real_escape_string( $value );
-        $value = htmlentities($value);
+        //$value = mysql_real_escape_string( $value );
+       // $value = htmlentities($value);
 		return $value;
 	}
 	
@@ -52,13 +52,22 @@
 	
 		
 		$query = "UPDATE studentsdata SET 
-                (name,birthdate,sex,alternateEmail,currentSemester,institute,cgpa,education,technicalExperience,projects,areaOfIntrest) 
-					= ('{$name}','{$birthDate}','{$sex}','{$alternateEmail}','{$currentsem}','{$institute}','{$cgpa}','{$education}','{$technicalExp}','{$projects}',
-                    '{$areaofint}') WHERE rollum = '{$rollnum}' ";
+                name='{$name}',
+                birthdate='{$birthDate}',
+                sex='{$sex}',
+                alternateEmail='{$alternateEmail}',
+                currentSemester='{$currentsem}',
+                institute='{$institute}',
+                cgpa='{$cgpa}',
+                education='{$education}',
+                technicalExperience='{$technicalExp}',
+                projects='{$projects}',
+                areaOfIntrest='{$areaofint}' 
+                WHERE rollnum = '{$rollnum}' ";
 		$result = mysql_query($query);
         
         if (mysql_affected_rows() == 1) {
-            header("Location:hogya.php");
+            header("Location:editprofile.php");
             exit;
         }
         else{
