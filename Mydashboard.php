@@ -99,6 +99,49 @@
                       
                       
                           
+                      
+                            <?php
+
+                            $result=get_companies();
+                                
+                                $com = 1;
+
+                            while($array = mysql_fetch_array($result)) {
+                                
+                                
+		
+                                $com = '<div class="row">
+                                <div class="thumbnail mdb-company-div">
+                                    <div class="mdb-company-name text-center">
+                                        <a href="" >';
+                                $com .= $array['name'];
+                                $com .= '</a></div><div class="mdb-company-content"><span class="mdb-appliedusers">Last date to apply : 
+                                            <font color="#447fc8">';
+                                $com .= $array['lastDate'];
+                                $com .= '</font></span><span class="mdb-appliedusers pull-right">Min CGPA :
+                                            <font color="#447fc8">';
+                                $com .= $array['mincgpa'];
+                                $com .= '</font></span></div><div class="mdb-company-footer"><div class="row"><div class="col-xs-6 ">
+                                                <button class="btn btn-danger company-btn pull-left" data-toggle="modal" data-target="#com-rm-modal">
+                                                    Read more
+                                                </button></div><div class="col-xs-6 ">
+                                                <button class="btn btn-success company-btn pull-right" id="apply">
+                                                    Apply
+                                                </button></div></div></div></div></div>';
+                                
+                               echo $com;
+
+                            }
+
+                                if($com == 1){
+                                    echo '<div class="thumbnail mdb-company-div">
+                                            <div class="mdb-company-content text-center">
+                                                <span class="mdb-appliedusers">No Companies to Show.</span>
+                                            </div>
+                                          </div>';
+                                }
+                            ?>
+                      <!-- company --
                             <div class="row">
                                 <div class="thumbnail mdb-company-div">
                                     <div class="mdb-company-name text-center">
@@ -136,108 +179,21 @@
                             </div>
                           
                           
+                          -->
                           
                           
-                           <div class="row">
-                                <div class="thumbnail mdb-company-div">
-                                    <div class="mdb-company-name text-center">
-                                        <a href="" >Google</a>
-                                    </div>
-                                    <div class="mdb-company-content">
-                                        <span class="mdb-appliedusers">Last date to apply : 
-                                            <font color="#447fc8">8-2-2014</font>
-                                        </span>
-                                        <span class="mdb-appliedusers pull-right">Min CGPA :
-                                            <font color="#447fc8">8.5</font>
-                                        </span>
-                                    </div>
-                                    <div class="mdb-company-footer">
-                                        
-                                        <div class="row">
-                                            <div class="col-xs-6 ">
-                                                <button class="btn btn-danger company-btn pull-left" data-toggle="modal" data-target="#com-rm-modal">
-                                                    Read more
-                                                </button>
-                                            </div>
-                                            <div class="col-xs-6 ">
-                                                <button class="btn btn-success company-btn pull-right" id="apply">
-                                                    Apply
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                           
-                          <div class="row">
-                                <div class="thumbnail mdb-company-div">
-                                    <div class="mdb-company-name text-center">
-                                        <a href="" >Microsoft</a>
-                                    </div>
-                                    <div class="mdb-company-content">
-                                        <span class="mdb-appliedusers">Last date to apply : 
-                                            <font color="#447fc8">8-2-2014</font>
-                                        </span>
-                                        <span class="mdb-appliedusers pull-right">Min CGPA :
-                                            <font color="#447fc8">8.5</font>
-                                        </span>
-                                    </div>
-                                    <div class="mdb-company-footer">
-                                        
-                                        <div class="row">
-                                            <div class="col-xs-6 ">
-                                                <button class="btn btn-danger company-btn pull-left" data-toggle="modal" data-target="#com-rm-modal">
-                                                    Read more
-                                                </button>
-                                            </div>
-                                            <div class="col-xs-6 ">
-                                                <button class="btn btn-success company-btn pull-right" id="apply">
-                                                    Apply
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                         
                       
                       
-                            <div class="row">
-                                <div class="thumbnail mdb-company-div">
-                                    <div class="mdb-company-name text-center">
-                                        <a href="" >Nasa</a>
-                                    </div>
-                                    <div class="mdb-company-content">
-                                        <span class="mdb-appliedusers">Last date to apply : 
-                                            <font color="#447fc8">8-2-2014</font>
-                                        </span>
-                                        <span class="mdb-appliedusers pull-right">Min CGPA :
-                                            <font color="#447fc8">8.5</font>
-                                        </span>
-                                    </div>
-                                    <div class="mdb-company-footer">
-                                        
-                                        <div class="row">
-                                            <div class="col-xs-6 ">
-                                                <button class="btn btn-danger company-btn pull-left" data-toggle="modal" data-target="#com-rm-modal">
-                                                    Read more
-                                                </button>
-                                            </div>
-                                            <div class="col-xs-6 ">
-                                                <button class="btn btn-success company-btn pull-right" id="apply">
-                                                    Apply
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                           
                           
                           
                           
                       
                       <div class="mdb-viewmore">
-                        View more
+                        Load more
                       </div>
                   </div>
               </div><!-- end of col-sm-8 means end of companies div -->
@@ -247,24 +203,35 @@
                   <div class="mdb-announcements thumbnail">
                     <div class="mdb-heading">New <font color="#447fc8">Announcements</font></div>
                       <ul class="list-group">
-                          <li class="list-group-item">This is first Announcemnrnt and this is made by jackkorbin
-                              <br><span class="small mdb-ann-time">-4th April 2013</span>
-                          </li>
-                          <li class="list-group-item">This is first Announcemnrnt
+                          
+                          <?php
+
+                                $result=get_announcements();
+                                $ann =1;
+                                while($array = mysql_fetch_array($result)) {
+
+                                    $ann = '<li class="list-group-item">';
+                                    $ann .= $array['ann_text'];
+                                    $ann .= '<br><span class="small mdb-ann-time">-';
+                                    $ann .= $array['added_on'];
+                                    $ann .= '</span></li>';
+                                    echo $ann;
+                                    //date("M jS, Y", strtotime("2011-01-05"));
+
+                                }
+                            if($ann == 1){
+                                    echo '<li class="list-group-item">No announcements to Show.</li>';
+                                }
+
+                          
+                          ?>
+                          
+                          <!-- ann
+                            <li class="list-group-item">This is first Announcemnrnt
                             <br><span class="small mdb-ann-time">-4th April 2013</span>
                           </li>
-                          <li class="list-group-item">This is first Announcemnrnt
-                            <br><span class="small mdb-ann-time">-4th April 2013</span>
-                          </li>
-                          <li class="list-group-item">This is first Announcemnrnt and this is made by jackkorbin
-                            <br><span class="small mdb-ann-time">-4th April 2013</span>
-                          </li>
-                          <li class="list-group-item">This is first Announcemnrnt
-                            <br><span class="small mdb-ann-time">-4th April 2013</span>
-                          </li>
-                          <li class="list-group-item">This is first Announcemnrnt and this is made by jackkorbin
-                            <br><span class="small mdb-ann-time">-4th April 2013</span>
-                          </li>
+
+                                -->
                       </ul>
                       <div class="mdb-viewmore">Load more</div>
                   </div>

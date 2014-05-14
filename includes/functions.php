@@ -50,7 +50,8 @@
 	
 	function updateUserProfile( $rollnum,$name,$birthDate,$sex,$alternateEmail,$currentsem,$institute,$cgpa,$education,$technicalExp,$projects, $areaofint){
 	
-		$currenttime = date('Y-m-d H-i-s');
+		$currenttime = date('Y-m-d');
+        $currenttime = date("M jS, Y", strtotime($currenttime));
 		$query = "UPDATE studentsdata SET 
                 name='{$name}',
                 birthdate='{$birthDate}',
@@ -128,7 +129,20 @@
         }
     }
 	
+    function get_announcements(){
+        $query = "SELECT * FROM announcements WHERE isActive = 1";
+		$result = mysql_query($query);
+		
+		return $result;
+    }
 	
+
+    function get_companies(){
+        $query = "SELECT * FROM companies WHERE isDeleted = 0";
+		$result = mysql_query($query);
+		
+		return $result;
+    }
 	/*
 	
 	
