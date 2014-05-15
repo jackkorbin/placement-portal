@@ -90,77 +90,18 @@
                       
                           <div class="form-group-option" >
                                 <div class="mdb-show-label">Show</div>
-                                <select class="form-control mdb-select">
-                                  <option selected>Active</option>
-                                  <option  >All</option>
-                                  <option>Applied</option>
-                                  <option>Unapplied</option>
+                                <select class="form-control mdb-select" id="filterselect">
+                                  <option selected value="Active">Active</option>
+                                  <option value="All" >All</option>
+                                  <option value="Applied">Applied</option>
+                                  <option value="Unapplied">Unapplied</option>
                                 </select>
                           </div>
                       
                       
                           
                       
-                            <?php
-
-                            $result=get_companies();
-                                
-                                $com = 1;
-
-                            while($array = mysql_fetch_array($result)) {
-                                
-                                $companyid = $array['id'];
-                                $comid = "'".$companyid."'";
-                                $app = checkappliedornot($companyid,$rollnum);
-                                $ap =  "'".$app."'";
-                                
-                                $com = '<div class="row">
-                                <div class="thumbnail mdb-company-div">
-                                    <div class="mdb-company-name text-center">
-                                        <a href="" >';
-                                $com .= $array['name'];
-                                $com .= '</a></div><div class="mdb-company-content"><span class="mdb-appliedusers">Last date to apply : 
-                                            <font color="#447fc8">';
-                                $com .= $array['lastDate'];
-                                $com .= '</font></span><span class="mdb-appliedusers pull-right">Min CGPA :
-                                            <font color="#447fc8">';
-                                $com .= $array['mincgpa'];
-                                $com .= '</font></span></div><div class="mdb-company-footer"><div class="row"><div class="col-xs-6 ">
-                                                <button class="btn btn-danger company-btn pull-left" data-toggle="modal" data-target="#com-rm-modal">
-                                                    Read more
-                                                </button></div><div class="col-xs-6 ">';
-                                if ( $app == 1 ){
-                                    $com .= '<button class="btn btn-primary company-btn 
-                                    pull-right" id="'.$companyid.'" onClick="javascript:applytoggle('.$comid.');">';
-                                    $com .= 'Unapply';
-                                }
-                                else if ($app == 2 ){
-                                    $com .= '<button class="btn btn-success company-btn 
-                                    pull-right" id="'.$companyid.'" onClick="javascript:applytoggle('.$comid.');">';
-                                    $com .= 'Apply again';
-                                }
-                                else if ($app == 0){
-                                    $com .= '<button class="btn btn-success company-btn 
-                                    pull-right" id="'.$companyid.'" onClick="javascript:applytoggle('.$comid.');">';
-                                    $com .= 'Apply';
-                                }
-                                else {
-                                    $com .= "error";
-                                }
-                                $com .= '</button></div></div></div></div></div>';
-                                
-                               echo $com;
-
-                            }
-
-                                if($com == 1){
-                                    echo '<div class="thumbnail mdb-company-div">
-                                            <div class="mdb-company-content text-center">
-                                                <span class="mdb-appliedusers">No Companies to Show.</span>
-                                            </div>
-                                          </div>';
-                                }
-                            ?>
+                            
                       <!-- company --
                             <div class="row">
                                 <div class="thumbnail mdb-company-div">
@@ -200,6 +141,9 @@
                           
                           
                           -->
+                            <div id="Ajaxcompanies">
+                                <img src="images/loading.gif" width="100%">
+                            </div>
                           
                           
                           
@@ -265,83 +209,18 @@
           <div class="modal-dialog">
             <div class="modal-content">
               
-                                <div class="mdb-company-modal-container">
-                                    <div class="mdb-modal-name ">
-                                        <a href="" >Facebook</a>
-                                        <button class="close" aria-hidden="true" data-dismiss="modal">
-                                            <span class="glyphicon glyphicon-remove" ></span>
-                                        </button>
-                                    </div>
-                                    
-                                    <div class="mdb-modal-content">
-                                        
-                                        <div class="row">
-                                            
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                      <label class="vpp-labelname">Min CGPA</label>
-                                                      <div class="vpp-content-text">8.5</div>
-                                                </div>
-                                            </div>
-                                            
-                                             <div class="col-sm-6">
-                                                <div class="form-group">
-                                                      <label class="vpp-labelname">Last date to Apply</label>
-                                                      <div class="vpp-content-text">4-2-2014</div>
-                                                </div>
-                                              </div>
-                                              
-                                              <div class="col-sm-6"> 
-                                                  <div class="form-group">
-                                                      <label class="vpp-labelname">Discription</label>
-                                                      <div class="vpp-content-text">
-                                                          Description...<br>hello this is Google.. 
-                                                          calling all creeps and division 
-                                                          to the world of the goo and i am jack korbin.
-                                                          Description...<br>hello this is Google.. 
-                                                          calling all creeps and division 
-                                                          to the world of the goo and i am jack korbin.
-                                                          Description...<br>hello this is Google.. 
-                                                          calling all creeps and division 
-                                                          to the world of the goo and i am jack korbin.
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                            
-                                              <div class="col-sm-6">
-                                                  <div class="form-group">
-                                                      <label class="vpp-labelname">Applied users</label>
-                                                      <div class="vpp-content-text">127</div>
-                                                  </div>
-                                              </div>
-                                            
-                                              
-                                              
-                                              <div class="col-sm-6">
-                                                  <div class="form-group">
-                                                      <label class="vpp-labelname">job profile offered</label>
-                                                      <div class="vpp-content-text">software developer, system analyst </div>
-                                                  </div>
-                                              </div>
-                                              <div class="col-sm-6">
-                                                  <div class="form-group">
-                                                      <label class="vpp-labelname">Link</label>
-                                                      <div class="vpp-content-text">
-                                                          <a href="https://www.facebook.com" target="_blank">www.facebook.com</a>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                            
-                                    </div>
-                                </div><!-- modal content container ending -->
-                                    <div class="mdb-modal-footer">
-                                            <button class="btn btn-success btn-block mdb-modal-btn" id="apply">
-                                                Apply
-                                            </button>
-                                    </div>
-                                
-              
-            </div>
+                        <div id="readmore">
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        </div>
+                
           </div>
         </div>
 
@@ -354,20 +233,19 @@
             
 <script>
           
-          $(document).ready(function(){
-                $('#apply').click(function(){  
-                    var app = $('#apply').text();
-                    if( app === "Apply" ){
-                        $('#apply').html('unapply');
-                    }
-                   if( app === 'unapply' ){
-                       $('#apply').html('Apply');
-                    }
-
-                });
-              
-              
+    
+      $(document).ready(function(){
+            
+          $('#filterselect').change(function(){
+              var value = $(this).find("option:selected").attr("value");
+              fetch_companies(value);
           });
+
+
+      });
+    
+    
+// 1. to apply and unapply using ajax and change text on button also
           
     function applytoggle(comid){
         
@@ -383,33 +261,67 @@
                 id : comid
                 },
                 success: function(app){
-                    
-
-                   if(app === '1' ){
-                       
+                  
+                    var app = +(app);
+                   if(app === 1){
                        $('#'+comid).removeClass('btn-success');
                        $('#'+comid).removeClass('btn-danger');
                        $('#'+comid).addClass('btn-primary');
                        $('#'+comid).html('Unapply');
                       
                    }
-                   else if (app === '2') {
+                   else if (app === 0) {
                        $('#'+comid).removeClass('btn-primary');
                        $('#'+comid).removeClass('btn-danger');
                        $('#'+comid).addClass('btn-success');
-                       $('#'+comid).html('Apply again');
+                       $('#'+comid).html('Apply');
                     }
                     else {
-                        $('#'+comid).html('Reload Page');
                         $('#'+comid).removeClass('btn-danger');
                         $('#'+comid).addClass('btn-danger');
+                        $('#'+comid).html('Reload Page');
                     }
 
                 }
 
             });
+     }
+ // 2. to fetch and filter companies in mydashboard main content.  
+    function fetch_companies(value){
+    
+       $('#Ajaxcompanies').html('<img src="images/loading.gif" width="100%">');
+        $.ajax({
+                type:'POST',
+
+                url:'fetch_companies.php',
+
+                data:{
+                value : value
+                },
+                success: function(data){
+                    $('#Ajaxcompanies').html(data);
+                }
+
+            });
     }
-          
+    fetch_companies('Active');
+    
+ //3. to fetch read more information inside read more.         
+    function fetch_details_of_comp(comid){
+        $('#readmore').html('<img src="images/loading.gif" width="100%">');
+        
+        $.ajax({
+            type : 'POST',
+            url : 'fetch_details_of_comp.php',
+            data : {
+                id : comid
+            },
+            success : function(data){
+                $('#readmore').html(data);
+            }
+        });
+    }
+    
 </script>
     
             

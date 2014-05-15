@@ -22,7 +22,7 @@
         $projects = check_input($details['projects']);
         $areaofint = check_input($details['areaOfIntrest']);
         
-       if(isset($_POST['updateprofile'])){
+        if(isset($_POST['updateprofile'])){
             $name = check_input($_POST['name']);
             $birthDate = check_input($_POST['birthdate']);
             $sex = check_input($_POST['sex']); 
@@ -57,6 +57,24 @@
         $technicalExp = "";
         $projects = "";
         $areaofint = "";
+        
+        if(isset($_POST['updateprofile'])){
+            $name = check_input($_POST['name']);
+            $birthDate = check_input($_POST['birthdate']);
+            $sex = check_input($_POST['sex']); 
+            $alternateEmail = check_input($_POST['alternateEmail']);
+            $currentsem = check_input($_POST['currentsem']);
+            $institute = check_input($_POST['institute']);
+            $cgpa = check_input($_POST['cgpa']);
+            $education = check_input($_POST['education']);
+            $technicalExp = check_input($_POST['technicalExp']);
+            $projects = check_input($_POST['projects']);
+            $areaofint = check_input($_POST['areaofint']);
+           
+           saveUserProfile($rollnum,$name,$birthDate,$sex,$alternateEmail,$currentsem,$institute,$cgpa,$education,$technicalExp,$projects, $areaofint);
+           
+           
+       }
         
     }
     else {

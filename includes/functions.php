@@ -1,3 +1,5 @@
+
+
 <?php
 
     function check_input( $value ) {
@@ -31,22 +33,39 @@
 		
 	}
 	
-	/*
 	
-	function saveUserProfile( $rollnum,$name,$CGPA,$age,$sex,$qualifications,$institute,$alternareEmailid,$currentSemester){
 	
-		
-		$query = "INSERT INTO studentsdata (rollnum ,name ,CGPA,institute ,age ,sex ,alternareEmailid ,CurrnetSemester,isProfileComplete  ) 
-					VALUES ( '{$rollno}','{$name}','{$CGPA}','{$institute}','{$Age}','{$Sex}','{$alternareEmailid}','{$currentSemester}','1'  ) ";
-		$result = mysql_query($query);
-		
-		$array = mysql_fetch_array($result);
+	function saveUserProfile( $rollnum,$name,$birthDate,$sex,$alternateEmail,$currentsem,$institute,$cgpa,$education,$technicalExp,$projects, $areaofint){
+	
+		$currenttime = date('Y-m-d');
+        if(strlen($name) == 0){
+            header("Location:editprofile.php?message=Name cannot be Empty");
+            exit;
+        } 
+        else {
+            $query = "INSERT INTO studentsdata
+                    (name,birthdate,sex,alternateEmail,currentSemester,institute,cgpa,
+                    education,technicalExperience,projects,areaOfIntrest, modified_on,rollnum,isProfileComplete,isActive,added_on) 
+                    VALUES ('{$name}','{$birthDate}','{$sex}','{$alternateEmail}','{$currentsem}','{$institute}',
+                    '{$cgpa}','{$education}','{$technicalExp}','{$projects}','{$areaofint}', '{$currenttime}','{$rollnum}','1','1','{$currenttime}')";
 
-		return $array;
+            $result = mysql_query($query);
+
+            if ($result) {
+                $_SESSION['name'] = $name;
+                header("Location:mydashboard.php");
+                exit;
+            }
+            else{
+                header("Location:editprofile.php?message=Error");
+                exit;
+            }
+        }
+        
 		
 	}
     
-    */
+    
 	
 	function updateUserProfile( $rollnum,$name,$birthDate,$sex,$alternateEmail,$currentsem,$institute,$cgpa,$education,$technicalExp,$projects, $areaofint){
 	
@@ -137,31 +156,86 @@
     }
 	
 
-    function get_companies(){
-        $query = "SELECT * FROM companies WHERE isDeleted = 0";
-		$result = mysql_query($query);
-		
-		return $result;
+    function get_companies($value,$rollnum){
+        
+        if($value == 'Applied'){
+            
+            //$query = "SELECT companyid FROM relationship WHERE StuROLLNum = ".$rollnum;  l
+          //  $result = mysql_query($query);
+         //   $array = mysql_fetch_array($result);
+            
+         //   $query = "SELECT * FROM companies WHERE id IN(".implode(',',$array).")"; m
+          //  $result = mysql_query($query);
+            
+            $query = "SELECT * FROM companies WHERE id IN (SELECT companyid FROM relationship WHERE StuRollNum = '".$rollnum."' AND isDeleted = '0')";
+            
+            $result = mysql_query($query);
+            
+            return $result;
+            
+            
+        }
+        else if($value == 'Unapplied'){
+             $query = "SELECT m.* 
+                    FROM companies m 
+                    INNER JOIN relationship l 
+                    ON m.id != l.companyid 
+                        WHERE ( l.StuRollNum = '".$rollnum."' AND l.isDeleted = '0' )";
+            $query = "SELECT * FROM companies WHERE id NOT IN (SELECT companyid FROM relationship WHERE StuRollNum = '".$rollnum."' AND isDeleted = '0')";
+            
+            $result = mysql_query($query);
+            
+            return $result;
+        }
+        else if($value == 'Active'){
+            $date = date("Y-m-d");
+            $query = "SELECT * FROM companies WHERE isDeleted = 0 AND lastDate >= '".$date."'";
+            $result = mysql_query($query);
+
+            return $result;
+        }
+        else if($value == 'All'){
+            $query = "SELECT * FROM companies WHERE isDeleted = 0 ";
+            $result = mysql_query($query);
+
+            return $result;
+        }
+        else {
+            $query = "SELECT * FROM companies WHERE isDeleted = 2";
+            $result = mysql_query($query);
+
+            return $result;
+        }
     }
 
     function checkappliedornot($companyid,$rollnum){
-        $query = "SELECT * FROM relationship WHERE StuRollNum = '{$rollnum}' AND companyid = '{$companyid}'";
+        $query = "SELECT * FROM relationship WHERE StuRollNum = '{$rollnum}' AND companyid = '{$companyid}' AND isDeleted = '0'";
         $result = mysql_query($query);
         $array = mysql_fetch_array($result);
-        if (mysql_num_rows($result)==1){
+        if (mysql_num_rows($result) == 1 ){
             
-            if( $array['isActive'] == 1 ){
-                return 1; // Applied.
-            }
-            else {
-                return 2; // unapplied but not First time.. has applied earlier
-            }
+            return 1; // Applied.
             
         }
         else {
-            return 0; // unnapplid and First time entry
+            return 0; // unnapplid 
         }
     }
+    function checklastdate($companyid){
+        $date = date("Y-m-d");
+        $query = "SELECT lastDate FROM companies WHERE id = '".$companyid."'";
+        $result = mysql_query($query);
+        $array = mysql_fetch_array($result);
+        if ( $array['lastDate'] >= $date ){
+            
+            return 1; // allowed.
+            
+        }
+        else {
+            return 0; // not allowed 
+        }
+    }
+
 	/*
 	
 	
