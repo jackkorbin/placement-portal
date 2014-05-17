@@ -1,3 +1,44 @@
+<?php session_start(); ?>
+<?php
+
+    if(isset($_SESSION['Adminrollnum'])){
+        
+
+            if( !(isset($_GET['rollnum'])) ){
+                header("Location:admin-login.php");
+                exit;
+            }
+            else {          
+                $rollnum = $_GET['rollnum'];
+            }
+    }
+    else
+    {
+        header("Location:admin-login.php");
+        exit;
+    }
+?>
+<?php require_once("includes/functions.php"); ?>
+<?php require_once("includes/connection.php"); ?>
+
+<?php 
+        
+        $details = getuserProfileDetails($rollnum);
+        
+        $name = check_input($details['name']);
+        $birthDate = check_input($details['birthdate']);
+        $sex = check_input($details['sex']);
+        $alternateEmail = check_input($details['alternateEmail']);
+        $currentsem = check_input($details['currentSemester']);
+        $institute = check_input($details['institute']);
+        $cgpa = check_input($details['cgpa']);
+        $education = nl2br(check_input($details['education'])); 
+        $technicalExp = nl2br(check_input($details['technicalExperience']));
+        $projects = nl2br(check_input($details['projects']));
+        $areaofint = nl2br(check_input($details['areaOfIntrest']));
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -66,37 +107,42 @@
                   <div class="thumbnail mpp-divs">
                             
                               <div class="form-group">
+                                  <label class="vpp-labelname">Roll num</label>
+                                  <div class="vpp-content-text"><?php echo $rollnum; ?></div>
+                              </div>
+                      
+                              <div class="form-group">
                                   <label class="vpp-labelname">Name</label>
-                                  <div class="vpp-content-text">jack</div>
+                                  <div class="vpp-content-text"><?php echo $name; ?></div>
                               </div>
                           
                               <div class="form-group">
                                   <label class="vpp-labelname">Birth Date</label>
-                                  <div class="vpp-content-text">1st Feb 1996</div>
+                                  <div class="vpp-content-text"><?php echo $birthDate; ?></div>
                               </div>
                           
                               <div class="form-group">
                                   <label class="vpp-labelname">Sex</label>
-                                  <div class="vpp-content-text">Male</div>
+                                  <div class="vpp-content-text"><?php echo $sex; ?></div>
                               </div>
                           
                               <div class="form-group">
                                   <label class="vpp-labelname"> Alternate Email id</label>
-                                  <div class="vpp-content-text">jackkorbin@gmail.com</div>
+                                  <div class="vpp-content-text"><?php echo $alternateEmail; ?></div>
                               </div>
                           
                               <div class="form-group">
                                   <label class="vpp-labelname">Institute</label>
-                                  <div class="vpp-content-text">IIITA</div>
+                                  <div class="vpp-content-text"><?php echo $institute; ?></div>
                               </div>
                           
                               <div class="form-group">
                                   <label class="vpp-labelname">Current semester</label>
-                                  <div class="vpp-content-text">1st sem</div>
+                                  <div class="vpp-content-text"><?php echo $currentsem; ?></div>
                               </div>
                               <div class="form-group">
                                   <label class="vpp-labelname">CGPA</label>
-                                  <div class="vpp-content-text">8.9</div>
+                                  <div class="vpp-content-text"><?php echo $cgpa; ?></div>
                               </div>
                       
                   </div>
@@ -130,31 +176,27 @@
                              <div class="form-group">
                                 <label class="vpp-labelname">Education</label>
                                 <div class="vpp-content-text">
-                                    I did my schooling from MIT university and den got into harvard by having a 
-                                    total emorality rate of 602.<br>Now i am in IIITA.
+                                    <?php echo $education; ?>
                                  </div>
                               </div>
                           
                               <div class="form-group">
                                 <label class="vpp-labelname">Technical Experience</label>
                                 <div class="vpp-content-text">
-                                    I did my schooling from MIT <br>university and den got into harvard by having a 
-                                    total emorality rate of 602 Now i am in IIITA.
+                                    <?php echo $technicalExp; ?>
                                  </div>
                               </div>
                           
                               <div class="form-group">
                                 <label class="vpp-labelname">Projects</label>
                                 <div class="vpp-content-text">
-                                    I did my schooling from MIT university and den got into harvard <br>by having a 
-                                    total emorality rate of 602.Now i am in IIITA.
+                                    <?php echo $projects; ?>
                                  </div>
                               </div>
                               <div class="form-group">
                                 <label class="vpp-labelname">Area of Intrest</label>
                                 <div class="vpp-content-text">
-                                    I did my schooling from MIT university and den got into harvard by having a 
-                                    total emorality <br>rate of 602.<br>Now i am in IIITA.
+                                    <?php echo $areaofint; ?>
                                  </div>
                               </div>
                           

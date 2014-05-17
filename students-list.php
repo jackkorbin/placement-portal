@@ -1,4 +1,27 @@
+<?php session_start(); ?>
+<?php
 
+    if(isset($_SESSION['Adminrollnum'])){
+        $rollnum = $_SESSION['Adminrollnum'];
+        
+            if( !(isset($_GET['name'])) ){
+                header("Location:admin-login.php");
+                exit;
+            }
+            else {
+                $compname = $_GET['name'];
+                $id = $_GET['id'];
+            }
+    }
+    else
+    {
+        header("Location:admin-login.php");
+        exit;
+    }
+?>
+
+<?php require_once("includes/functions.php"); ?>
+<?php require_once("includes/connection.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -43,7 +66,7 @@
       
         <header class="navbar navbar-fixed-top mydashboardpageheader">
             <div class="container">
-                <p class="navbar-brand mdb-p-header">Hi <font color="#447fc8">Admin</font></p>
+                <p class="navbar-brand mdb-p-header">Hi <font color="#447fc8">Admin <?php echo $rollnum; ?></font></p>
 
                 <button class="navbar-toggle" data-toggle="collapse" data-target=".mybuttonid" style="background-color:black;">
                     <span class="icon-bar" style="background-color:white;"></span>
@@ -66,75 +89,64 @@
               
               <div class="col-sm-8 " > <!-- start of companies div -->
                   <div class="mdb-company thumbnail">
-                    <div class="mdb-heading">Students applied to <font color="#447fc8">Facebook</font></div>
+                    <div class="mdb-heading">Students applied to <font color="#447fc8"><?php echo $compname; ?></font></div>
                       
-                          <div class="row">
-
-                              <div class="col-lg-6">
-                                  <div class="form-group-option">
-                                        <div class="mdb-show-label">Show</div>
-                                        <select class="form-control mdb-select">
-                                          <option selected>All</option>
-                                          <option  >IIITA</option>
-                                          <option>RGIT</option>
-                                        </select>
-                                  </div>
-                              </div>
-                              <div class="col-lg-6">
-                                  <a href="admin-dashboard.php" class="btn btn-primary a-add-btn">
+                          <div class="row ST-mdb-select">
+                                  <a href="admin-dashboard.php" class="btn btn-primary ST-a-add-btn">
                                       Back to Companies
                                   </a>
-                              </div>
-
                             </div>
                           
                       
-                            <div class="row">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Name &nbsp<span class="glyphicon glyphicon-sort gly-sort"></span></th>
-                                            <th>Roll num &nbsp<span class="glyphicon glyphicon-sort gly-sort"></span></th>
-                                            <th>CGPA &nbsp<span class="glyphicon glyphicon-sort gly-sort"></span></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td><a href="studentprofile.php?rol=IIT2013113" target="_blank">Jack</a></td>
-                                            <td>IIT2013113</td>
-                                            <td>3.5</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td><a href="studentprofile.php?rol=IIT2013113" target="_blank">Korbin</a></td>
-                                            <td>IIT2014197</td>
-                                            <td>9.9</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td><a href="studentprofile.php?rol=IIT2013113" target="_blank">Jack</a></td>
-                                            <td>IIT2014197</td>
-                                            <td>9.9</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td><a href="studentprofile.php?rol=IIT2013113" target="_blank">Jack</a></td>
-                                            <td>IIT2013113</td>
-                                            <td>3.5</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td><a href="studentprofile.php?rol=IIT2013113" target="_blank">Jack</a></td>
-                                            <td>IIT2014197</td>
-                                            <td>9.9</td>
-                                        </tr>
-                                        
-                                    </tbody>
-                                   
-                                </table>
-                            </div>
+        <div class="row">
+
+            <table id= "myTable" class="table table-striped tablesorter">
+                <thead>
+                    <tr>
+                        <th><span class="glyphicon glyphicon-list gly-sort"></span></th>
+                        <th>Name <span class="glyphicon glyphicon-sort gly-sort"></span></th>
+                        <th>Roll num <span class="glyphicon glyphicon-sort gly-sort"></span></th>
+                        <th>CGPA <span class="glyphicon glyphicon-sort gly-sort"></span></th>
+                        <th>Institute <span class="glyphicon glyphicon-sort gly-sort"></span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <?php
+
+                    $result = get_students_list($id);
+                    if(mysql_num_rows($result) > 0 ){
+                        $i = 1;
+                            while($array = mysql_fetch_array($result)) {
+                                $rollnum = $array['rollnum'];
+                                $name = $array['name'];
+                                $institute = $array['institute'];
+                                $cgpa = $array['cgpa'];
+                                $list = '
+                                <tr>
+                                    <td>'.$i.'</td>
+                                    <td><a href="studentprofile.php?rollnum='.$rollnum.'">'.$name.'</a></td>
+                                    <td>'.$rollnum.'</td>
+                                    <td>'.$cgpa.'</td>
+                                    <td>'.$institute.'</td>
+                                </tr> ';
+                                echo $list;
+                                $i++;
+                            }
+                    }else {
+                        echo '
+                            <div class="ST-noStudentsdiv">No students</div>
+                        ';
+                        
+                    }
+
+                    ?>
+                </tbody>
+
+            </table>
+            
+
+        </div>
                       
                       
                           
@@ -171,20 +183,13 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>  
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>  
+      <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
       <script>
           
           $(document).ready(function(){
-                $('#apply').click(function(){  
-                    var app = $('#apply').text();
-                    if( app === "Apply" ){
-                        $('#apply').html('unapply');
-                    }
-                   if( app === 'unapply' ){
-                       $('#apply').html('Apply');
-                    }
-
-                });
+                $("#myTable").tablesorter();
+            //  $("#myTable").tablesorter( {sortList: [[0,0], [1,0]]} ); 
           });
           
       </script>

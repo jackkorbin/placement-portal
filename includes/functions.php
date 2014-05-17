@@ -102,6 +102,7 @@
 	
 	function authenticateUser( $rollnum,$pass ) {
         
+       
         $_SESSION = array();
 		
         if(strlen($rollnum) == 10 ){
@@ -128,6 +129,23 @@
             
 		
 	}
+    function authenticateAdmin( $rollnum , $pass ){
+        
+        
+        //start new session -->
+        $_SESSION = array();
+		
+        if(strlen($rollnum) == 10 ){
+			     $_SESSION['Adminrollnum']= $rollnum;
+                     header("Location:admin-dashboard.php");
+                     exit;
+            }
+        else {
+            $message = "invalid rollnum";
+            return $message;
+        }
+        
+    }
 
 
     function checkisProfileComplete($rollnum){
@@ -148,12 +166,7 @@
         }
     }
 	
-    function get_announcements(){
-        $query = "SELECT * FROM announcements WHERE isActive = 1";
-		$result = mysql_query($query);
-		
-		return $result;
-    }
+   
 	
 
     function get_companies($value,$rollnum){
@@ -167,7 +180,7 @@
          //   $query = "SELECT * FROM companies WHERE id IN(".implode(',',$array).")"; m
           //  $result = mysql_query($query);
             
-            $query = "SELECT * FROM companies WHERE id IN (SELECT companyid FROM relationship WHERE StuRollNum = '".$rollnum."' AND isDeleted = '0')";
+            $query = "SELECT * FROM companies WHERE id IN (SELECT companyid FROM relationship WHERE StuRollNum = '".$rollnum."' AND isDeleted = '0') ORDER BY id";
             
             $result = mysql_query($query);
             
@@ -185,6 +198,13 @@
             
             $result = mysql_query($query);
             
+            return $result;
+        }
+        else if($value == 'Inactive'){
+            $date = date("Y-m-d");
+            $query = "SELECT * FROM companies WHERE isDeleted = 0 AND lastDate < NOW() ";
+            $result = mysql_query($query);
+
             return $result;
         }
         else if($value == 'Active'){
@@ -234,6 +254,11 @@
         else {
             return 0; // not allowed 
         }
+    }
+    function get_students_list($id){
+        $query = "SELECT * FROM studentsdata WHERE rollnum IN (SELECT StuRollNum FROM relationship WHERE isDeleted = 0 AND companyid = '{$id}'  )";
+        $result = mysql_query($query);
+        return $result;
     }
 
 	/*

@@ -294,6 +294,11 @@ mdb-com-sidelinks{
   
     
 }
+.ST-mdb-select{
+    text-align: center;
+    
+    margin-bottom: 2em;
+}
 .mdb-select{
     width:10em;
     font-family: Helvetica, Arial, 'lucida grande', tahoma, verdana, arial, sans-serif;
@@ -422,7 +427,26 @@ ADMIN CSS STARTS */
 }
 .gly-sort{
     font-size:12px;
+    margin: 0 5px;
 }
 .gly-sort:hover{
     cursor:pointer;
+}
+.ST-mdb-select{
+    text-align: center;
+    
+    margin-bottom: 2em;
+}
+.ST-noStudentsdiv{
+    width: 100%;
+    padding:1em;
+    text-align: center;
+    font-size:16px;
+    font-family:Tahoma, Geneva, sans-serif;
+	font-weight:100;
+   
+}
+
+.ST-a-add-btn{
+    width:12em;
 }

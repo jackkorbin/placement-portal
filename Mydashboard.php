@@ -210,15 +210,7 @@
             <div class="modal-content">
               
                         <div id="readmore">
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
+                           
                         </div>
                 
           </div>

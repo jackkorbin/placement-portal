@@ -4,10 +4,16 @@
     if(isset($_SESSION["name"])){
         $name = $_SESSION["name"];
         $rollnum = $_SESSION['rollnum'];
+        $user = 'student';
+        
     }
     else if(isset($_SESSION["rollnum"])){
         header("Location:editprofile.php");
         exit;
+    }
+    else if( isset($_SESSION["Adminrollnum"]) ){
+        $user = 'admin';
+        $rollnum = $_SESSION["Adminrollnum"];
     }
     else {
         header("Location:index.php");
@@ -27,12 +33,14 @@
 
         $name = check_input($details['name']);
         $link = check_input($details['link']);
-        $jobProfile = check_input($details['jobProfile']);
-        $appliedUsers = check_input($details['appliedUsers']); 
+        $jobProfile = check_input($details['jobProfile']); 
         $lastDate = check_input($details['lastDate']);
         $mincgpa = check_input($details['mincgpa']);
         $description = check_input($details['description']);
 
+        $query = "SELECT * FROM relationship WHERE companyid = '{$comid}' AND isDeleted = 0";
+        $result = mysql_query($query);
+        $appliedUsers = mysql_num_rows($result);
 
 
     echo '
