@@ -132,13 +132,9 @@
                                                 </button>
                                             </div>
                                         </div>
-                                        
-
-                                        
                                     </div>
                                 </div>
                             </div>
-                          
                           
                           -->
                             <div id="Ajaxcompanies">
@@ -146,16 +142,6 @@
                             </div>
                           
                           
-                          
-                         
-                      
-                      
-                            
-                          
-                          
-                          
-                          
-                      
                       <div class="mdb-viewmore">
                         Load more
                       </div>
@@ -166,38 +152,18 @@
               <div class="col-sm-4 " > <!-- start of announcmnts div -->
                   <div class="mdb-announcements thumbnail">
                     <div class="mdb-heading">New <font color="#447fc8">Announcements</font></div>
-                      <ul class="list-group">
-                          
-                          <?php
-
-                                $result=get_announcements();
-                                $ann =1;
-                                while($array = mysql_fetch_array($result)) {
-
-                                    $ann = '<li class="list-group-item">';
-                                    $ann .= $array['ann_text'];
-                                    $ann .= '<br><span class="small mdb-ann-time">-';
-                                    $ann .= $array['added_on'];
-                                    $ann .= '</span></li>';
-                                    echo $ann;
-                                    //date("M jS, Y", strtotime("2011-01-05"));
-
-                                }
-                            if($ann == 1){
-                                    echo '<li class="list-group-item">No announcements to Show.</li>';
-                                }
-
-                          
-                          ?>
-                          
-                          <!-- ann
+                     <!-- 
                             <li class="list-group-item">This is first Announcemnrnt
                             <br><span class="small mdb-ann-time">-4th April 2013</span>
                           </li>
 
-                                -->
+                                
+                      </ul>-->
+                      <ul class="list-group" id="ann_list">
+                          <img src="images/loading.gif" width="100%">
                       </ul>
-                      <div class="mdb-viewmore">Load more</div>
+                      
+                      
                   </div>
               </div> <!-- end of announcmnts div -->
                   
@@ -280,14 +246,14 @@
      }
  // 2. to fetch and filter companies in mydashboard main content.  
     function fetch_companies(value){
-    
-       $('#Ajaxcompanies').html('<img src="images/loading.gif" width="100%">');
+         
+      $('#Ajaxcompanies').html('<img src="images/loading.gif" width="100%">');
         $.ajax({
                 type:'POST',
 
                 url:'fetch_companies.php',
 
-                data:{
+                data : {
                 value : value
                 },
                 success: function(data){
@@ -313,6 +279,23 @@
             }
         });
     }
+    
+    function fetchannouncements(){
+        $('#ann_list').html('<img src="images/loading.gif" width="100%">');
+        $.ajax({
+            type : 'POST',
+            url : 'fetch_announcement.php',
+            data : {
+                user : 'student'
+            },
+            success : function(data){
+                $('#ann_list').html(data);
+            }
+            
+        });
+    }
+    
+    fetchannouncements();
     
 </script>
     

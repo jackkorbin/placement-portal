@@ -1,8 +1,8 @@
 <?php session_start(); ?>
 <?php
 
-    if(isset($_SESSION['Adminrollnum'])){
-        $rollnum = $_SESSION['Adminrollnum'];
+    if( isset($_POST['user']) ){
+        $user = $_POST['user'];
     }
     else {
         header("Location:index.php");
@@ -25,7 +25,11 @@
             $ann .= $array['ann_text'];
             $ann .= '<br><span class="small mdb-ann-time">-';
             $ann .= $array['added_on'];
-            $ann .= '</span><span class="small mdb-ann-time pull-right"><a href="#" onClick="javascript:del_ann('.$id.')" >Delete</a></span></li>';
+            $ann .= '</span>';
+            if($_POST['user'] == 'admin'){
+                $ann .= '<span class="small mdb-ann-time pull-right"><a href="#" onClick="javascript:del_ann('.$id.')" >Delete</a></span>';
+            }
+            $ann .= '</li>';
             echo $ann;
             //date("M jS, Y", strtotime("2011-01-05"));
 

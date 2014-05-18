@@ -94,7 +94,7 @@
                  <div class="collapse navbar-collapse mybuttonid"> 
                     <ui class="nav navbar-nav navbar-right">
                         <li><a href="mydashboard.php" class="mdb-menutext">My Dashboard</a></li>
-                         <li><a href="index.php" class="mdb-menutext">Logout</a></li>
+                         <li><a href="logout.php" class="mdb-menutext">Logout</a></li>
                     </ui>
                 </div>
             </div>

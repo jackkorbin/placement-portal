@@ -493,6 +493,9 @@
         $.ajax({
             type : 'POST',
             url : 'fetch_announcement.php',
+            data : {
+                user : 'admin'
+            },
             success : function(data){
                 $('#ann_list').html(data);
                 $('#announcement').val('');

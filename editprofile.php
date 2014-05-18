@@ -53,7 +53,7 @@
         $currentsem = "";
         $institute = "";
         $cgpa = "";
-        $education = "sdfsdf"; 
+        $education = ""; 
         $technicalExp = "";
         $projects = "";
         $areaofint = "";

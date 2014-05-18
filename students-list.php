@@ -77,7 +77,7 @@
                  <div class="collapse navbar-collapse mybuttonid"> 
                     <ui class="nav navbar-nav navbar-right">
                         <li><a href="admin-dashboard.php" class="mdb-menutext">My Dashboard</a></li>
-                         <li><a href="admin-login.php" class="mdb-menutext">Logout</a></li>
+                         <li><a href="logout.php" class="mdb-menutext">Logout</a></li>
                     </ui>
                 </div>
             </div>
@@ -113,8 +113,10 @@
                 <tbody>
                     
                     <?php
+                    $content = "Students Applied to ".$compname."\r\n\r\n";
 
                     $result = get_students_list($id);
+                    
                     if(mysql_num_rows($result) > 0 ){
                         $i = 1;
                             while($array = mysql_fetch_array($result)) {
@@ -132,11 +134,18 @@
                                 </tr> ';
                                 echo $list;
                                 $i++;
+                                
+                                $content .= "name : ".$name;
+                                $content .= "\r\nRollnum : ".$rollnum;
+                                $content .= "\r\nCGPA : ".$cgpa;
+                                $content .= "\r\nInstitute : ".$institute;
+                                $content .= "\r\n---------------------------\r\n\r\n";
                             }
                     }else {
                         echo '
                             <div class="ST-noStudentsdiv">No students</div>
                         ';
+                        $content .= "No Students";
                         
                     }
 
@@ -147,6 +156,7 @@
             
 
         </div>
+                      
                       
                       
                           
@@ -164,11 +174,18 @@
               <div class="col-sm-4 " > <!-- start of announcmnts div -->
                   <div class="mdb-students-list thumbnail">
                       <div class="mdb-heading"><font color="#447fc8">Download</font></div>
-                          <a href="#" class="btn btn-block btn-md btn-danger sl-custom-btn">
-                              Download whole List &nbsp<span class="glyphicon glyphicon-cloud-download"> </span>
-                          </a>
+                      
+                        <form action="downloadfile.php" method="post">
+                            <input type="hidden" value="<?php echo $content; ?>" name="content">
+                            <input type="hidden" value="<?php echo $compname; ?>" name="compname">
+                          <button type="input"  class="btn btn-block btn-md btn-danger sl-custom-btn">
+                              Download whole List <span class="glyphicon glyphicon-cloud-download gly-sort"> </span>
+                          </button>
+                      </form>
+                      
+                      
                           <a href="#" class="btn btn-block btn-md btn-success sl-custom-btn">
-                              Download all CVs as RAR &nbsp<span class="glyphicon glyphicon-cloud-download"></span>
+                              Download all CVs as RAR <span class="glyphicon glyphicon-cloud-download gly-sort"></span>
                           </a>
                   </div>
               </div> <!-- end of announcmnts div -->
