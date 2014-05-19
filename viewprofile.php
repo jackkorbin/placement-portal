@@ -151,14 +151,18 @@
                   <div class="row">
                       <div class="col-md-12">
                           <div class="thumbnail mpp-divs">
-                              <img class="img-responsive thumbnail vpp-customimg" src="images/pp.jpg">
+                              <img class="img-responsive thumbnail vpp-customimg" src="profile_pictures/<?php 
+                                               if( file_exists('profile_pictures/'.$rollnum.'.jpg') ) 
+                                                   echo $rollnum.".jpg"; 
+                                                else echo "defaultpp.jpg"; 
+                                               ?>">
                               
                           </div>
                       </div>
                       <div class="col-md-12">
                           <div class="thumbnail mpp-divs">
                               <div class="form-group">
-                                    <a href="#" class="btn btn-block btn-lg btn-danger">
+                                    <a href="downloadresume.php" class="btn btn-block btn-lg btn-danger" >
                                         Download your Current resume 
                                         <span class="glyphicon glyphicon-cloud-download"></span>
                                     </a>

@@ -105,10 +105,12 @@
        
         $_SESSION = array();
 		
-        if(strlen($rollnum) == 10 ){
+        if(strlen($rollnum) == 10 ){ // LDAP authentication using mail
 			     $_SESSION['rollnum']= $rollnum;
-                
+            
                 $result = checkisProfileComplete($rollnum);
+            
+                
                 if($result){
                     
                      header("Location:mydashboard.php");

@@ -5,7 +5,7 @@
         $rollnum = $_SESSION['Adminrollnum'];
         
             if( !(isset($_GET['name'])) ){
-                header("Location:admin-login.php");
+                header("Location:index.php");
                 exit;
             }
             else {
@@ -15,7 +15,7 @@
     }
     else
     {
-        header("Location:admin-login.php");
+        header("Location:index.php");
         exit;
     }
 ?>
@@ -118,8 +118,10 @@
                     $result = get_students_list($id);
                     
                     if(mysql_num_rows($result) > 0 ){
+                        $files = array();
                         $i = 1;
                             while($array = mysql_fetch_array($result)) {
+                                $files[$i-1] = "student_resumes/".$array['rollnum'].".pdf";
                                 $rollnum = $array['rollnum'];
                                 $name = $array['name'];
                                 $institute = $array['institute'];
@@ -160,8 +162,12 @@
                       
                       
                           
-                            
-                          
+<?php 
+    $_SESSION['array'] = $files;
+   
+
+?>
+
                           
                           
                           
@@ -179,13 +185,13 @@
                             <input type="hidden" value="<?php echo $content; ?>" name="content">
                             <input type="hidden" value="<?php echo $compname; ?>" name="compname">
                           <button type="input"  class="btn btn-block btn-md btn-danger sl-custom-btn">
-                              Download whole List <span class="glyphicon glyphicon-cloud-download gly-sort"> </span>
+                              Download whole List as Text<span class="glyphicon glyphicon-cloud-download gly-sort"> </span>
                           </button>
                       </form>
                       
                       
-                          <a href="#" class="btn btn-block btn-md btn-success sl-custom-btn">
-                              Download all CVs as RAR <span class="glyphicon glyphicon-cloud-download gly-sort"></span>
+                          <a href="downloadresumeallzip.php" class="btn btn-block btn-md btn-success sl-custom-btn">
+                              Download all CVs as ZIP <span class="glyphicon glyphicon-cloud-download gly-sort"></span>
                           </a>
                   </div>
               </div> <!-- end of announcmnts div -->

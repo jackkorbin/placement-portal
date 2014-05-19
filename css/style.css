@@ -344,6 +344,7 @@ mdb-com-sidelinks{
 
 .mpp-chngepic{
     text-align:center;
+    margin-left: 1em;
     
 }
 .mpp-compl-profl{
@@ -354,6 +355,9 @@ mdb-com-sidelinks{
     padding-bottom:10px;
     
     
+}
+#chooseprofilepic , #choosecv{
+    display: none;
 }
 
 /* end of edit profile CSS starting ViewprofileCSS --> */

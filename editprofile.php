@@ -232,14 +232,18 @@
                   <div class="row">
                       <div class="col-md-12">
                           <div class="thumbnail mpp-divs">
-                              <img class="img-responsive thumbnail vpp-customimg" src="images/pp.jpg">
-                              <a href=""><div class="mpp-chngepic">Change your photo</div></a>
+                              <img class="img-responsive thumbnail vpp-customimg" src="profile_pictures/<?php 
+                                               if( file_exists('profile_pictures/'.$rollnum.'.jpg') ) 
+                                                   echo $rollnum.".jpg"; 
+                                                else echo "defaultpp.jpg"; 
+                                               ?>">
+                              <a href="#"><div class="mpp-chngepic" id="changepptext">Change your photo</div></a>
                           </div>
                       </div>
                       <div class="col-md-12">
                           <div class="thumbnail mpp-divs">
                               <div class="form-group">
-                                    <a href="#" class="btn btn-block btn-lg btn-danger">
+                                    <a href="#" class="btn btn-block btn-lg btn-danger" id="uploadresumebtn" title="Only PDF allowed"  >
                                         Upload your resume 
                                         <span class="glyphicon glyphicon-cloud-upload"></span>
                                     </a>
@@ -306,7 +310,13 @@
           </form>
       </div>
       
+      <form action="uploadpp.php" method="POST" enctype="multipart/form-data">
+        <input type="file" name="pp" id="chooseprofilepic" >
+      </form>
       
+      <form action="uploadcv.php" method="POST" enctype="multipart/form-data">
+        <input type="file" name="cv" id="choosecv" >
+      </form>
 
 
          
@@ -319,10 +329,23 @@
       <script>
         
           $(document).ready(function(){
-              $('#epp-submitbtn').click(function(){
-                  $('#epp-form').submit();
+              
+              
+              $('#changepptext').click(function(){
+                $('#chooseprofilepic').click();
               });
+              $('#chooseprofilepic').change(function(){
+                  this.form.submit();
+              });
+              $('#uploadresumebtn').click(function(){
+                $('#choosecv').click();
+              });
+              $('#choosecv').change(function(){
+                  this.form.submit();
+              });
+              $('#uploadresumebtn').tooltip();
           });
+          
           
       </script>
      
