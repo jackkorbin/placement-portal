@@ -171,7 +171,7 @@
    
 	
 
-    function get_companies($value,$rollnum){
+    function get_companies($value,$rollnum,$start,$end){
         
         if($value == 'Applied'){
             
@@ -182,7 +182,7 @@
          //   $query = "SELECT * FROM companies WHERE id IN(".implode(',',$array).")"; m
           //  $result = mysql_query($query);
             
-            $query = "SELECT * FROM companies WHERE id IN (SELECT companyid FROM relationship WHERE StuRollNum = '".$rollnum."' AND isDeleted = '0') ORDER BY id";
+            $query = "SELECT * FROM companies WHERE id IN (SELECT companyid FROM relationship WHERE StuRollNum = '".$rollnum."' AND isDeleted = '0') ORDER BY id LIMIT {$start},{$end} ";
             
             $result = mysql_query($query);
             
@@ -191,12 +191,8 @@
             
         }
         else if($value == 'Unapplied'){
-             $query = "SELECT m.* 
-                    FROM companies m 
-                    INNER JOIN relationship l 
-                    ON m.id != l.companyid 
-                        WHERE ( l.StuRollNum = '".$rollnum."' AND l.isDeleted = '0' )";
-            $query = "SELECT * FROM companies WHERE id NOT IN (SELECT companyid FROM relationship WHERE StuRollNum = '".$rollnum."' AND isDeleted = '0')";
+             
+            $query = "SELECT * FROM companies WHERE id NOT IN (SELECT companyid FROM relationship WHERE StuRollNum = '".$rollnum."' AND isDeleted = '0') LIMIT {$start},{$end} ";
             
             $result = mysql_query($query);
             
@@ -204,26 +200,26 @@
         }
         else if($value == 'Inactive'){
             $date = date("Y-m-d");
-            $query = "SELECT * FROM companies WHERE isDeleted = 0 AND lastDate < NOW() ";
+            $query = "SELECT * FROM companies WHERE isDeleted = 0 AND lastDate < '".$date."' LIMIT {$start},{$end} ";
             $result = mysql_query($query);
 
             return $result;
         }
         else if($value == 'Active'){
             $date = date("Y-m-d");
-            $query = "SELECT * FROM companies WHERE isDeleted = 0 AND lastDate >= '".$date."'";
+            $query = "SELECT * FROM companies WHERE isDeleted = 0 AND lastDate >= '".$date."' LIMIT {$start},{$end} ";
             $result = mysql_query($query);
 
             return $result;
         }
         else if($value == 'All'){
-            $query = "SELECT * FROM companies WHERE isDeleted = 0 ";
+            $query = "SELECT * FROM companies WHERE isDeleted = 0 LIMIT {$start},{$end} ";
             $result = mysql_query($query);
 
             return $result;
         }
         else {
-            $query = "SELECT * FROM companies WHERE isDeleted = 2";
+            $query = "SELECT * FROM companies WHERE isDeleted = 2 LIMIT {$start},{$end} ";
             $result = mysql_query($query);
 
             return $result;
@@ -243,9 +239,31 @@
             return 0; // unnapplid 
         }
     }
+
+    
+    function checkcgpa($companyid,$rollnum){
+        $query = " SELECT cgpa FROM studentsdata WHERE rollnum = '{$rollnum}' LIMIT 1";
+        $result1 = mysql_query($query);
+        
+        $query = " SELECT mincgpa FROM companies WHERE id = '{$companyid}' LIMIT 1";
+        $result2 = mysql_query($query);
+        
+        $array1 = mysql_fetch_array($result1);
+        $array2 = mysql_fetch_array($result2);
+        
+        if ( $array1['cgpa'] >= $array2['mincgpa'] ){
+            
+            return 1; // Applicable.
+            
+        }
+        else {
+            return 0; // unnapplicable
+        }
+    }
+
     function checklastdate($companyid){
         $date = date("Y-m-d");
-        $query = "SELECT lastDate FROM companies WHERE id = '".$companyid."'";
+        $query = "SELECT lastDate FROM companies WHERE id = '".$companyid."' LIMIT 1";
         $result = mysql_query($query);
         $array = mysql_fetch_array($result);
         if ( $array['lastDate'] >= $date ){
@@ -257,6 +275,8 @@
             return 0; // not allowed 
         }
     }
+
+
     function get_students_list($id){
         $query = "SELECT * FROM studentsdata WHERE rollnum IN (SELECT StuRollNum FROM relationship WHERE isDeleted = 0 AND companyid = '{$id}'  )";
         $result = mysql_query($query);

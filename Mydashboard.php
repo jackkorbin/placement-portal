@@ -142,7 +142,7 @@
                             </div>
                           
                           
-                      <div class="mdb-viewmore">
+                      <div class="mdb-viewmore" onclick="javascript:fetch_companies()" id="loadmore">
                         Load more
                       </div>
                   </div>
@@ -188,114 +188,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>  
+    <script src="js/dashboard.script.js"></script> 
             
 <script>
-          
     
-      $(document).ready(function(){
-            
-          $('#filterselect').change(function(){
-              var value = $(this).find("option:selected").attr("value");
-              fetch_companies(value);
-          });
-
-
-      });
-    
-    
-// 1. to apply and unapply using ajax and change text on button also
-          
-    function applytoggle(comid){
-        
-	    $('#'+comid).addClass('btn-danger');  
-        $('#'+comid).html('Wait..');
-        
-            $.ajax({
-                type:'POST',
-
-                url:'applytoggle.php',
-
-                data:{
-                id : comid
-                },
-                success: function(app){
-                  
-                    var app = +(app);
-                   if(app === 1){
-                       $('#'+comid).removeClass('btn-success');
-                       $('#'+comid).removeClass('btn-danger');
-                       $('#'+comid).addClass('btn-primary');
-                       $('#'+comid).html('Unapply');
-                      
-                   }
-                   else if (app === 0) {
-                       $('#'+comid).removeClass('btn-primary');
-                       $('#'+comid).removeClass('btn-danger');
-                       $('#'+comid).addClass('btn-success');
-                       $('#'+comid).html('Apply');
-                    }
-                    else {
-                        $('#'+comid).removeClass('btn-danger');
-                        $('#'+comid).addClass('btn-danger');
-                        $('#'+comid).html('Reload Page');
-                    }
-
-                }
-
-            });
-     }
- // 2. to fetch and filter companies in mydashboard main content.  
-    function fetch_companies(value){
-         
-      $('#Ajaxcompanies').html('<img src="images/loading.gif" width="100%">');
-        $.ajax({
-                type:'POST',
-
-                url:'fetch_companies.php',
-
-                data : {
-                value : value
-                },
-                success: function(data){
-                    $('#Ajaxcompanies').html(data);
-                }
-
-            });
-    }
-    fetch_companies('Active');
-    
- //3. to fetch read more information inside read more.         
-    function fetch_details_of_comp(comid){
-        $('#readmore').html('<img src="images/loading.gif" width="100%">');
-        
-        $.ajax({
-            type : 'POST',
-            url : 'fetch_details_of_comp.php',
-            data : {
-                id : comid
-            },
-            success : function(data){
-                $('#readmore').html(data);
-            }
-        });
-    }
-    
-    function fetchannouncements(){
-        $('#ann_list').html('<img src="images/loading.gif" width="100%">');
-        $.ajax({
-            type : 'POST',
-            url : 'fetch_announcement.php',
-            data : {
-                user : 'student'
-            },
-            success : function(data){
-                $('#ann_list').html(data);
-            }
-            
-        });
-    }
-    
-    fetchannouncements();
+    fetchannouncements_student();
     
 </script>
     

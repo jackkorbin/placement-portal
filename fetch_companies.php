@@ -26,8 +26,11 @@
 <?php
 
     $value = $_POST['value'];
+    $start = $_POST['num']; 
+    $end = $_POST['inc']; 
+   // num = 2
 
-    $result=get_companies($value,$rollnum);
+    $result=get_companies($value,$rollnum,$start,$end);
 
     $com = 1;
 
@@ -41,6 +44,7 @@
                 $comid = "'".$companyid."'";
                 $app = checkappliedornot($companyid,$rollnum);
                 $checkdate = checklastdate($companyid);
+                $checkcgpa =  checkcgpa($companyid,$rollnum);
                 $ap =  "'".$app."'";
 
                 $com = '<div class="row">
@@ -59,23 +63,34 @@
                                     Read more
                                 </button></div><div class="col-xs-6 ">';
                 if( $checkdate == 1 ){
+                    
+                    if( $checkcgpa == 1 ){
 
-                    if ( $app == 1 ){
-                        $com .= '<button class="btn btn-primary company-btn 
-                        pull-right" id="'.$companyid.'" onClick="javascript:applytoggle('.$comid.');">';
-                        $com .= 'Unapply</button>';
-                    }
+                            if ( $app == 1 ){
+                                $com .= '<button class="btn btn-primary company-btn 
+                                pull-right" id="'.$companyid.'" onClick="javascript:applytoggle('.$comid.');">';
+                                $com .= 'Unapply</button>';
+                            }
 
-                    else if ($app == 0){
-                        $com .= '<button class="btn btn-success company-btn 
-                        pull-right" id="'.$companyid.'" onClick="javascript:applytoggle('.$comid.');">';
-                        $com .= 'Apply</button>';
+                            else if ($app == 0){
+                                $com .= '<button class="btn btn-success company-btn 
+                                pull-right" id="'.$companyid.'" onClick="javascript:applytoggle('.$comid.');">';
+                                $com .= 'Apply</button>';
+                            }
+                            else {
+                                $com .= '<button class="btn btn-danger company-btn 
+                                pull-right" id="'.$companyid.'" onClick="javascript:applytoggle('.$comid.');">';
+                                $com .= 'Reload page</button>';
+                            }
+                    } else {
+                        $com .= '<button class="btn btn-default company-btn pull-right" >';
+                        $com .= 'Low CGPA</button>';
                     }
-                    else {
-                        $com .= '<button class="btn btn-red company-btn 
-                        pull-right" id="'.$companyid.'" onClick="javascript:applytoggle('.$comid.');">';
-                        $com .= 'Reload page</button>';
-                    }
+                    
+                }
+                else {
+                    $com .= '<button class="btn btn-default company-btn pull-right" >';
+                        $com .= 'Last Date Passed</button>';
                 }
 
                 $com .= '</div></div></div></div></div>';
@@ -83,6 +98,7 @@
                echo $com;
 
             }
+            
         }else { // user = admin
             while($array = mysql_fetch_array($result)) {
 

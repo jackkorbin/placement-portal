@@ -155,7 +155,7 @@
                           
                           
                       
-                          <div class="mdb-viewmore">
+                          <div class="mdb-viewmore" onclick="javascript:fetch_companies()" id="loadmore">
                             Load more
                           </div>
                   </div>
@@ -372,155 +372,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>  
+<script src="js/dashboard.script.js"></script> 
 <script>
-          
-    
-      $(document).ready(function(){
-            
-          $('#filterselect').change(function(){
-              var value = $(this).find("option:selected").attr("value");
-              fetch_companies(value);
-          });
-          
-        
-        
-
-
-      });
-    
-    
-
- // 2. to fetch and filter companies in mydashboard main content.  
-    function fetch_companies(value){
-    
-       $('#Ajaxcompanies').html('<img src="images/loading.gif" width="100%">');
-        $.ajax({
-                type:'POST',
-
-                url:'fetch_companies.php',
-
-                data:{
-                value : value
-                },
-                success: function(data){
-                    $('#Ajaxcompanies').html(data);
-                }
-
-            });
-    }
-    fetch_companies('Active');
-    
- //3. to fetch read more information inside read more.         
-    function fetch_details_of_comp(comid){
-        $('#readmore').html('<img src="images/loading.gif" width="100%">');
-        
-        $.ajax({
-            type : 'POST',
-            url : 'fetch_details_of_comp.php',
-            data : {
-                id : comid
-            },
-            success : function(data){
-                $('#readmore').html(data);
-            }
-        });
-    }
-    function edit_comp(comid){
-        $('#editcomp').html('<img src="images/loading.gif" width="100%">');
-        
-        $.ajax({
-            type : 'POST',
-            url : 'fetch_edit_comp.php',
-            data : {
-                id : comid
-            },
-            success : function(data){
-                $('#editcomp').html(data);
-            }
-        });
-    }
-    
-    
-
-    function fetch_remove_comp(comid){
-        
-        $('#removecomp').html('<img src="images/loading.gif" width="100%">');
-        $.ajax({
-            type : 'POST',
-            url : 'fetch_remove_comp.php',
-            data : {
-                id : comid
-            },
-            success : function(data){
-                
-                $('#removecomp').html(data);
-            }
-        });
-        
-    }
-    function remove_comp(comid){
-        
-        
-        $.ajax({
-            type : 'POST',
-            url : 'remove_comp.php',
-            data : {
-                id : comid
-            },
-            success : function(data){
-                $('#div'+comid).hide(500);
-            }
-        });
-        
-    }
-    function add_announc(){
-        var text = $('#announcement').val();
-        $.ajax({
-            type : 'POST',
-            url : 'add_announcement.php',
-            data : {
-                text : text
-            },
-            success : function(data){
-                
-                fetchannouncements();
-            }
-            
-        });
-    }
-    function fetchannouncements(){
-        $('#ann_list').html('<img src="images/loading.gif" width="100%">');
-        $.ajax({
-            type : 'POST',
-            url : 'fetch_announcement.php',
-            data : {
-                user : 'admin'
-            },
-            success : function(data){
-                $('#ann_list').html(data);
-                $('#announcement').val('');
-            }
-            
-        });
-    }
-    
-    fetchannouncements();
-    
-    function del_ann(id){
-        $.ajax({
-            type : 'POST',
-            url : 'del_announcement.php',
-            data : {
-                id : id
-            },
-            success : function(data){
-                $('#ann'+id).hide(500);
-            }
-            
-        });
-    }
-        
-    
+     
+    fetchannouncements_admin();
     
 </script>
     
