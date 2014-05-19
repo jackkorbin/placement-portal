@@ -25,7 +25,7 @@
     $zip->close();
 
     header('Content-Type: application/zip');
-    header('Content-disposition: attachment; filename=filename.zip');
+    header('Content-disposition: attachment; filename=resumes.zip');
    // header('Content-Length: ' . filesize($zipfilename));
     readfile($zipname);
     

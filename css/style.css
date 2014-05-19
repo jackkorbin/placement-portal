@@ -5,6 +5,15 @@
   src: local('Lato Hairline'), local('Lato-Hairline'), url(../fonts/lato.woff) format('woff');
 }
 
+body {
+   background-color:#eeeeee;
+   background:#333 url(../images/campus818901.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;     
+}
+
 
 /* Sign in Page */
 
