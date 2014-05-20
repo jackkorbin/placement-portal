@@ -24,7 +24,7 @@
 	function saveUserProfile( $rollnum,$name,$birthDate,$sex,$alternateEmail,$currentsem,$institute,$cgpa,$education,$technicalExp,$projects, $areaofint){
 	
 		
-        if(strlen($name) == 0){ /
+        if(strlen($name) == 0){ 
             header("Location:editprofile.php?message=Name cannot be Empty");
             exit;
         } 
@@ -33,7 +33,7 @@
                     (name,birthdate,sex,alternateEmail,currentSemester,institute,cgpa,
                     education,technicalExperience,projects,areaOfIntrest, modified_on,rollnum,isProfileComplete,isActive,added_on) 
                     VALUES ('{$name}','{$birthDate}','{$sex}','{$alternateEmail}','{$currentsem}','{$institute}',
-                    '{$cgpa}','{$education}','{$technicalExp}','{$projects}','{$areaofint}', '{$currenttime}','{$rollnum}','1','1',DATE())";
+                    '{$cgpa}','{$education}','{$technicalExp}','{$projects}','{$areaofint}', '{$currenttime}','{$rollnum}','1','1',NOW())";
 
             $result = mysql_query($query);
 
@@ -69,7 +69,7 @@
                 technicalExperience='{$technicalExp}',
                 projects='{$projects}',
                 areaOfIntrest='{$areaofint}',
-                modified_on = DATE()
+                modified_on = NOW()
                 WHERE rollnum = '{$rollnum}' ";
 		$result = mysql_query($query);
         
@@ -180,16 +180,16 @@
         }
         else if($value == 'Inactive'){
             $date = date("Y-m-d");
-            $query = "SELECT * FROM companies WHERE isDeleted = 0 AND lastDate < '".$date."' LIMIT {$start},{$end} ";
+            $query = "SELECT * FROM companies WHERE isDeleted = 0 AND lastDate < ".$date." LIMIT {$start},{$end} ";
             $result = mysql_query($query);
 
             return $result;
         }
         else if($value == 'Active'){
             $date = date("Y-m-d");
-            $query = "SELECT * FROM companies WHERE isDeleted = 0 AND lastDate >= '".$date."' LIMIT {$start},{$end} ";
+            $query = "SELECT * FROM companies WHERE (isDeleted = 0 AND lastDate >= ".$date." ) LIMIT {$start},{$end} ";
             $result = mysql_query($query);
-
+            //echo $query;
             return $result;
         }
         else if($value == 'All'){
