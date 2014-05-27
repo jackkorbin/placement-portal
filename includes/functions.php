@@ -89,6 +89,9 @@
 	function authenticateUser( $rollnum,$pass ) {
         
        
+        
+        
+        
         $_SESSION = array();
 		
         if(strlen($rollnum) == 10 ){ // This check is temporary, this will be soon replaced by the Authentication From the MAIL.
