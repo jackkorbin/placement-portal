@@ -20,7 +20,7 @@
         $result = add_announcement($text,$rollnum);
         
             if( $result==1 ) {
-                $id = mysql_insert_id();
+                $id = mysql_insert_id($dbh1);
                 $value = admin_action_logger($rollnum,'add','announcement',$id);
                 if ($value == 0) {
                     echo mysql_error();
@@ -31,6 +31,4 @@
         else {
             echo mysql_error();
         }
-        
-
 ?>

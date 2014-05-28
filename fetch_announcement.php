@@ -14,8 +14,7 @@
 
 <?php
 
-        $query = "SELECT * FROM announcements WHERE isDeleted = 0 ORDER BY id DESC";
-		$result = mysql_query($query);
+		$result = fetch_announcements();
         $ann =1;
 
         while($array = mysql_fetch_array($result)) {

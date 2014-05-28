@@ -22,8 +22,7 @@
     $app = checkappliedornot($com_id,$rollnum);
 
     if( $app == 0 ){ // currently --> apply
-        $query = "INSERT INTO relationship ( StuRollNum,companyid,isActive,isDeleted ) VALUES ( '{$rollnum}','{$com_id}','1','0' ) ";
-        $result = mysql_query($query);
+        $result = apply_to_company($rollnum,$com_id);
         if ($result){
             echo '1';
         }
@@ -33,8 +32,7 @@
         
     }
     else if ( $app == 1 ){ // currently --> unapply
-        $query = "UPDATE relationship SET isDeleted = 1 WHERE StuRollNum = '{$rollnum}' AND companyid = '{$com_id}'";
-        $result = mysql_query($query);
+        $result = unapply_to_company($rollnum,$com_id);
          if ($result){
             echo '0';
         }

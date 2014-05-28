@@ -17,16 +17,14 @@
     $comid = $_POST['id'];
     $id = "'".$comid."'";
 
-    $query = "SELECT * FROM companies WHERE id= '".$comid."'";
-    $result = mysql_query($query);
-    $details = mysql_fetch_array($result);
+    $details = get_company_details($comid);
 
-        $name = check_input($details['name']);
-        $link = check_input($details['link']);
-        $jobProfile = check_input($details['jobProfile']); 
-        $lastDate = check_input($details['lastDate']);
-        $mincgpa = check_input($details['mincgpa']);
-        $description = check_input($details['description']);
+    $name = check_input($details['name']);
+    $link = check_input($details['link']);
+    $jobProfile = check_input($details['jobProfile']); 
+    $lastDate = check_input($details['lastDate']);
+    $mincgpa = check_input($details['mincgpa']);
+    $description = check_input($details['description']);
 
 
     echo '<form action= "update_comp.php" method = "POST">

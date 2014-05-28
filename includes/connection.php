@@ -2,15 +2,20 @@
 
 require("info.php");
 
-//1. create a database connection
-	$connection = mysql_connect(server,username,pass);
-	if (!$connection) {
-	   die("Database connection failed: " . mysql_error());
-    }
-	
-//2. select a database to use
-	$db_select = mysql_select_db(DB_name,$connection);
-	if (!$db_select) {
-        die("Database selection failed: " . mysql_error());
-    }
+$dbh1 = mysql_connect(server,username,pass); 
+if (!$dbh1) {
+   die("Database connection failed: " . mysql_error());
+}
+mysql_select_db(DB_name, $dbh1);
+
+
+
+$dbh2 = mysql_connect(server2,username2,pass2, true); 
+if (!$dbh2) {
+   die("Database connection failed: " . mysql_error());
+}
+mysql_select_db(DB_name2, $dbh2);
+
+
+
 ?>

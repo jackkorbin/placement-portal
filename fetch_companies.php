@@ -39,8 +39,8 @@
 <?php
 
     $value = $_POST['value'];
-    $start = $_POST['num']; 
-    $end = $_POST['inc']; 
+    $start = $_POST['num'];
+    $end = $_POST['inc'];
    // num = 2
 
     $result=get_companies($value,$rollnum,$start,$end);

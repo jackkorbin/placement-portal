@@ -27,20 +27,17 @@
 
     $comid = $_POST['id'];
 
-    $query = "SELECT * FROM companies WHERE id= '".$comid."'";
-    $result = mysql_query($query);
-    $details = mysql_fetch_array($result);
+    
+    $details = $details = get_company_details($comid);
 
-        $name = check_input($details['name']);
-        $link = check_input($details['link']);
-        $jobProfile = check_input($details['jobProfile']); 
-        $lastDate = check_input($details['lastDate']);
-        $mincgpa = check_input($details['mincgpa']);
-        $description = check_input($details['description']);
+    $name = check_input($details['name']);
+    $link = check_input($details['link']);
+    $jobProfile = check_input($details['jobProfile']); 
+    $lastDate = check_input($details['lastDate']);
+    $mincgpa = check_input($details['mincgpa']);
+    $description = check_input($details['description']);
 
-        $query = "SELECT * FROM relationship WHERE companyid = '{$comid}' AND isDeleted = 0";
-        $result = mysql_query($query);
-        $appliedUsers = mysql_num_rows($result);
+    $appliedUsers = applied_users($comid);
 
 
     echo '

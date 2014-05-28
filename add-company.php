@@ -29,10 +29,10 @@
         notify_user(MAIL_TO1,$name,$description,$lastdate,$mincgpa,$jobprofile,$link);
         notify_user(MAIL_TO2,$name,$description,$lastdate,$mincgpa,$jobprofile,$link);
         
-        $id = mysql_insert_id();
+        $id = mysql_insert_id($dbh1);
         $value = admin_action_logger($rollnum,'add','company',$id);
         if ($value == 0) {
-            echo mysql_error();
+            echo mysql_error($dbh1);
         }
 
         header("Location:admin-dashboard.php?done");
