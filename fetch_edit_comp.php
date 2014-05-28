@@ -53,7 +53,7 @@
                           </div>
                           <div class="form-group">
                             <label class="mpp-labelname">Last Date to apply</label>
-                            <input type="date" class="form-control" name = "lastdate" placeholder="" value="'.$lastDate.'">
+                            <input type="text" class="form-control" name = "lastdate" placeholder="YYYY-MM-DD hh:mm" value="'.$lastDate.'">
                           </div>
                           <div class="form-group">
                               <label class="mpp-labelname">Link</label>

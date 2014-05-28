@@ -33,7 +33,7 @@
     $name = check_input($details['name']);
     $link = check_input($details['link']);
     $jobProfile = check_input($details['jobProfile']); 
-    $lastDate = check_input($details['lastDate']);
+    $lastDate = format_date(check_input($details['lastDate']));
     $mincgpa = check_input($details['mincgpa']);
     $description = check_input($details['description']);
 

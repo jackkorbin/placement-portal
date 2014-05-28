@@ -9,13 +9,14 @@
                   
                     $rollnum = $array['admRollNum'];
                     $id = $array['id'];
+                    $message = "'Are you sure you want to delete this Admin?'";
                     $list = '
                     <tr>
                         <td>'.$id.'</td>
                         
                         <td>'.$rollnum.'</td>
                         
-                        <td><a href="manage_admin.php?delete='.$id.'">Delete</a></td>
+                        <td><a href="manage_admin.php?delete='.$id.'" onClick="return confirm('.$message.')" >Delete</a></td>
                         
                     </tr> ';
                     echo $list;

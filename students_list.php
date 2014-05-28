@@ -32,7 +32,7 @@
 
          <div class="collapse navbar-collapse mybuttonid"> 
             <ui class="nav navbar-nav navbar-right">
-                <?php if($admin == "yes") echo '<li><a href="admin-dashboard.php" class="mdb-menutext">Admin Page</a></li>';  ?>
+                <?php if($admin == "yes") echo '<li><a href="admin_dashboard.php" class="mdb-menutext">Admin Page</a></li>';  ?>
                 <li><a href="mydashboard.php" class="mdb-menutext">My Dashboard</a></li>
                 <li><a href="viewprofile.php" class="mdb-menutext">view profile</a></li>
                 <li><a href="logout.php" class="mdb-menutext">Logout</a></li>

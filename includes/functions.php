@@ -8,6 +8,43 @@
         $value = addslashes(htmlentities($value));
 		return $value;
 	}
+
+    function format_date($str) {
+                $month = array(" ", "Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec");
+                $y = explode(' ', $str);
+                $x = explode('-', $y[0]);
+                $date = "";    
+                $m = (int)$x[1];
+                $m = $month[$m];
+                $st = array(1, 21, 31);
+                $nd = array(2, 22);
+                $rd = array(3, 23);
+                if(in_array( $x[2], $st)) {
+                        $date = $x[2].'st';
+                }
+                else if(in_array( $x[2], $nd)) {
+                        $date .= $x[2].'nd';
+                }
+                else if(in_array( $x[2], $rd)) {
+                        $date .= $x[2].'rd';
+                }
+                else {
+                        $date .= $x[2].'th';
+                }
+                $date .= ' ' . $m . ' ' . $x[0];
+                
+            //for Time ->
+                $x = explode(':', $y[1]);
+                $t = 'am';
+                if( $x[0] > 12 ){
+                    $x[0] -= 12;
+                    $t = 'pm';
+                }
+                $date .= ', '.$x[0].':'.$x[1].' '.$t;
+ 
+                    
+                return $date;
+    }
 	
 	function getuserProfileDetails($rollnum){
 	   global $dbh1;
@@ -18,11 +55,24 @@
 
 		return $array;
 	}
+    
+    function check_all_fields( $name,$birthDate,$alternateEmail,$cgpa ){
+          
+        if(is_numeric($cgpa) && 0 < $cgpa && $cgpa <= 10 && strlen($name) > 3 && $birthDate != NULL && strlen($alternateEmail) > 5 ){
+            return 1;
+        }
+        else {
+            return 0;
+        }
+        
+    }
 	
 	function saveUserProfile( $rollnum,$name,$birthDate,$sex,$alternateEmail,$currentsem,$institute,$cgpa,$education,$technicalExp,$projects, $areaofint){
 	   global $dbh1;
-        if(strlen($name) == 0){ 
-            header("Location:editprofile.php?message=Name cannot be Empty");
+        
+        $result = check_all_fields( $name,$birthDate,$alternateEmail,$cgpa );
+        if($result == 0){ 
+            header("Location:editprofile.php?message=Please Fill All Details Properly");
             exit;
         } 
         else {
@@ -43,33 +93,54 @@
         }
 	}
     
-	function updateUserProfile( $rollnum,$name,$birthDate,$sex,$alternateEmail,$currentsem,$institute,$cgpa,$education,$technicalExp,$projects, $areaofint){
+	function updateUserProfile( $rollnum,$name,$birthDate,$sex,$alternateEmail,$currentsem,$institute,$cgpa,$education,$technicalExp,$projects, $areaofint,$halfsubmit){
 	
 		//$currenttime = date('Y-m-d');
        // $currenttime = date("M jS, Y", strtotime($currenttime));
         global $dbh1;
-		$query = "UPDATE studentsdata SET 
-                name='{$name}',
-                birthdate='{$birthDate}',
-                sex='{$sex}',
-                alternateEmail='{$alternateEmail}',
-                currentSemester='{$currentsem}',
-                institute='{$institute}',
-                cgpa='{$cgpa}',
-                education='{$education}',
-                technicalExperience='{$technicalExp}',
-                projects='{$projects}',
-                areaOfIntrest='{$areaofint}',
-                modified_on = NOW()
-                WHERE rollnum = '{$rollnum}' ";
-		$result = mysql_query($query,$dbh1);
         
-        if (mysql_affected_rows() == 1) {
-            return 1;
-        }
-        else{
-            return 0;
-        }
+        
+            if( $halfsubmit == 0 ){
+                    $result = check_all_fields( $name,$birthDate,$alternateEmail,$cgpa );
+                    if ($result == 1) {
+                    $query = "UPDATE studentsdata SET 
+                            name='{$name}',
+                            birthdate='{$birthDate}',
+                            sex='{$sex}',
+                            alternateEmail='{$alternateEmail}',
+                            currentSemester='{$currentsem}',
+                            institute='{$institute}',
+                            cgpa='{$cgpa}',
+                            education='{$education}',
+                            technicalExperience='{$technicalExp}',
+                            projects='{$projects}',
+                            areaOfIntrest='{$areaofint}',
+                            modified_on = NOW()
+                            WHERE rollnum = '{$rollnum}' ";
+                    }
+                    else {
+                        header("Location:editprofile.php?message=Please Fill All Details Properly");
+                        exit;
+                    }
+            }
+            else {
+                $query = "UPDATE studentsdata SET 
+                        education='{$education}',
+                        technicalExperience='{$technicalExp}',
+                        projects='{$projects}',
+                        areaOfIntrest='{$areaofint}',
+                        modified_on = NOW()
+                        WHERE rollnum = '{$rollnum}' ";
+            }
+            $result = mysql_query($query,$dbh1);
+
+            if (mysql_affected_rows($dbh1) == 1) {
+                return 1;
+            }
+            else{
+                return 0;
+            }
+        
 	}
 	
 	function authenticateUser( $rollnum,$pass ) {
@@ -77,31 +148,79 @@
         $_SESSION = array();
 
         if(strlen($rollnum) == 10 ){ // This check is temporary, this will be soon replaced by the Authentication From the MAIL.
-            $_SESSION['rollnum']= $rollnum;
-            $query = " SELECT * FROM adminlogin WHERE admRollNum = '{$rollnum}' AND isDeleted = 0 LIMIT 1";
-            $result = mysql_query($query,$dbh1);
-            if( mysql_num_rows($result) == 1 ) { // check if this is admin? if yes.. make its session!
-               $value = add_login_admin_logger($rollnum);
-               if( $value == 1 ){
-                   $_SESSION['Adminrollnum']= $rollnum;
-               }
-            }
+            
+            if(LDAP_LOGIN){
+                $value = authenticate_user_LDAP($rollnum,$pas);
+                if($value){
+                    $_SESSION['rollnum']= $rollnum;
+                    $query = " SELECT * FROM adminlogin WHERE admRollNum = '{$rollnum}' AND isDeleted = 0 LIMIT 1";
+                    $result = mysql_query($query,$dbh1);
+                    if( mysql_num_rows($result) == 1 ) { // check if this is admin? if yes.. make its session!
+                       $value = add_login_admin_logger($rollnum);
+                       if( $value == 1 ){
+                           $_SESSION['Adminrollnum']= $rollnum;
+                       }
+                    }
 
-            $result = checkisProfileComplete($rollnum);
-            if($result){
-                 return 1;
+                    $result = checkisProfileComplete($rollnum);
+                    if($result){
+                         return 1;
+                    }
+                    else{
+                        return 2; // not complete
+                    }
+                }
+                else {
+                    return 0;
+                }
+                
             }
-            else{
-                return 0;
+            else {
+            
+                $_SESSION['rollnum']= $rollnum;
+                $query = " SELECT * FROM adminlogin WHERE admRollNum = '{$rollnum}' AND isDeleted = 0 LIMIT 1";
+                $result = mysql_query($query,$dbh1);
+                if( mysql_num_rows($result) == 1 ) { // check if this is admin? if yes.. make its session!
+                   $value = add_login_admin_logger($rollnum);
+                   if( $value == 1 ){
+                       $_SESSION['Adminrollnum']= $rollnum;
+                   }
+                }
+
+                $result = checkisProfileComplete($rollnum);
+                if($result){
+                     return 1;
+                }
+                else{
+                    return 2;
+                }
             }
-
-
         }
         else {
-            $message = "invalid rollnum";
-            return $message;
+           // $message = "invalid Rollnum or Password";
+            return 0;
         }
 	}
+
+//LDAP
+    function authenticate_user_LDAP( $uid, $pwd ) {
+            if ($pwd) {
+                    $ds = ldap_connect("172.31.1.42");
+                    ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
+                    $a = ldap_search($ds, "dc=iiita,dc=ac,dc=in", "uid=$uid" );
+                    $b = ldap_get_entries( $ds, $a );
+                    $dn = $b[0]["dn"];
+                    $ldapbind=@ldap_bind($ds, $dn, $pwd);
+                    if ($ldapbind) {
+                            return 1;
+                    } else {
+                            return 0;
+                    }
+                    ldap_close($ds);
+            } else {
+                    return 0;
+            }
+    }
 
     function checkisProfileComplete($rollnum){
         global $dbh1;
@@ -127,7 +246,7 @@
         global $dbh1;
         if($value == 'Applied'){
             
-            $query = "SELECT * FROM companies WHERE id IN (SELECT companyid FROM relationship WHERE StuRollNum = '".$rollnum."' AND isDeleted = '0') ORDER BY id ORDER BY id DESC LIMIT {$start},{$end} ";
+            $query = "SELECT * FROM companies WHERE id IN (SELECT companyid FROM relationship WHERE StuRollNum = '".$rollnum."' AND isDeleted = '0') ORDER BY id DESC LIMIT {$start},{$end} ";
             $result = mysql_query($query,$dbh1);
             return $result;
         }

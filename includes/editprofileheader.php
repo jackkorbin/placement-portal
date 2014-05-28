@@ -1,5 +1,6 @@
 <?php
-    if(isset($_SESSION["name"])){ //To update profile 
+    //To update profile
+    if(isset($_SESSION["name"])){  
         $message = "<font color='#447fc8'>Update Profile</font>";
         $pc = 1;
         $name = $_SESSION["name"];
@@ -32,8 +33,15 @@
             $technicalExp = check_input($_POST['technicalExp']);
             $projects = check_input($_POST['projects']);
             $areaofint = check_input($_POST['areaofint']);
+            
+            if( $pc == 0 || ALLOW_PROFILE_EDIT == true ){
+                $halfsubmit = 0;
+            }
+            else {
+                $halfsubmit = 1;
+            }
            
-            $value = updateUserProfile($rollnum,$name,$birthDate,$sex,$alternateEmail,$currentsem,$institute,$cgpa,$education,$technicalExp,$projects, $areaofint); 
+            $value = updateUserProfile($rollnum,$name,$birthDate,$sex,$alternateEmail,$currentsem,$institute,$cgpa,$education,$technicalExp,$projects, $areaofint,$halfsubmit); 
             if ($value == 1) {
                 header("Location:editprofile.php?message=Updated");
                 exit;
@@ -44,7 +52,8 @@
             }
        }    
     }
-    else if(isset($_SESSION["rollnum"])){ //To save profile first time 
+//To save profile first time
+    else if(isset($_SESSION["rollnum"])){  
         $message = "Complete your Profile to proceed";
         $pc = 0;
         $rollnum = $_SESSION["rollnum"];

@@ -22,7 +22,7 @@
         <?php include('includes/buttonheader.php'); ?>
         <div class="collapse navbar-collapse mybuttonid"> 
             <ui class="nav navbar-nav navbar-right">
-                <?php if($admin == "yes") echo '<li><a href="admin-dashboard.php" class="mdb-menutext">Admin Page</a></li>';  ?>
+                <?php if($admin == "yes") echo '<li><a href="admin_dashboard.php" class="mdb-menutext">Admin Page</a></li>';  ?>
                 <li><a href="mydashboard.php" class="mdb-menutext">My Dashboard</a></li>
                 <li><a href="viewprofile.php" class="mdb-menutext">view profile</a></li>
                 <li><a href="logout.php" class="mdb-menutext">Logout</a></li>
@@ -36,63 +36,15 @@
       <div class='mpp-compl-profl text-center'>
           <?php echo $message; ?>
       </div>
+    
 
       <form action="editprofile.php" method="post" role="form" id="epp-form">
           <div class="row">
-              
-              <div class="col-md-4 ">
-                  <div class="thumbnail mpp-divs">
-                      <div class="form-group">
-                          <label class="mpp-labelname">Name</label>
-                          <input type="text" name="name" class="form-control" id="name" placeholder="Name" value="<?php echo $name ; ?>">
-                      </div>
-
-                      <div class="form-group">
-                          <label class="mpp-labelname">Birth date</label>
-                        <input type="date" name="birthdate" class="form-control" id="" placeholder="" value="<?php echo $birthDate ; ?>">
-                      </div>
-
-                      <div class="form-group">
-                          <label class="mpp-labelname">Sex</label>
-                            <select class="form-control" name="sex" >
-                              <option <?php if($sex == "Male") {echo "selected"; }?> >Male</option>
-                              <option <?php if($sex == "Female") {echo "selected"; }?> >Female</option>
-                              <option>Other</option>
-                            </select>
-                      </div>
-
-                      <div class="form-group"  >
-                          <label class="mpp-labelname"> Alternate Email id</label>
-                        <input type="email" class="form-control" name="alternateEmail" placeholder="Alternate Email" value="<?php echo $alternateEmail ; ?>">
-                      </div>
-
-                      <div class="form-group">
-                          <label class="mpp-labelname">Institute</label>
-                        <select class="form-control" name="institute">
-                          <option <?php if($institute == "IIITA") {echo "selected"; }?>>IIITA</option>
-                          <option <?php if($institute == "RGIT") {echo "selected"; }?>>RGIT</option>
-                        </select>
-                      </div>
-
-                      <div class="form-group">
-                          <label class="mpp-labelname">Current semester</label>
-                        <select class="form-control" name="currentsem">
-                          <option <?php if($currentsem == 1) {echo "selected"; }?>>1</option>
-                          <option <?php if($currentsem == 2) {echo "selected"; }?>>2</option>
-                          <option <?php if($currentsem == 3) {echo "selected"; }?>>3</option>
-                          <option <?php if($currentsem == 4) {echo "selected"; }?>>4</option>
-                          <option <?php if($currentsem == 5) {echo "selected"; }?>>5</option>
-                          <option <?php if($currentsem == 6) {echo "selected"; }?>>6</option>
-                          <option <?php if($currentsem == 7) {echo "selected"; }?>>7</option>
-                          <option <?php if($currentsem == 8) {echo "selected"; }?>>8</option>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                          <label class="mpp-labelname">CGPA</label>
-                          <input type="text" name="cgpa" class="form-control" id="" placeholder="Avrage till now" value="<?php echo $cgpa ; ?>">
-                      </div>
-                  </div>
+              <div class="col-md-4">
+                    <?php include 'includes/edit_view_toggle.php' ; ?>
               </div>
+                
+              
               <div class="col-md-4 ">
                   <div class="row">
                       <div class="col-md-12">
@@ -129,6 +81,7 @@
                       </div>
                   </div>
               </div>
+              
               <div class="col-md-4 ">
                   <div class="thumbnail mpp-divs">
                      <div class="form-group">
@@ -151,6 +104,7 @@
                       </div>
                   </div>
               </div>
+              
           </div>
       </form>
   </div>

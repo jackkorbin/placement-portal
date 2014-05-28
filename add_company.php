@@ -26,8 +26,10 @@
     
     if($value == 1 ){
         
-        notify_user(MAIL_TO1,$name,$description,$lastdate,$mincgpa,$jobprofile,$link);
-        notify_user(MAIL_TO2,$name,$description,$lastdate,$mincgpa,$jobprofile,$link);
+        if(ALLOW_MAIL == true){
+            notify_user(MAIL_TO1,$name,$description,$lastdate,$mincgpa,$jobprofile,$link);
+            notify_user(MAIL_TO2,$name,$description,$lastdate,$mincgpa,$jobprofile,$link);
+        }
         
         $id = mysql_insert_id($dbh1);
         $value = admin_action_logger($rollnum,'add','company',$id);
@@ -35,11 +37,11 @@
             echo mysql_error($dbh1);
         }
 
-        header("Location:admin-dashboard.php?done");
+        header("Location:admin_dashboard.php?done");
         exit;
     }
     else {
-        header("Location:admin-dashboard.php?error");
+        header("Location:admin_dashboard.php?error");
         exit;
     }
         

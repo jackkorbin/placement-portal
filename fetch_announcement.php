@@ -16,14 +16,17 @@
 
 		$result = fetch_announcements();
         $ann =1;
+        
 
         while($array = mysql_fetch_array($result)) {
             
+            $ann_date = $array['added_on'];
+            $ann_date = format_date($ann_date);
             $id = "'".$array['id']."'";
             $ann = '<li class="list-group-item" id="ann'.$array['id'].'">';
             $ann .= $array['ann_text'];
             $ann .= '<br><span class="small mdb-ann-time">-';
-            $ann .= $array['added_on'];
+            $ann .= $ann_date;
             $ann .= '</span>';
             if($_POST['user'] == 'admin'){
                 $ann .= '<span class="small mdb-ann-time pull-right"><a href="#" onClick="javascript:del_ann('.$id.')" >Delete</a></span>';

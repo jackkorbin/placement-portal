@@ -37,7 +37,7 @@
 
 //Add Admin -->
     if( isset($_POST['submit']) ){
-        $rollnumto = check_input($_POST['admrollnum']);
+        $rollnumto = strtolower(check_input($_POST['admrollnum']));
         $value = add_admin($rollnumto,$rollnum);
         if( $value == 0 ){
             header("Location:manage_admin.php?msg=Invalid Rollnum");
@@ -95,7 +95,7 @@
 
          <div class="collapse navbar-collapse mybuttonid"> 
             <ui class="nav navbar-nav navbar-right">
-                <?php if($admin == "yes") echo '<li><a href="admin-dashboard.php" class="mdb-menutext">Admin Page</a></li>';  ?>
+                <?php if($admin == "yes") echo '<li><a href="admin_dashboard.php" class="mdb-menutext">Admin Page</a></li>';  ?>
                 <li><a href="mydashboard.php" class="mdb-menutext">My Dashboard</a></li>
                 <li><a href="viewprofile.php" class="mdb-menutext">view profile</a></li>
                 <li><a href="logout.php" class="mdb-menutext">Logout</a></li>

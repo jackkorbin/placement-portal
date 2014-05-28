@@ -24,7 +24,7 @@
         <?php include('includes/buttonheader.php'); ?>
          <div class="collapse navbar-collapse mybuttonid"> 
             <ui class="nav navbar-nav navbar-right">
-                <?php if($admin == "yes"){ echo '<li><a href="admin-dashboard.php" class="mdb-menutext-active">Admin Page</a></li>'; } ?>
+                <?php if($admin == "yes"){ echo '<li><a href="admin_dashboard.php" class="mdb-menutext-active">Admin Page</a></li>'; } ?>
                 <li><a href="mydashboard.php" class="mdb-menutext">My Dashboard</a></li>
                 <li><a href="viewprofile.php" class="mdb-menutext">view profile</a></li>
                 <li><a href="logout.php" class="mdb-menutext">Logout</a></li>
@@ -121,7 +121,7 @@
 <div class="modal fade" id="com-rm-modal-add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
-          <form action = "add-company.php" method= "post">
+          <form action = "add_company.php" method= "post">
                 <div class="mdb-company-modal-container">
                     <div class="mdb-modal-name ">
                         <a href="#">Add Company</a>
@@ -142,7 +142,7 @@
                                       </div>
                                       <div class="form-group">
                                         <label class="mpp-labelname">Last Date to apply</label>
-                                        <input name="lastdate" type="date" class="form-control" id="" placeholder="">
+                                        <input name="lastdate" type="text" class="form-control" id="lastdate" title="eg - 2014-05-23 15:00" value="YYYY-MM-DD hh:mm">
                                       </div>
                                       <div class="form-group">
                                           <label class="mpp-labelname">Link</label>
@@ -192,6 +192,8 @@ $(document).ready(function(){
           resetcounter();
           fetch_companies('admin');
       });
+    $('input[id=lastdate]').tooltip({'trigger':'focus'});
+    
 });
     
     

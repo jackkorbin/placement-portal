@@ -13,11 +13,16 @@
 	
     //For Mailing ->
 
-    define('MAIL_TO1', '');
+    define("ALLOW_MAIL", true);
+
+    define('MAIL_TO1', 'jackkorbin304@gmail.com');
     define('MAIL_TO2','');
     define('MAIL_REPLY','');
-    define('MAIL_FROM','');
-    
+    define('MAIL_FROM','no-reply');
+
+    define("LDAP_LOGIN", false);
+
+    define("ALLOW_PROFILE_EDIT", true);
 	
 
 ?>

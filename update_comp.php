@@ -32,11 +32,11 @@
                 echo mysql_error();
             }
             
-            header("Location:admin-dashboard.php?updated");
+            header("Location:admin_dashboard.php?updated");
             exit;
         }
         else {
-            header("Location:admin-dashboard.php?error");
+            header("Location:admin_dashboard.php?error");
             exit;
         }
 

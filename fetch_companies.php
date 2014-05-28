@@ -59,6 +59,8 @@
                 $checkdate = checklastdate($companyid);
                 $checkcgpa =  checkcgpa($companyid,$rollnum);
                 $ap =  "'".$app."'";
+                $lastdate = $array['lastDate'];
+                $lastdate = format_date($lastdate);
 
                 $com = '<div class="row">
                 <div class="thumbnail mdb-company-div">
@@ -67,7 +69,7 @@
                 $com .= $array['name'];
                 $com .= '</a></div><div class="mdb-company-content"><span class="mdb-appliedusers">Last date to apply : 
                             <font color="#447fc8">';
-                $com .= $array['lastDate'];
+                $com .= $lastdate;
                 $com .= '</font></span><span class="mdb-appliedusers pull-right">Min CGPA :
                             <font color="#447fc8">';
                 $com .= $array['mincgpa'];
@@ -114,13 +116,15 @@
             
         }else if ( $user = "admin" ) { // user = admin
             while($array = mysql_fetch_array($result)) {
-
+                
                 $companyid = $array['id'];
                 $comid = "'".$companyid."'";
                 //$app = checkappliedornot($companyid,$rollnum);
                 //$checkdate = checklastdate($companyid);
                 //$ap =  "'".$app."'";
                 $name = $array['name'];
+                $lastdate = $array['lastDate'];
+                $lastdate = format_date($lastdate);
 
                 $com = '<div class="row" id = "div'.$companyid.'">
                 <div class="thumbnail mdb-company-div">
@@ -129,7 +133,7 @@
                 $com .= $name;
                 $com .= '</a></div><div class="mdb-company-content"><span class="mdb-appliedusers">Last date to apply : 
                             <font color="#447fc8">';
-                $com .= $array['lastDate'];
+                $com .= $lastdate;
                 $com .= '</font></span><span class="mdb-appliedusers pull-right">Min CGPA :
                             <font color="#447fc8">';
                 $com .= $array['mincgpa'];
@@ -142,7 +146,7 @@
                         </button>
                     </div>
                     <div class="col-xs-3 text-center">
-                        <a href="students-list.php?name='.$name.'&&id='.$companyid.'" class="btn btn-success company-btn">
+                        <a href="students_list.php?name='.$name.'&&id='.$companyid.'" class="btn btn-success company-btn">
                             Students list
                         </a>
                     </div>

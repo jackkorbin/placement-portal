@@ -13,22 +13,31 @@
 
 
 <?php
-	
-	$message="";
+
+    if( isset($_GET['msg']) ){
+        $message = $_GET['msg'];
+    }
+    else {
+        $message="";
+    }
 	
 	
 	if(isset($_POST['signin'])){
 		
-		$usern = strtoupper($_POST['rollnum']);
+		$usern = strtolower($_POST['rollnum']);
 		$pas = $_POST['password'];
 		
 		$result = authenticateUser( $usern , $pas );
-        if($result){
+        if($result == 1){
              header("Location:mydashboard.php");
              exit;
         }
-        else{
+        else if( $result == 2) {
             header("Location:editprofile.php");
+            exit;
+        }
+        else {
+            header("Location:index.php?msg=Invalid Rollnum or Password");
             exit;
         }
         
