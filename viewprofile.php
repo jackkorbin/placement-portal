@@ -1,6 +1,14 @@
 <?php session_start(); ?>
+<?php require_once('includes/info.php'); ?>
 <?php
-
+    
+    if( isset($_SESSION["Adminrollnum"])  ) {
+        $admin = "yes";
+    }
+    else {
+        $admin = "no";
+    }
+    
     if(isset($_SESSION["name"])){
         $name = $_SESSION["name"];
     }
@@ -33,9 +41,10 @@
 
          <div class="collapse navbar-collapse mybuttonid"> 
             <ui class="nav navbar-nav navbar-right">
+                <?php if($admin == "yes") echo '<li><a href="admin-dashboard.php" class="mdb-menutext">Admin Page</a></li>';  ?>
                 <li><a href="mydashboard.php" class="mdb-menutext">My Dashboard</a></li>
                 <li><a href="viewprofile.php" class="mdb-menutext-active">view profile</a></li>
-                 <li><a href="logout.php" class="mdb-menutext">Logout</a></li>
+                <li><a href="logout.php" class="mdb-menutext">Logout</a></li>
             </ui>
         </div>
     </div>

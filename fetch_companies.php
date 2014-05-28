@@ -1,12 +1,24 @@
 <?php session_start(); ?>
 <?php
+    if( isset($_POST['user']) ){
+        
+        if( $_POST['user'] == "admin" ){
+            $user = "admin";
+        }
+        else if ( $_POST['user'] == "student" ) {
+            $user = "student";
+        }
+        else {
+            $user = "null";
+        }
+        
+    }
 
     if(isset($_SESSION["name"])){
         $name = $_SESSION["name"];
         $rollnum = $_SESSION['rollnum'];
-        $user = 'student';
-        
     }
+/*
     else if(isset($_SESSION["rollnum"])){
         header("Location:editprofile.php");
         exit;
@@ -15,13 +27,14 @@
         $user = 'admin';
         $rollnum = $_SESSION["Adminrollnum"];
     }
+*/
     else {
         header("Location:index.php");
         exit;
     }
 ?>
-<?php require_once("includes/functions.php"); ?>
 <?php require_once("includes/connection.php"); ?>
+<?php require_once("includes/functions.php"); ?>
 
 <?php
 
@@ -99,7 +112,7 @@
 
             }
             
-        }else { // user = admin
+        }else if ( $user = "admin" ) { // user = admin
             while($array = mysql_fetch_array($result)) {
 
                 $companyid = $array['id'];

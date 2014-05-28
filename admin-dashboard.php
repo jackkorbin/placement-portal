@@ -1,10 +1,12 @@
 <?php session_start(); ?>
+
 <?php
     if(isset($_SESSION['Adminrollnum'])){
+        $admin = "yes";
         $rollnum = $_SESSION['Adminrollnum'];
     }
     else {
-        header("Location:admin-login.php");
+        header("Location:index.php");
         exit;
     }
 ?>
@@ -22,7 +24,9 @@
         <?php include('includes/buttonheader.php'); ?>
          <div class="collapse navbar-collapse mybuttonid"> 
             <ui class="nav navbar-nav navbar-right">
-                <li><a href="admin-dashboard.php" class="mdb-menutext-active">My Dashboard</a></li>
+                <?php if($admin == "yes"){ echo '<li><a href="admin-dashboard.php" class="mdb-menutext-active">Admin Page</a></li>'; } ?>
+                <li><a href="mydashboard.php" class="mdb-menutext">My Dashboard</a></li>
+                <li><a href="viewprofile.php" class="mdb-menutext">view profile</a></li>
                 <li><a href="logout.php" class="mdb-menutext">Logout</a></li>
             </ui>
         </div>
@@ -37,7 +41,7 @@
           <div class="mdb-company thumbnail">
             <div class="mdb-heading">Apply to <font color="#447fc8">Companies</font></div>
                 <div class="row">
-                      <div class="col-lg-6">
+                      <div class="col-lg-4">
                           <div class="form-group-option" >
                                 <div class="mdb-show-label">Show</div>
                                 <select class="form-control mdb-select" id="filterselect">
@@ -47,16 +51,21 @@
                                 </select>
                           </div>
                       </div>
-                      <div class="col-lg-6">
+                      <div class="col-lg-4">
                           <button class="btn btn-primary company-btn a-add-btn" data-toggle="modal" data-target="#com-rm-modal-add">
                               Add Company
                           </button>
+                      </div>
+                      <div class="col-lg-4">
+                          <a href="manage_admin.php" class="btn btn-danger company-btn a-add-btn">
+                              Manage Admins
+                          </a>
                       </div>
                 </div>
                 <div id="Ajaxcompanies">
                     <img src="images/loading.gif" width="100%">
                 </div>
-                <div class="mdb-viewmore" onclick="javascript:fetch_companies()" id="loadmore">
+                <div class="mdb-viewmore" onclick="javascript:fetch_companies('admin')" id="loadmore">
                   Load more
                 </div>
             </div>
@@ -175,7 +184,18 @@
     
 <?php require('includes/footerscriptjs.php'); ?> 
 <script src="js/dashboard.script.js"></script> 
-<script> fetchannouncements_admin(); </script>
+<script> 
+fetchannouncements('admin'); 
+fetch_companies('admin');
+$(document).ready(function(){
+      $('#filterselect').change(function(){
+          resetcounter();
+          fetch_companies('admin');
+      });
+});
+    
+    
+</script>
     
     
   </body>

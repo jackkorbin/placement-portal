@@ -3,9 +3,16 @@
 <?php require('includes/basichtmlheader.php'); ?>
 <title>Edit Profile</title>
 <?php require('includes/basichtmlheader2.php'); ?>
-<?php require('includes/editprofileheader.php'); ?>
+<?php require('includes/editprofileheader.php'); 
 
-      
+    if( isset($_SESSION["Adminrollnum"])  ) {
+        $admin = "yes";
+    }
+    else {
+        $admin = "no";
+    }
+
+?>  
 <header class="navbar navbar-fixed-top mydashboardpageheader">
     <div class="container">
         <p class="navbar-brand mdb-p-header">Hi <font color="#447fc8">
@@ -15,6 +22,7 @@
         <?php include('includes/buttonheader.php'); ?>
         <div class="collapse navbar-collapse mybuttonid"> 
             <ui class="nav navbar-nav navbar-right">
+                <?php if($admin == "yes") echo '<li><a href="admin-dashboard.php" class="mdb-menutext">Admin Page</a></li>';  ?>
                 <li><a href="mydashboard.php" class="mdb-menutext">My Dashboard</a></li>
                 <li><a href="viewprofile.php" class="mdb-menutext">view profile</a></li>
                 <li><a href="logout.php" class="mdb-menutext">Logout</a></li>

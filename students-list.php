@@ -1,22 +1,21 @@
 <?php session_start(); ?>
 <?php
 
-    if(isset($_SESSION['Adminrollnum'])){
+
+    if(isset($_SESSION['Adminrollnum'])  && isset($_GET['id']) ){
+         
         $rollnum = $_SESSION['Adminrollnum'];
-        if( !(isset($_GET['name'])) ){
-            header("Location:index.php");
-            exit;
-        }
-        else {
-            $compname = $_GET['name'];
-            $id = $_GET['id'];
-        }
+        $admin = "yes";
+        $compname = $_GET['name'];
+        $id = $_GET['id'];
+      
     }
     else
     {
         header("Location:index.php");
         exit;
     }
+
 ?>
 
 
@@ -33,8 +32,10 @@
 
          <div class="collapse navbar-collapse mybuttonid"> 
             <ui class="nav navbar-nav navbar-right">
-                <li><a href="admin-dashboard.php" class="mdb-menutext">My Dashboard</a></li>
-                 <li><a href="logout.php" class="mdb-menutext">Logout</a></li>
+                <?php if($admin == "yes") echo '<li><a href="admin-dashboard.php" class="mdb-menutext">Admin Page</a></li>';  ?>
+                <li><a href="mydashboard.php" class="mdb-menutext">My Dashboard</a></li>
+                <li><a href="viewprofile.php" class="mdb-menutext">view profile</a></li>
+                <li><a href="logout.php" class="mdb-menutext">Logout</a></li>
             </ui>
         </div>
     </div>

@@ -1,12 +1,4 @@
-$(document).ready(function(){
-            
-          $('#filterselect').change(function(){
-              resetcounter();
-              fetch_companies();
-          });
 
-
-});
 
     
 // Counter to count no of companies ( Fetch companies and LOAD MORE ) 
@@ -23,7 +15,7 @@ $(document).ready(function(){
     
  //  to fetch ,filter And Load More companies in mydashboard main content.  
     
-    function fetch_companies(){
+    function fetch_companies(user){
         
         var value = $('#filterselect').find("option:selected").attr("value");
         
@@ -41,7 +33,8 @@ $(document).ready(function(){
                 data : {
                 value : value,
                     num : num,
-                    inc : increment
+                    inc : increment,
+                    user : user
                 },
                 success: function(data){
                     if( num === 0) {
@@ -56,7 +49,7 @@ $(document).ready(function(){
 
             });
     }
-    fetch_companies();
+   
 
 //3. to fetch read more information inside read more.         
     function fetch_details_of_comp(comid){
@@ -115,27 +108,14 @@ $(document).ready(function(){
             });
      }
 
-    function fetchannouncements_student(){
+   
+    function fetchannouncements(user){
         $('#ann_list').html('<img src="images/loading.gif" width="100%">');
         $.ajax({
             type : 'POST',
             url : 'fetch_announcement.php',
             data : {
-                user : 'student'
-            },
-            success : function(data){
-                $('#ann_list').html(data);
-            }
-            
-        });
-    }
-    function fetchannouncements_admin(){
-        $('#ann_list').html('<img src="images/loading.gif" width="100%">');
-        $.ajax({
-            type : 'POST',
-            url : 'fetch_announcement.php',
-            data : {
-                user : 'admin'
+                user : user
             },
             success : function(data){
                 $('#ann_list').html(data);
@@ -207,8 +187,7 @@ $(document).ready(function(){
                 text : text
             },
             success : function(data){
-                
-                fetchannouncements_admin();
+                fetchannouncements('admin');
             }
             
         });

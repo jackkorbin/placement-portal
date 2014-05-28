@@ -4,7 +4,15 @@
 	define("username","root");
 	define("pass","");
 	define("DB_name","iiitapp");
+    define("DB_name2","logger");
 	
-// for 000webhost username -> a1316648_iiitapp, password -> iiitapp123 ,server -> server24.000webhost.com	
+    //For Mailing ->
+
+    define('MAIL_TO1', '');
+    define('MAIL_TO2','');
+    define('MAIL_REPLY','');
+    define('MAIL_FROM','');
+    
+	
 
 ?>

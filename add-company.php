@@ -9,8 +9,8 @@
         exit;
     }
 ?>
-<?php require_once("includes/functions.php"); ?>
 <?php require_once("includes/connection.php"); ?>
+<?php require_once("includes/functions.php"); ?>
 
 <?php 
     
@@ -21,14 +21,21 @@
     $jobprofile = $_POST['jobprofile'];
     $link = $_POST['link'];
     $date = date("Y-m-d");
+
+
+    $value = add_company($name,$description,$lastdate,$mincgpa,$jobprofile,$link,$date);
     
-    $query = "INSERT INTO companies 
-            (name,description,mincgpa,lastDate,jobProfile,link,isActive,isDeleted,added_on,added_by) 
-            VALUES 
-            ('{$name}','{$description}','{$mincgpa}','{$lastdate}','{$jobprofile}','{$link}','1','0','{$date}','{$rollnum}') ";
-   
-    $result = mysql_query($query);
-    if($result){
+    if($value == 1 ){
+        
+        notify_user(MAIL_TO1,$name,$description,$lastdate,$mincgpa,$jobprofile,$link);
+        notify_user(MAIL_TO2,$name,$description,$lastdate,$mincgpa,$jobprofile,$link);
+        
+        $id = mysql_insert_id();
+        $value = admin_action_logger($rollnum,'add','company',$id);
+        if ($value == 0) {
+            echo mysql_error();
+        }
+
         header("Location:admin-dashboard.php?done");
         exit;
     }

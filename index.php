@@ -8,8 +8,9 @@
             exit;
 		}
 ?>
-<?php require_once("includes/functions.php"); ?>
 <?php require_once("includes/connection.php"); ?>
+<?php require_once("includes/functions.php"); ?>
+
 
 <?php
 	
@@ -21,7 +22,15 @@
 		$usern = strtoupper($_POST['rollnum']);
 		$pas = $_POST['password'];
 		
-		$message = authenticateUser( $usern , $pas );
+		$result = authenticateUser( $usern , $pas );
+        if($result){
+             header("Location:mydashboard.php");
+             exit;
+        }
+        else{
+            header("Location:editprofile.php");
+            exit;
+        }
         
         
 		

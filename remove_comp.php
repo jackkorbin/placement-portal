@@ -1,6 +1,6 @@
 <?php session_start(); ?>
-<?php require_once("includes/functions.php"); ?>
 <?php require_once("includes/connection.php"); ?>
+<?php require_once("includes/functions.php"); ?>
 <?php
 
     if(isset($_SESSION["Adminrollnum"])){
@@ -18,6 +18,13 @@
     $query = "UPDATE companies SET isDeleted = 1 WHERE id = '{$comid}'";
     $result = mysql_query($query);
     if($result){
-        echo 'done';
+        
+        $value = admin_action_logger($rollnum,'Remove','company',$comid);
+        if ($value == 0) {
+            echo mysql_error();
+        }
+        else {
+            echo 'done';
+        }
     }
 ?>

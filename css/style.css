@@ -147,6 +147,7 @@ mydashboard CSS starts --> */
 .mdb-announcements{
     max-height:41.5em;
     background-color: white;
+    min-height:30em;
     
     padding:3em;
     overflow: auto;
@@ -463,4 +464,10 @@ ADMIN CSS STARTS */
 
 .ST-a-add-btn{
     width:12em;
+}
+.errormsg{
+    margin:1em 0;
+    text-align: center;
+    font-size:15px;
+    
 }

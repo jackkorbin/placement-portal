@@ -9,8 +9,8 @@
         exit;
     }
 ?>
-<?php require_once("includes/functions.php"); ?>
 <?php require_once("includes/connection.php"); ?>
+<?php require_once("includes/functions.php"); ?>
 
 <?php 
         $id = $_POST['id'];
@@ -30,6 +30,12 @@
         $result = mysql_query($query);
         
         if($result){
+            
+            $value = admin_action_logger($rollnum,'update','company',$id);
+            if ($value == 0) {
+                echo mysql_error();
+            }
+            
             header("Location:admin-dashboard.php?updated");
             exit;
         }

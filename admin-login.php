@@ -21,7 +21,7 @@
 		$rollnum = strtoupper($_POST['rollnum']);
 		$pas = $_POST['password'];
 		
-		$message = authenticateAdmin( $rollnum , $pas );
+		$message = authenticateUser( $rollnum , $pas );
         
         
 		

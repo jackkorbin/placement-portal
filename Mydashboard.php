@@ -1,5 +1,13 @@
 <?php session_start(); ?>
+
 <?php
+    
+    if( isset($_SESSION['Adminrollnum'])  ) {
+        $admin = "yes";
+    }
+    else {
+        $admin = "no";
+    }
 
     if(isset($_SESSION["name"])){
         $name = $_SESSION["name"];
@@ -29,6 +37,7 @@
         <?php include('includes/buttonheader.php'); ?>
          <div class="collapse navbar-collapse mybuttonid"> 
             <ui class="nav navbar-nav navbar-right">
+                <?php if($admin == "yes"){ echo '<li><a href="admin-dashboard.php" class="mdb-menutext">Admin Page</a></li>'; } ?>
                 <li><a href="mydashboard.php" class="mdb-menutext-active">My Dashboard</a></li>
                 <li><a href="viewprofile.php" class="mdb-menutext">view profile</a></li>
                 <li><a href="logout.php" class="mdb-menutext">Logout</a></li>
@@ -56,7 +65,7 @@
               <div id="Ajaxcompanies">
                     <img src="images/loading.gif" width="100%">
               </div>
-              <div class="mdb-viewmore" onclick="javascript:fetch_companies()" id="loadmore">
+              <div class="mdb-viewmore" onclick="javascript:fetch_companies('student')" id="loadmore">
                     Load more
               </div>
           </div>
@@ -90,7 +99,16 @@
     
 <?php require('includes/footerscriptjs.php'); ?>    
 <script src="js/dashboard.script.js"></script>          
-<script>  fetchannouncements_student(); </script>
+<script>  
+fetchannouncements('student');
+ fetch_companies('student');
+$(document).ready(function(){
+  $('#filterselect').change(function(){
+      resetcounter();
+      fetch_companies('student');
+  });
+});
+</script>
     
         
     

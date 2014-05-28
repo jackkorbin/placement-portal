@@ -1,21 +1,17 @@
 <?php session_start(); ?>
 <?php
 
-    if(isset($_SESSION['Adminrollnum'])){
-        
-        if( !(isset($_GET['rollnum'])) ){
-            header("Location:index.php");
-            exit;
-        }
-        else {          
-            $rollnum = $_GET['rollnum'];
-        }
+    if(isset($_SESSION['Adminrollnum']) && isset($_GET['rollnum']) ){
+        $rollnum = $_GET['rollnum'];
+        $admin = "yes";
     }
     else
     {
         header("Location:index.php");
         exit;
     }
+   
+   
 ?>
 
 <?php require('includes/basichtmlheader.php'); ?>
@@ -26,14 +22,16 @@
 
 <header class="navbar navbar-fixed-top mydashboardpageheader">
     <div class="container">
-        <p class="navbar-brand mdb-p-header"><font color="#447fc8">Jack Korbin</font></p>
+        <p class="navbar-brand mdb-p-header"><font color="#447fc8"><?php echo $rollnum; ?></font></p>
 
         <?php include('includes/buttonheader.php'); ?>
 
          <div class="collapse navbar-collapse mybuttonid"> 
             <ui class="nav navbar-nav navbar-right">
+                <?php if($admin == "yes") echo '<li><a href="admin-dashboard.php" class="mdb-menutext">Admin Page</a></li>';  ?>
                 <li><a href="mydashboard.php" class="mdb-menutext">My Dashboard</a></li>
-                 <li><a href="logout.php" class="mdb-menutext">Logout</a></li>
+                <li><a href="viewprofile.php" class="mdb-menutext">view profile</a></li>
+                <li><a href="logout.php" class="mdb-menutext">Logout</a></li>
             </ui>
         </div>
     </div>

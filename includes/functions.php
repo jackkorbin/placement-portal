@@ -1,3 +1,5 @@
+<?php //require_once('info.php'); ?>
+
 <?php
 
     function check_input( $value ) {
@@ -88,55 +90,44 @@
 	
 	function authenticateUser( $rollnum,$pass ) {
         
-       
         
-        
-        
-        $_SESSION = array();
-		
-        if(strlen($rollnum) == 10 ){ // This check is temporary, this will be soon replaced by the Authentication From the MAIL.
-			     $_SESSION['rollnum']= $rollnum;
-            
-                $result = checkisProfileComplete($rollnum);
-            
-                
-                if($result){
+                $_SESSION = array();
+
+                if(strlen($rollnum) == 10 ){ // This check is temporary, this will be soon replaced by the Authentication From the MAIL.
                     
-                     header("Location:mydashboard.php");
-                     exit;
+                    
+                    
+                    $_SESSION['rollnum']= $rollnum;
+                         
+                    $query = " SELECT * FROM adminlogin WHERE admRollNum = '{$rollnum}' AND isDeleted = 0 LIMIT 1";
+                    $result = mysql_query($query);
+
+                    if( mysql_num_rows($result) == 1 ) { // check if this is admin? if yes.. make its session!
+                           $value = add_login_admin_logger($rollnum);
+                           if( $value == 1 ){
+                               $_SESSION['Adminrollnum']= $rollnum;
+                           }
+                    }
+                            
+                    $result = checkisProfileComplete($rollnum);
+                    if($result){
+                         return 1;
+                    }
+                    else{
+                        return 0;
+                    }
+
+
                 }
-                else{
-                    header("Location:editprofile.php");
-                    exit;
+                else {
+                    $message = "invalid rollnum";
+                    return $message;
                 }
-                
-               
-            }
-        else {
-            $message = "invalid rollnum";
-            return $message;
-        }
+        
         
             
 		
 	}
-    function authenticateAdmin( $rollnum , $pass ){
-        
-        
-        //start new session -->
-        $_SESSION = array();
-		
-        if(strlen($rollnum) == 10 ){ // This check is temporary, this will be soon replaced by the Authentication From the MAIL.
-			     $_SESSION['Adminrollnum']= $rollnum;
-                     header("Location:admin-dashboard.php");
-                     exit;
-            }
-        else {
-            $message = "invalid rollnum";
-            return $message;
-        }
-        
-    }
 
 
     function checkisProfileComplete($rollnum){
@@ -261,5 +252,160 @@
         $result = mysql_query($query);
         return $result;
     }
+
+    function get_admin_list() {
+        $query = "SELECT * FROM adminlogin WHERE isDeleted = 0";
+        $result = mysql_query($query);
+        return $result;
+    }
+
+    function add_admin($rollnumto,$rollnumby){
+        if( strlen($rollnumto) != 10 ){
+            return 0;
+        }
+    
+        else {
+            $query = "INSERT INTO adminlogin (admRollNum,isActive,isDeleted,added_by ) VALUES ('{$rollnumto}',1,0,'{$rollnumby}') ";
+            $result = mysql_query($query);
+            if( $result ) {
+                return 2;
+            }
+            else {
+                return 1;
+            }
+            
+        }
+    }
+
+    function add_company($name,$description,$lastdate,$mincgpa,$jobprofile,$link,$date){
+    
+        $query = "INSERT INTO companies 
+            (name,description,mincgpa,lastDate,jobProfile,link,isActive,isDeleted,added_on,added_by) 
+            VALUES 
+            ('{$name}','{$description}','{$mincgpa}','{$lastdate}','{$jobprofile}','{$link}','1','0','{$date}','{$rollnum}') ";
+
+            $result = mysql_query($query);
+        
+            if($result){
+                return 1;
+            }
+            else {
+                return 0;
+            }
+    
+    }
+
+
+
+    function del_admin($id){
+        $query = "UPDATE adminlogin SET isDeleted = 1 WHERE id = '{$id}' ";
+        $result = mysql_query($query);
+        if( $result ) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    function notify_user($to,$name,$description,$lastdate,$mincgpa,$jobprofile,$link){
+        
+        
+        $subject = "Placement Portal Update: ".$name." is visiting our campus now!";
+        $body = $name." is Visiting our campus. About ".$name." : ".$description." , For more information visit ".$link.".
+        job profile offered by company is ".$jobprofile.".Min cgpa required to apply is ".$mincgpa." and last date to apply is ".$lastdate.".
+        To apply go to iiitapp.iiita.ac.in.";
+        
+        sendmail ( $to,$subject,$body);
+            
+     }
+
+     function sendmail($to,$subject,$body){
+                
+        $header = "From: ".$MAIL_FROM."\r\n";
+       // $header.= "MIME-Version: 1.0\r\n"; 
+        $header.= "MIME-Version: 1.0\r\n"; 
+        $header.= "Content-Type: text/plain; charset=utf-8\r\n"; 
+        $header.= "X-Priority: 1\r\n"; 
+
+        mail($to, $subject, $body, $header);
+
+    }
+
+//LOGGER functions -->
+
+
+      function add_login_admin_logger($rollnum){
+          $db_select = mysql_select_db(DB_name2);
+            if (!$db_select) {
+                die("Database selection failed: " . mysql_error());
+                return 0;
+            }
+            else {
+                if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+                    $ip = $_SERVER['HTTP_CLIENT_IP'];
+                } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+                } else {
+                    $ip = $_SERVER['REMOTE_ADDR'];
+                }
+                
+                $query = "INSERT INTO loginlogger (admrollnum,ip_address) VALUES ('{$rollnum}','{$ip}')";
+                $result = mysql_query($query);
+                if($result){
+                    $db_select = mysql_select_db(DB_name);
+                    if (!$db_select) {
+                        die("Database selection failed: " . mysql_error());
+                        return 0;
+                    }
+                    else {
+                        return 1;
+                    }
+                }
+                else {
+                    return 0;
+                }
+                 
+            }
+
+      }
+
+      function admin_action_logger($rollnum,$action,$matter,$matterid){
+          $db_select = mysql_select_db(DB_name2);
+            if (!$db_select) {
+                die("Database selection failed: " . mysql_error());
+                return 0;
+            }
+            else {
+                if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+                    $ip = $_SERVER['HTTP_CLIENT_IP'];
+                } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+                } else {
+                    $ip = $_SERVER['REMOTE_ADDR'];
+                }
+
+                $query = "INSERT INTO actionlogger (by_rollnum,matter,matter_id,action,ip_address) VALUES
+                ('{$rollnum}','{$matter}','{$matterid}','{$action}','{$ip}')";
+                $result = mysql_query($query);
+                if($result){
+                    $db_select = mysql_select_db(DB_name);
+                    if (!$db_select) {
+                        die("Database selection failed: " . mysql_error());
+                        return 0;
+                    }
+                    else {
+                        return 1;
+                    }
+                }
+                else {
+                    return 0;
+                }
+
+            }
+
+        }
+
+
 
 ?>
