@@ -15,8 +15,9 @@
 <?php 
     $comid = $_POST['id'];
 
-    $query = "UPDATE companies SET isDeleted = 1 WHERE id = '{$comid}'";
-    $result = mysql_query($query);
+    $result = del_company($id,$rollnum);
+
+    
     if($result){
         
         $value = admin_action_logger($rollnum,'Remove','company',$comid);

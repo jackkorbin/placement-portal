@@ -13,21 +13,17 @@
 <?php require_once("includes/functions.php"); ?>
 
 <?php 
-        $id = $_POST['id'];
-        $name = $_POST['name'];
-        $description = $_POST['description'];
-        $link = $_POST['link'];
-        $jobprofile = $_POST['jobprofile'];
-        $lastdate = $_POST['lastdate'];
-        $mincgpa = $_POST['mincgpa'];
+        $id = check_input($_POST['id']);
+        $name = check_input($_POST['name']);
+        $link = check_input($_POST['link']);
+        $mincgpa = check_input($_POST['mincgpa']);
+        $lastdate = check_input($_POST['lastdate']);
+        $jobprofile = check_input($_POST['jobprofile']);
+        $description = check_input($_POST['description']);
 
-        $query = "UPDATE companies SET name = '{$name}',
-                                        description = '{$description}',
-                                        link = '{$link}',
-                                        jobProfile = '{$jobprofile}',
-                                        lastDate = '{$lastdate}',
-                                        mincgpa = '{$mincgpa}' WHERE id= '".$id."'";
-        $result = mysql_query($query);
+        $result = update_company($id,$name,$description,$lastdate,$mincgpa,$jobprofile,$link,$rollnum);
+
+        
         
         if($result){
             

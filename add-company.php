@@ -14,16 +14,15 @@
 
 <?php 
     
-    $name = $_POST['name'];
-    $description = $_POST['description'];
-    $lastdate = $_POST['lastdate'];
-    $mincgpa = $_POST['mincgpa'];
-    $jobprofile = $_POST['jobprofile'];
-    $link = $_POST['link'];
-    $date = date("Y-m-d");
+    $name = check_input($_POST['name']);
+    $description = check_input($_POST['description']);
+    $lastdate = check_input($_POST['lastdate']);
+    $mincgpa = check_input($_POST['mincgpa']);
+    $jobprofile = check_input($_POST['jobprofile']);
+    $link = check_input($_POST['link']);
 
 
-    $value = add_company($name,$description,$lastdate,$mincgpa,$jobprofile,$link,$date);
+    $value = add_company($name,$description,$lastdate,$mincgpa,$jobprofile,$link,$rollnum);
     
     if($value == 1 ){
         

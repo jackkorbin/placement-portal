@@ -14,8 +14,8 @@
 
 <?php
         $id = $_POST['id'];
-        $query = "UPDATE announcements SET isDeleted = '1' WHERE id = '{$id}' ";
-		$result = mysql_query($query);
+        $result = del_announcement($id,$rollnum);
+        
         if($result) {
             $value = admin_action_logger($rollnum,'delete','announcement',$id);
             if ($value == 0) {

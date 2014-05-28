@@ -27,32 +27,46 @@
     else {
         $msg = "";
     }
+    
+    if( isset($_GET['msgg']) ){
+        $msgg = $_GET['msgg'];
+    }
+    else {
+        $msgg = "";
+    }
+
+//Add Admin -->
     if( isset($_POST['submit']) ){
-        $rollnumto = $_POST['admrollnum'];
+        $rollnumto = check_input($_POST['admrollnum']);
         $value = add_admin($rollnumto,$rollnum);
         if( $value == 0 ){
             header("Location:manage_admin.php?msg=Invalid Rollnum");
             exit;
         }
-        else if( $value == 1 ){
+        else if( $value == 3 ){
             header("Location:manage_admin.php?msg=Already Exist");
             exit;
         }
-        else {
+        else if ( $value == 2 ) {
             
-            $value = admin_action_logger($rollnum,'add','admin',$rollnumto);
-            if ($value == 0) {
+            $result = admin_action_logger($rollnum,'add','admin',$rollnumto);
+            if ($result == 0) {
                 echo mysql_error();
             }
             
             header("Location:manage_admin.php?msg=Added");
             exit;
         }
+        else {
+            header("Location:manage_admin.php?msg=Error");
+            exit;
+        }
     }
 
+//Delete admin -->
     if( isset($_GET['delete']) ){
         $id = $_GET['delete'];
-        $value = del_admin($id);
+        $value = del_admin($id,$rollnum);
         if( $value == 0 ){
             header("Location:manage_admin.php?msgg=Error");
             exit;
@@ -68,12 +82,7 @@
             exit;
         }
     }
-    if( isset($_GET['msgg']) ){
-        $msgg = $_GET['msgg'];
-    }
-    else {
-        $msgg = "";
-    }
+
 
 ?>
     

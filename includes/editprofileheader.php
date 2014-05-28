@@ -1,5 +1,5 @@
 <?php
-    if(isset($_SESSION["name"])){
+    if(isset($_SESSION["name"])){ //To update profile 
         $message = "<font color='#447fc8'>Update Profile</font>";
         $pc = 1;
         $name = $_SESSION["name"];
@@ -18,7 +18,8 @@
         $technicalExp = check_input($details['technicalExperience']);
         $projects = check_input($details['projects']);
         $areaofint = check_input($details['areaOfIntrest']);
-        
+
+         
         if(isset($_POST['updateprofile'])){
             $name = check_input($_POST['name']);
             $birthDate = check_input($_POST['birthdate']);
@@ -32,10 +33,18 @@
             $projects = check_input($_POST['projects']);
             $areaofint = check_input($_POST['areaofint']);
            
-           updateUserProfile($rollnum,$name,$birthDate,$sex,$alternateEmail,$currentsem,$institute,$cgpa,$education,$technicalExp,$projects, $areaofint); 
+            $value = updateUserProfile($rollnum,$name,$birthDate,$sex,$alternateEmail,$currentsem,$institute,$cgpa,$education,$technicalExp,$projects, $areaofint); 
+            if ($value == 1) {
+                header("Location:editprofile.php?message=Updated");
+                exit;
+            }
+            else{
+                header("Location:editprofile.php?message=Error");
+                exit;
+            }
        }    
     }
-    else if(isset($_SESSION["rollnum"])){
+    else if(isset($_SESSION["rollnum"])){ //To save profile first time 
         $message = "Complete your Profile to proceed";
         $pc = 0;
         $rollnum = $_SESSION["rollnum"];
@@ -50,7 +59,7 @@
         $technicalExp = "";
         $projects = "";
         $areaofint = "";
-        
+    
         if(isset($_POST['updateprofile'])){
             $name = check_input($_POST['name']);
             $birthDate = check_input($_POST['birthdate']);
@@ -64,7 +73,16 @@
             $projects = check_input($_POST['projects']);
             $areaofint = check_input($_POST['areaofint']);
            
-           saveUserProfile($rollnum,$name,$birthDate,$sex,$alternateEmail,$currentsem,$institute,$cgpa,$education,$technicalExp,$projects, $areaofint);
+            $value = saveUserProfile($rollnum,$name,$birthDate,$sex,$alternateEmail,$currentsem,$institute,$cgpa,$education,$technicalExp,$projects, $areaofint);
+            if ($value == 1) {
+                $_SESSION['name'] = $name;
+                header("Location:editprofile.php?message=Updated");
+                exit;
+            }
+            else{
+                header("Location:editprofile.php?message=Error");
+                exit;
+            }
        }
     }
     else {

@@ -4,7 +4,7 @@
 // Counter to count no of companies ( Fetch companies and LOAD MORE ) 
     
     var num = 0; // Number of companies present at this moment.
-    var increment = 3; // Change this to change number of companies fetching at a time.
+    var increment = 6; // Change this to change number of companies fetching at a time.
     
     function counter(){
         num += increment;
