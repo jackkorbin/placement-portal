@@ -47,7 +47,7 @@
                                 <select class="form-control mdb-select" id="filterselect">
                                   <option selected value="Active">Active</option>
                                   <option value="All" >All</option>
-                                  <option value="Applied">Inactive</option>
+                                  <option value="Inactive">Inactive</option>
                                 </select>
                           </div>
                       </div>

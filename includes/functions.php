@@ -149,8 +149,8 @@
 
         if(strlen($rollnum) == 10 ){ // This check is temporary, this will be soon replaced by the Authentication From the MAIL.
             
-            if(LDAP_LOGIN){
-                $value = authenticate_user_LDAP($rollnum,$pas);
+            if(LDAP_LOGIN == true){
+                $value = authenticate_user_LDAP($rollnum,$pass);
                 if($value){
                     $_SESSION['rollnum']= $rollnum;
                     $query = " SELECT * FROM adminlogin WHERE admRollNum = '{$rollnum}' AND isDeleted = 0 LIMIT 1";
@@ -264,7 +264,7 @@
         }
         else if($value == 'Active'){
             $date = date("Y-m-d");
-            $query = "SELECT * FROM companies WHERE (isDeleted = 0 AND lastDate >= ".$date." ) ORDER BY id DESC LIMIT {$start},{$end} ";
+            $query = "SELECT * FROM companies WHERE (isDeleted = 0 AND lastDate > ".$date." ) ORDER BY id DESC LIMIT {$start},{$end} ";
             $result = mysql_query($query,$dbh1);
             //echo $query;
             return $result;
