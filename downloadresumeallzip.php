@@ -1,13 +1,9 @@
 <?php session_start(); ?>
 <?php
     
-    if( !($_SESSION['array'])  ){
-        header("Location:index.php");
-        exit;
-    }
-    else {
-        $files = $_SESSION['array'];
-    }
+   
+    $files = $_SESSION['array'];
+    
         
     
 ?>

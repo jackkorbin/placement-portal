@@ -11,7 +11,7 @@ if( $pc == 0 || ALLOW_PROFILE_EDIT == true ){
 
                       <div class="form-group">
                           <label class="mpp-labelname">Birth date</label>
-                        <input type="date" name="birthdate" class="form-control" id="" placeholder="" value="'.$birthDate.'">
+                        <input type="text" name="birthdate" class="form-control" id="filter-date" placeholder="YYYY-MM-DD" value="'.$birthDate.'">
                       </div>
 
                       <div class="form-group">

@@ -18,20 +18,38 @@ body {
 /* Sign in Page */
 
 .singinbar{
-    margin:10em auto;
+    margin:5em auto;
     margin-bottom: 0em;
     
     
-    width:33em;
+    width:32em;
     background-color:white;
     padding:40px;
     padding-top:20px;
     padding-bottom:20px;
     
-    border-radius:18px;
+    border-radius:0 0 18px 18px;
     -moz-box-shadow: 0px 0px 16px #999;
     -webkit-box-shadow: 0px 0px 16px #999;
     box-shadow: 0px 0px 16px #999;
+    display:none;
+}
+.comp-container{
+    margin:5em auto;
+    margin-bottom: 0em;
+    
+    
+    width:45em;
+    background-color:white;
+    padding:40px;
+    padding-top:20px;
+    padding-bottom:15px;
+    
+    border-radius:0 0 18px 18px;
+    -moz-box-shadow: 0px 0px 16px #999;
+    -webkit-box-shadow: 0px 0px 16px #999;
+    box-shadow: 0px 0px 16px #999;
+    display:none;
 }
 
 .signinrowheading{
@@ -39,7 +57,7 @@ body {
     border-bottom:1px solid #eaebe6;
     text-align:center;
     font-family: 'Lato', sans-serif;
-    font-size:36px;
+    font-size:30px;
     line-height:40px;
      font-style: normal;
     font-weight: 900;
@@ -47,7 +65,7 @@ body {
 }
 
 .signinmiddle{
-    padding:30px;
+    padding:30px 15px 10px 15px;
     text-align:center;
     border-bottom:1px solid #eaebe6;
 }
@@ -58,10 +76,17 @@ body {
 }
 .signinfooter{
     padding:20px;
+    padding-bottom:10px;
     text-align: center;
 }
+.btn-container{
+    padding-bottom:5px;
+}
+.btn-container a{
+    padding-top:10px;
+}
 .btn-signin{
-    width:10em;
+    width:15em;
     height:3em;
 }
 .signinpageheaderbaap{
@@ -75,21 +100,30 @@ body {
 }
 
 .signinpagefooterbaap{
-    border-radius:0px; 
-    margin:0px; 
-    background-color:white; 
-    height:3em; 
     
     
+    background-color:white;
+    
+    bottom:-100px;
+    text-align: center;
+    padding:1em;
+}
+.signinpagefooterbaap a{
+    margin:0;
+    padding:0;
+    font-size: 12px;
+}
+.signinpagefooterbaap a:hover{
+    color:#666;
+    text-decoration: none;
 }
 
-
-.signinpagefooter{
-    padding:1.5em 0;
-   
-    text-align:center;
+.signinpagefooterbaap b{
+    font-weight: 100;
     color:#666;
-    border-top:1px solid #ddd;
+    margin:0;
+    padding:0;
+    font-size: 12px;
 }
 .signinpageheader{
     padding:0.5em 0;
@@ -98,6 +132,17 @@ body {
     font-weight: 900;
 }
 
+.comp-input{
+    display:inline-block;
+}
+.comp-input input{
+    width:250px;
+}
+.comp-input textarea{
+    width:500px;
+    resize:none;
+    height:3em;
+}
 /* sign in page custom Css ends 
 mydashboard CSS starts --> */
 
@@ -228,6 +273,10 @@ mydashboard CSS starts --> */
     line-height:30px;
     background-color: white;
 }
+.mdb-company-content.unapproved{
+    border-bottom:0;
+    padding:5px 1em;
+}
 .mdb-modal-content{
      border-bottom:1px solid #eaebe6;
     padding:1em;
@@ -342,6 +391,8 @@ mdb-com-sidelinks{
 .mpp-divs{
     padding:2em;
     padding-bottom: 1.5em;
+    margin:0;
+    margin-bottom:30px;
 }
 .mpp-labelname{
     display:block;
@@ -470,4 +521,8 @@ ADMIN CSS STARTS */
     text-align: center;
     font-size:15px;
     
+}
+#error {
+    padding: 11px;
+    color: red;
 }

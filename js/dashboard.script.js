@@ -25,29 +25,56 @@
         else {
             $('#loadmore').html('Loading..');
         }
-        $.ajax({
-                type:'POST',
+        if( value == 'Unapproved' ){
+            $.ajax({
+                    type:'POST',
 
-                url:'fetch_companies.php',
+                    url:'fetch_new_companies.php',
 
-                data : {
-                value : value,
-                    num : num,
-                    inc : increment,
-                    user : user
-                },
-                success: function(data){
-                    if( num === 0) {
-                        $('#Ajaxcompanies').html(data);
+                    data : {
+                    value : value,
+                        num : num,
+                        inc : increment,
+                        user : user
+                    },
+                    success: function(data){
+                        if( num === 0) {
+                            $('#Ajaxcompanies').html(data);
+                        }
+                        else {
+                            $('#Ajaxcompanies').append(data);
+                            $('#loadmore').html('Load more');
+                        }
+                        counter();
                     }
-                    else {
-                        $('#Ajaxcompanies').append(data);
-                        $('#loadmore').html('Load more');
-                    }
-                    counter();
-                }
 
             });
+        }
+        else {
+            $.ajax({
+                    type:'POST',
+
+                    url:'fetch_companies.php',
+
+                    data : {
+                    value : value,
+                        num : num,
+                        inc : increment,
+                        user : user
+                    },
+                    success: function(data){
+                        if( num === 0) {
+                            $('#Ajaxcompanies').html(data);
+                        }
+                        else {
+                            $('#Ajaxcompanies').append(data);
+                            $('#loadmore').html('Load more');
+                        }
+                        counter();
+                    }
+
+            });
+        }
     }
    
 
@@ -106,7 +133,7 @@
                 }
 
             });
-     }
+     } 
 
    
     function fetchannouncements(user){
@@ -206,4 +233,44 @@
         });
     }
 
+    function publish_comp(comid){
+        
+        $('#'+comid).addClass('btn-danger');  
+        $('#'+comid).html('Wait..');
+        
+            $.ajax({
+                type:'POST',
+
+                url:'publish_comp.php',
+
+                data:{
+                id : comid
+                },
+                success: function(app){
+                  
+                    var app = +(app); // to convert to number
+                   if(app === 1){
+                       $('#'+comid).removeClass('btn-success');
+                       $('#'+comid).removeClass('btn-danger');
+                       $('#'+comid).addClass('btn-info');
+                       $('#'+comid).html('publish');
+                      
+                   }
+                   else if (app === 0) {
+                       $('#'+comid).removeClass('btn-info');
+                       $('#'+comid).removeClass('btn-danger');
+                       $('#'+comid).addClass('btn-success');
+                       $('#'+comid).html('Unpublish');
+                    }
+                    else {
+                        $('#'+comid).removeClass('btn-danger');
+                        $('#'+comid).addClass('btn-danger');
+                        $('#'+comid).html('Reload Page');
+                    }
+
+                }
+
+            });
+        
+    }
 

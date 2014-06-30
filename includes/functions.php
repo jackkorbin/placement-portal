@@ -142,12 +142,42 @@
             }
         
 	}
+
+    function validate_comp($email,$pass){
+        global $dbh1;
+        $query = " SELECT * FROM companies WHERE email = '$email' AND password = '$pass' AND approved = 1 LIMIT 1";
+        $result = mysql_query($query,$dbh1);
+        $query = " SELECT * FROM companies WHERE email = '$email' AND password = '$pass' LIMIT 1";
+        $result2 = mysql_query($query,$dbh1);
+        if( mysql_num_rows($result2) == 1 ) {
+            
+            if( mysql_num_rows($result) == 1 ) {
+                $result = mysql_fetch_array($result);
+                $_SESSION['company'] = $result['id'];
+                return 1; // approved!
+            }
+            else {
+                return 2; // unapproved
+            }
+        }
+        else {
+            return 0; // not exist
+        }
+        
+    }
+
+    function get_company_by_id($id){
+        global $dbh1;
+        $query = " SELECT * FROM companies WHERE id = '$id' LIMIT 1";
+        $result2 = mysql_query($query,$dbh1);
+        return mysql_fetch_array($result2);
+    }
 	
 	function authenticateUser( $rollnum,$pass ) {
         global $dbh1;
         $_SESSION = array();
 
-        if(strlen($rollnum) == 10 ){ // This check is temporary, this will be soon replaced by the Authentication From the MAIL.
+        if(strlen($rollnum) == 10 && strlen($pass) > 2 ){ // This check is temporary, this will be soon replaced by the Authentication From the MAIL.
             
             if(LDAP_LOGIN == true){
                 $value = authenticate_user_LDAP($rollnum,$pass);
@@ -202,6 +232,7 @@
         }
 	}
 
+
 //LDAP
     function authenticate_user_LDAP( $uid, $pwd ) {
             if ($pwd) {
@@ -246,31 +277,49 @@
         global $dbh1;
         if($value == 'Applied'){
             
-            $query = "SELECT * FROM companies WHERE id IN (SELECT companyid FROM relationship WHERE StuRollNum = '".$rollnum."' AND isDeleted = '0') ORDER BY id DESC LIMIT {$start},{$end} ";
+            $query = "SELECT * FROM companies WHERE id IN (SELECT companyid FROM relationship WHERE StuRollNum = '".$rollnum."' AND isDeleted = '0' AND isActive = 1 ) ORDER BY id DESC LIMIT {$start},{$end} ";
             $result = mysql_query($query,$dbh1);
             return $result;
         }
         else if($value == 'Unapplied'){
              
-            $query = "SELECT * FROM companies WHERE id NOT IN (SELECT companyid FROM relationship WHERE StuRollNum = '".$rollnum."' AND isDeleted = '0') ORDER BY id DESC LIMIT {$start},{$end} ";          
+            $query = "SELECT * FROM companies WHERE id NOT IN (SELECT companyid FROM relationship WHERE StuRollNum = '".$rollnum."' AND isDeleted = '0' AND isActive = 1) ORDER BY id DESC LIMIT {$start},{$end} ";          
             $result = mysql_query($query,$dbh1);
             return $result;
         }
         else if($value == 'Inactive'){
-            $date = date("Y-m-d");
-            $query = "SELECT * FROM companies WHERE isDeleted = 0 AND lastDate < ".$date." ORDER BY id DESC LIMIT {$start},{$end} ";
+            $query = "SELECT * FROM companies WHERE ( isDeleted = 0 AND lastDate < NOW() AND isActive = 1 ) ORDER BY id DESC LIMIT {$start},{$end} ";
             $result = mysql_query($query,$dbh1);
             return $result;
         }
         else if($value == 'Active'){
-            $date = date("Y-m-d");
-            $query = "SELECT * FROM companies WHERE (isDeleted = 0 AND lastDate > ".$date." ) ORDER BY id DESC LIMIT {$start},{$end} ";
+            $query = "SELECT * FROM companies WHERE (isDeleted = 0 AND lastDate > NOW() AND isActive = 1 ) ORDER BY id DESC LIMIT {$start},{$end} ";
             $result = mysql_query($query,$dbh1);
-            //echo $query;
+           // echo $query;
+            return $result;
+        }
+        else if($value == 'Published'){
+            $query = "SELECT * FROM companies WHERE isDeleted = 0 AND isActive = 1 ORDER BY id DESC LIMIT {$start},{$end} ";
+            $result = mysql_query($query,$dbh1);
+            return $result;
+        }
+        else if($value == 'Unpublished'){
+            $query = "SELECT * FROM companies WHERE isDeleted = 0 AND isActive = 0 ORDER BY id DESC LIMIT {$start},{$end} ";
+            $result = mysql_query($query,$dbh1);
+            return $result;
+        }
+        else if($value == 'ALL'){
+            $query = "SELECT * FROM companies WHERE approved = 1 ORDER BY id DESC LIMIT {$start},{$end} ";
+            $result = mysql_query($query,$dbh1);
             return $result;
         }
         else if($value == 'All'){
-            $query = "SELECT * FROM companies WHERE isDeleted = 0 ORDER BY id DESC LIMIT {$start},{$end} ";
+            $query = "SELECT * FROM companies WHERE approved = 1 AND isActive = 1 ORDER BY id DESC LIMIT {$start},{$end} ";
+            $result = mysql_query($query,$dbh1);
+            return $result;
+        }
+        else if($value == 'Unapproved'){
+            $query = "SELECT * FROM companies WHERE approved = 0 ORDER BY id DESC LIMIT {$start},{$end} ";
             $result = mysql_query($query,$dbh1);
             return $result;
         }
@@ -343,11 +392,11 @@
 
     function checklastdate($companyid){
         global $dbh1;
-        $date = date("Y-m-d");
-        $query = "SELECT lastDate FROM companies WHERE id = '".$companyid."' LIMIT 1";
+        $query = "SELECT lastDate FROM companies WHERE id = '".$companyid."' AND lastDate > NOW() LIMIT 1";
         $result = mysql_query($query,$dbh1);
         $array = mysql_fetch_array($result);
-        if ( $array['lastDate'] >= $date ){
+        //$result = mysql_num_rows($array);
+        if ( $array ){
             
             return 1; // allowed.
             
@@ -381,12 +430,75 @@
         }
     }
 
+    function submit_jnf($Organization,$Buisness,$contact_details,$Name,$Designation,$contact_number,$email,$intrestedin,$CGPA,$elegiblity,$Infrastructural,$agreement,$Profile,$salary,$Allowance,$Perks,$Location,$Joining,$Insurance,$CTC,$stock,$facility,$accomodation,$comid){
+        global $dbh1;
+        $query = "INSERT INTO jnf ( organization,buisness,contact_details,name,designation,contact_number,email,intrestedin,cgpa,elegiblity,infrastructural,agreement,profile,salary,allowance,perks,location,joining,insurance,ctc,stock,facility,accomodation,isActive,isDeleted,added_on,company_id ) VALUES ( '$Organization','$Buisness','$contact_details','$Name','$Designation','$contact_number','$email','$intrestedin','$CGPA','$elegiblity','$Infrastructural','$agreement','$Profile','$salary','$Allowance','$Perks','$Location','$Joining','$Insurance','$CTC','$stock','$facility','$accomodation',1,0,NOW(),$comid ) ";
+        $result = mysql_query($query,$dbh1);
+        if ($result){
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    
+    }
+
     
 //Admin typical Functions -->
+
+    function register_company( $organization,$contact,$designation,$email,$password ){
+        global $dbh1;
+        $query = "INSERT INTO companies (organization,contact,designation,email,password,isActive,isDeleted,added_on) VALUES 
+        ('$organization','$contact','$designation','$email','$password','0','0',NOW()) ";
+        $result = mysql_query($query,$dbh1);
+        
+        if($result){
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
 
     function get_students_list($id){
         global $dbh1;
         $query = "SELECT * FROM studentsdata WHERE rollnum IN (SELECT StuRollNum FROM relationship WHERE isDeleted = 0 AND companyid = '{$id}'  )";
+        $result = mysql_query($query,$dbh1);
+        return $result;
+    }
+
+    function checkpublished($com_id){
+        global $dbh1;
+        $query = "SELECT * FROM companies WHERE id = ".$com_id." LIMIT 1";
+        $result = mysql_query($query,$dbh1);
+        $result = mysql_fetch_array($result);
+        if($result['isActive'] == 1 ){
+            return 1;
+        }
+        else if( $result['isActive'] == 0 ){
+            return 0;
+        }
+        else {
+            return 2;
+        }
+        
+    }
+    function publish_company($com_id){
+        global $dbh1;
+        $query = "UPDATE companies SET isActive = 1 WHERE id= '{$com_id}'";
+        $result = mysql_query($query,$dbh1);
+        return $result;
+    }
+    function unpublish_company($com_id){
+        global $dbh1;
+        $query = "UPDATE companies SET isActive = 0 WHERE id= '{$com_id}'";
+        $result = mysql_query($query,$dbh1);
+        return $result;
+    }
+
+    function approve_company($id){
+        global $dbh1;
+        $query = "UPDATE companies SET approved = 1 WHERE id= '{$id}'";
         $result = mysql_query($query,$dbh1);
         return $result;
     }
@@ -426,7 +538,7 @@
     
     }
 
-    function del_company($name,$description,$lastdate,$mincgpa,$jobprofile,$link,$rollnum){
+    function del_company($id,$rollnum){
         global $dbh1;
         $query = "UPDATE companies SET isDeleted = '1' , modified_by = '{$rollnum}' WHERE id = '{$id}' ";
         $result = mysql_query($query,$dbh1);
@@ -509,6 +621,21 @@
             }
             
         }
+    }
+
+    function get_jnf_list(){
+        global $dbh1;
+        $query = "SELECT * FROM jnf WHERE isDeleted = 0 ORDER BY id DESC";
+        $result = mysql_query($query,$dbh1);
+        return $result;
+    }
+
+    function get_jnf_byid($id){
+        global $dbh1;
+        $query = "SELECT * FROM jnf WHERE isDeleted = 0 AND id = '$id' LIMIT 1";
+        $result = mysql_query($query,$dbh1);
+        $array = mysql_fetch_array($result);
+        return $array;
     }
 
 //Mail functions -->

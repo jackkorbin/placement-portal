@@ -24,7 +24,8 @@
         <?php include('includes/buttonheader.php'); ?>
          <div class="collapse navbar-collapse mybuttonid"> 
             <ui class="nav navbar-nav navbar-right">
-                <?php if($admin == "yes"){ echo '<li><a href="admin_dashboard.php" class="mdb-menutext-active">Admin Page</a></li>'; } ?>
+                <?php if($admin == "yes"){ echo '<li><a href="view_jnf_list.php" class="mdb-menutext">View JNFs</a></li>'; } ?>
+                <?php if($admin == "yes"){ echo '<li><a href="admin_dashboard.php" class="mdb-menutext-active">Admin Panel</a></li>'; } ?>
                 <li><a href="mydashboard.php" class="mdb-menutext">My Dashboard</a></li>
                 <li><a href="viewprofile.php" class="mdb-menutext">view profile</a></li>
                 <li><a href="logout.php" class="mdb-menutext">Logout</a></li>
@@ -45,9 +46,12 @@
                           <div class="form-group-option" >
                                 <div class="mdb-show-label">Show</div>
                                 <select class="form-control mdb-select" id="filterselect">
-                                  <option selected value="Active">Active</option>
-                                  <option value="All" >All</option>
+                                  <option selected value="Unapproved">New</option>
+                                  <option value="Active">Active</option>
                                   <option value="Inactive">Inactive</option>
+                                  <option value="Unpublished">Unpublished</option>
+                                  <option value="Published" >Published</option>
+                                  <option value="ALL" >All</option>
                                 </select>
                           </div>
                       </div>

@@ -22,7 +22,8 @@
         <?php include('includes/buttonheader.php'); ?>
         <div class="collapse navbar-collapse mybuttonid"> 
             <ui class="nav navbar-nav navbar-right">
-                <?php if($admin == "yes") echo '<li><a href="admin_dashboard.php" class="mdb-menutext">Admin Page</a></li>';  ?>
+                <?php if($admin == "yes"){ echo '<li><a href="view_jnf_list.php" class="mdb-menutext">View JNFs</a></li>'; } ?>
+                <?php if($admin == "yes"){ echo '<li><a href="admin_dashboard.php" class="mdb-menutext">Admin Panel</a></li>'; } ?>
                 <li><a href="mydashboard.php" class="mdb-menutext">My Dashboard</a></li>
                 <li><a href="viewprofile.php" class="mdb-menutext">view profile</a></li>
                 <li><a href="logout.php" class="mdb-menutext">Logout</a></li>
@@ -118,7 +119,9 @@
       </form>
 
 
-<?php require('includes/footerscriptjs.php'); ?>    
+<?php require('includes/footerscriptjs.php'); ?>  
+<link rel=stylesheet href="js/jquery-ui-1.10.4.custom/css/flick/jquery-ui-1.10.4.custom.min.css">
+<script src="js/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js"></script>
 <script>
 
   $(document).ready(function(){
@@ -137,6 +140,10 @@
           this.form.submit();
       });
       $('#uploadresumebtn').tooltip();
+      
+      $("#filter-date").datepicker({
+                dateFormat: 'yy-mm-dd'
+        });
   });
 
 

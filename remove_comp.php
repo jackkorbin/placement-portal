@@ -15,7 +15,7 @@
 <?php 
     $comid = $_POST['id'];
 
-    $result = del_company($id,$rollnum);
+    $result = del_company($comid,$rollnum);
 
     
     if($result){

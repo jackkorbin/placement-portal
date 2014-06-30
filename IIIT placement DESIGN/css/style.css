@@ -1,0 +1,418 @@
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 100;
+  src: local('Lato Hairline'), local('Lato-Hairline'), url(../fonts/lato.woff) format('woff');
+}
+
+
+/* Sign in Page */
+
+.singinbar{
+    margin:10em auto;
+    
+    height:25em;
+    width:33em;
+    background-color:white;
+    padding:40px;
+    padding-top:20px;
+    padding-bottom:20px;
+    
+    border-radius:18px;
+    -moz-box-shadow: 0px 0px 16px #999;
+    -webkit-box-shadow: 0px 0px 16px #999;
+    box-shadow: 0px 0px 16px #999;
+}
+
+.signinrowheading{
+    padding:10px;
+    border-bottom:1px solid #eaebe6;
+    text-align:center;
+    font-family: 'Lato', sans-serif;
+    font-size:36px;
+    line-height:40px;
+     font-style: normal;
+    font-weight: 900;
+    
+}
+
+.signinmiddle{
+    padding:30px;
+    text-align:center;
+    border-bottom:1px solid #eaebe6;
+}
+.formfix{
+    width:20em;
+    height:3em;
+    margin:0 auto;
+}
+.signinfooter{
+    padding:20px;
+    text-align: center;
+}
+.btn-signin{
+    width:10em;
+    height:3em;
+}
+.signinpageheaderbaap{
+    border-radius:0px; 
+    margin:0px; 
+    background-color:white; 
+    height:6em; 
+    box-shadow: 0px 0px 16px #999;
+    -moz-box-shadow: 0px 0px 16px #999;
+    -webkit-box-shadow: 0px 0px 16px #999;
+}
+
+.signinpagefooterbaap{
+    border-radius:0px; 
+    margin:0px; 
+    background-color:white; 
+    height:3em; 
+    
+    
+}
+
+
+.signinpagefooter{
+    padding:1.5em 0;
+   
+    text-align:center;
+    color:#666;
+    border-top:1px solid #ddd;
+}
+.signinpageheader{
+    padding:0.5em 0;
+     font-family: 'Lato', sans-serif;
+    font-size:36px;
+    font-weight: 900;
+}
+
+/* sign in page custom Css ends 
+mydashboard CSS starts --> */
+
+
+.mydashboardpageheader{
+    
+    background-color:white; 
+    height:3.8em; 
+    box-shadow: 0px 0px 16px #999;
+    -moz-box-shadow: 0px 0px 16px #999;
+    -webkit-box-shadow: 0px 0px 16px #999;
+    
+}
+.mdb-p-header{
+    
+    font-family: 'Lato', sans-serif;
+    font-size:20px;
+    font-weight: 900;
+    
+}
+
+.mdb-menutext{
+    
+    color:black;
+    transition: 0.2s;
+}
+.mdb-menutext:hover{
+    color:#447fc8;
+    border-bottom: 2px solid #447fc8;
+}
+.mdb-menutext-active{
+    color:#447fc8;
+    border-bottom: 2px solid #447fc8;
+}
+
+.mdb-company{
+    min-height:30em;
+    background-color: white;
+    
+    padding:3em;
+    
+    box-shadow: 0px 0px 16px #999;
+    -moz-box-shadow: 0px 0px 16px #999;
+    -webkit-box-shadow: 0px 0px 16px #999;
+    
+}
+.mdb-announcements{
+    max-height:41.5em;
+    background-color: white;
+    
+    padding:3em;
+    overflow: auto;
+    position:fixed;
+    margin-right: 4em;
+    
+    box-shadow: 0px 0px 16px #999;
+    -moz-box-shadow: 0px 0px 16px #999;
+    -webkit-box-shadow: 0px 0px 16px #999;
+}
+
+.mdb-contentdiv{
+    margin-top:3em;
+}
+.mdb-heading{
+    border-bottom:1px solid #eaebe6;
+    height:2em;
+    text-align: center;
+    margin-bottom:1em;
+    font-family: 'Lato', sans-serif;
+    font-size:30px;
+    line-height:40px;
+    font-style: normal;
+    font-weight: 900;
+    
+}
+.mdb-company-div{
+    
+    padding:1em;
+    padding-top: 0;
+    background-color: #f6f6f6;
+}
+.mdb-company-name{
+    
+    border-bottom:1px solid #eaebe6;
+    padding-top:15px;
+    font-family: 'Lato', sans-serif;
+    font-size:23px;
+    font-weight: 900;
+    height:3em;
+}
+.mdb-details1{
+    padding:10px 12px;
+    height:2em;
+}
+.mdb-modal-name {
+    border-bottom:1px solid #eaebe6;
+    padding-top:15px;
+    font-family: 'Lato', sans-serif;
+    font-size:23px;
+    font-weight: 900;
+    height:3em;
+    text-align: center;   
+}
+.mdb-company-name a:hover{   
+    color:#447fc8;
+    text-decoration: none;
+}
+.mdb-appliedusers{
+    
+    font-size:15px;
+    font-family:Tahoma, Geneva, sans-serif;
+	font-weight:100;
+    margin-top:0.2em;
+}
+
+.mdb-company-content{
+    
+    border-bottom:1px solid #eaebe6;
+    padding:1em;
+    
+    overflow:auto;
+    
+    border-bottom-left-radius:10px;
+    border-bottom-right-radius:10px;
+    
+    font-size:15px;
+    line-height:30px;
+    background-color: white;
+}
+.mdb-modal-content{
+     border-bottom:1px solid #eaebe6;
+    padding:1em;
+    overflow: auto;
+    
+    
+    font-size:15px;
+    line-height:30px;
+    background-color: white;
+    
+}
+
+.mdb-company-footer{
+    padding:1em;
+    padding-bottom: 0;
+    
+}
+.mdb-modal-footer{
+    padding:1em;
+    height:4em;
+}
+.mdb-modal-btn{
+    height:3em;
+}
+.company-btn{
+    width:8em;
+    margin: 0.5em 0.2em;
+}
+
+mdb-com-sidelinks{
+}
+.mdb-com-footer-content{
+    
+    padding:0.7em 1em;
+    font-family: Helvetica, Arial, 'lucida grande', tahoma, verdana, arial, sans-serif;
+    font-size:16px;
+    font-weight: 100;
+}
+.mdb-mincgpanum{
+    color:#447fc8;
+    font-size:18px;
+    font-family:Tahoma, Geneva, sans-serif;
+	font-weight:100;
+}
+.mdb-viewmore{
+    text-align: center;
+   
+    padding:1em;
+    margin:1em;
+    font-family: 'Lato', sans-serif;
+    font-size:16px;
+    font-weight: 900;
+    
+}
+.mdb-viewmore:hover{
+     background-color: #eee;
+    cursor:pointer;
+    
+}
+.mdb-ann-time{
+    color:#447fc8;
+}
+
+.mdb-company-modal-container{
+   
+  line-height: 1.42857143;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  -webkit-transition: all .2s ease-in-out;
+          transition: all .2s ease-in-out;
+    padding:1em;
+    padding-top: 0;
+    background-color: #f6f6f6;
+  
+    
+}
+.mdb-select{
+    width:10em;
+    font-family: Helvetica, Arial, 'lucida grande', tahoma, verdana, arial, sans-serif;
+    font-size:16px;
+    font-weight: 100;
+}
+
+.form-group-option{
+    margin-bottom: 2em;
+    left:2px;
+}
+.mdb-show-label{
+    padding:0.3em;
+    font-family: Helvetica, Arial, 'lucida grande', tahoma, verdana, arial, sans-serif;
+    font-size:15px;
+    color:#447fc8;
+}
+/* endydashboard CSS starting editprofile page CSS --> */
+
+.mpp-contentdiv{
+    background-color:white;
+    
+     
+    padding-top:8em;
+    box-shadow: 0px 0px 16px #999;
+    -moz-box-shadow: 0px 0px 16px #999;
+    -webkit-box-shadow: 0px 0px 16px #999;
+    
+}
+
+.mpp-divs{
+    padding:2em;
+    padding-bottom: 1.5em;
+}
+.mpp-labelname{
+    display:block;
+    
+    font-size:15px;
+    font-family:Tahoma, Geneva, sans-serif;
+	font-weight:100;
+    
+}
+
+.mpp-chngepic{
+    text-align:center;
+    
+}
+
+/* end of edit profile CSS starting ViewprofileCSS --> */
+
+.vpp-labelname{
+    display:block;
+    padding-left:0.2em;
+    
+    font-size:14px;
+    font-family:Tahoma, Geneva, sans-serif;
+	font-weight:100;
+    
+}
+
+.vpp-content-text{
+    padding:0.5em;
+    width:100%;
+    background-color:#eee;
+    border-radius:5px;
+    color:#447fc8;
+    font-size:15px;
+    font-family:Tahoma, Geneva, sans-serif;
+	font-weight:100;
+}
+.vpp-customimg{
+    max-height:20em;
+}
+
+/* USER UI ENDS HERE ... 
+ADMIN CSS STARTS */
+
+.a-add-ann-btn{
+    margin:1em 0;
+    width:100%;
+}
+.a-add-btn{
+    float:right;
+    margin-top:2em;
+    width:12em;
+}
+.list-students {
+  position: relative;
+  display: block;
+  padding: 5px 15px;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  
+  border-right:none;
+    width:33%;
+    float:left;
+}
+
+.mdb-students-list{
+    height:41.5em;
+    background-color: white;
+    
+    padding:3em;
+    overflow: auto;
+    
+    
+    
+    box-shadow: 0px 0px 16px #999;
+    -moz-box-shadow: 0px 0px 16px #999;
+    -webkit-box-shadow: 0px 0px 16px #999;
+    
+}
+.sl-custom-btn{
+    padding:0.6em 0;
+    font-size:15px;
+}
+.gly-sort{
+    font-size:12px;
+}
+.gly-sort:hover{
+    cursor:pointer;
+}

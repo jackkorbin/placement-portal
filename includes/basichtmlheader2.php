@@ -9,6 +9,7 @@ echo'
     <!-- Bootstrap -->
     <link href="css/bootstrap.css" rel="stylesheet">
       <link href="css/style.css" rel="stylesheet">
+      
 
     
     <!--[if lt IE 9]>

@@ -1,16 +1,5 @@
 <?php session_start(); ?>
-<?php
 
-    if(isset($_SESSION['Adminrollnum'])){
-        $rollnum = $_SESSION['Adminrollnum'];
-        
-    }
-    else
-    {
-        header("Location:admin-login.php");
-        exit;
-    }
-?>
 
 
 

@@ -65,7 +65,7 @@
                 $com = '<div class="row">
                 <div class="thumbnail mdb-company-div">
                     <div class="mdb-company-name text-center">
-                        <a href="" >';
+                        <a href="#" data-toggle="modal" data-target="#com-rm-modal" onClick="javascript:fetch_details_of_comp('.$comid.');">';
                 $com .= $array['name'];
                 $com .= '</a></div><div class="mdb-company-content"><span class="mdb-appliedusers">Last date to apply : 
                             <font color="#447fc8">';
@@ -98,13 +98,13 @@
                                 $com .= 'Reload page</button>';
                             }
                     } else {
-                        $com .= '<button class="btn btn-default company-btn pull-right" >';
+                        $com .= '<button class="btn btn-primary company-btn pull-right" disabled>';
                         $com .= 'Low CGPA</button>';
                     }
                     
                 }
                 else {
-                    $com .= '<button class="btn btn-default company-btn pull-right" >';
+                    $com .= '<button class="btn btn-success company-btn pull-right" disabled>';
                         $com .= 'Last Date Passed</button>';
                 }
 
@@ -125,11 +125,24 @@
                 $name = $array['name'];
                 $lastdate = $array['lastDate'];
                 $lastdate = format_date($lastdate);
+                $publ = checkpublished($companyid);
+                if($publ == 1){
+                    $pub = "Unpublish";
+                    $type = "btn-success";
+                }
+                else if($publ == 0) {
+                    $pub = "Publish";
+                    $type = "btn-info";
+                }
+                else {
+                    $pub = "Error";
+                    $type = "btn-default";
+                }
 
                 $com = '<div class="row" id = "div'.$companyid.'">
                 <div class="thumbnail mdb-company-div">
                     <div class="mdb-company-name text-center">
-                        <a href="" >';
+                        <a href="" data-toggle="modal" data-target="#com-rm-modal" onClick="javascript:fetch_details_of_comp('.$comid.');">';
                 $com .= $name;
                 $com .= '</a></div><div class="mdb-company-content"><span class="mdb-appliedusers">Last date to apply : 
                             <font color="#447fc8">';
@@ -140,19 +153,19 @@
                 $com .= ' 
                 </font></span></div><div class="mdb-company-footer">
                 <div class="row">
-                    <div class="col-xs-3 ">
-                        <button class="btn btn-info company-btn pull-left" data-toggle="modal" data-target="#com-rm-modal" onClick="javascript:fetch_details_of_comp('.$comid.');">
-                            Read more
-                        </button>
-                    </div>
                     <div class="col-xs-3 text-center">
-                        <a href="students_list.php?name='.$name.'&&id='.$companyid.'" class="btn btn-success company-btn">
+                        <a href="students_list.php?name='.$name.'&&id='.$companyid.'" class="btn btn-primary company-btn">
                             Students list
                         </a>
                     </div>
                     <div class="col-xs-3 text-center">
                         <button class="editbtn btn btn-success company-btn" id = "editbtn '.$companyid.'"data-toggle="modal" data-target="#com-rm-modal-edit" onClick="javascript:edit_comp('.$comid.');">
                             Edit
+                        </button>
+                    </div>
+                    <div class="col-xs-3 ">
+                        <button class="btn '.$type.' company-btn pull-left" id="'.$companyid.'" onClick="javascript:publish_comp('.$comid.');">
+                            '.$pub.'
                         </button>
                     </div>
                     <div class="col-xs-3 ">

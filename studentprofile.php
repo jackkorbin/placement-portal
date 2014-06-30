@@ -1,15 +1,7 @@
 <?php session_start(); ?>
 <?php
 
-    if(isset($_SESSION['Adminrollnum']) && isset($_GET['rollnum']) ){
-        $rollnum = $_GET['rollnum'];
-        $admin = "yes";
-    }
-    else
-    {
-        header("Location:index.php");
-        exit;
-    }
+    
    
    
 ?>
@@ -28,7 +20,8 @@
 
          <div class="collapse navbar-collapse mybuttonid"> 
             <ui class="nav navbar-nav navbar-right">
-                <?php if($admin == "yes") echo '<li><a href="admin_dashboard.php" class="mdb-menutext">Admin Page</a></li>';  ?>
+                <?php if($admin == "yes"){ echo '<li><a href="view_jnf_list.php" class="mdb-menutext">View JNFs</a></li>'; } ?>
+                <?php if($admin == "yes"){ echo '<li><a href="admin_dashboard.php" class="mdb-menutext">Admin Panel</a></li>'; } ?>
                 <li><a href="mydashboard.php" class="mdb-menutext">My Dashboard</a></li>
                 <li><a href="viewprofile.php" class="mdb-menutext">view profile</a></li>
                 <li><a href="logout.php" class="mdb-menutext">Logout</a></li>

@@ -32,7 +32,8 @@
 
          <div class="collapse navbar-collapse mybuttonid"> 
             <ui class="nav navbar-nav navbar-right">
-                <?php if($admin == "yes") echo '<li><a href="admin_dashboard.php" class="mdb-menutext">Admin Page</a></li>';  ?>
+                <?php if($admin == "yes"){ echo '<li><a href="view_jnf_list.php" class="mdb-menutext">View JNFs</a></li>'; } ?>
+                <?php if($admin == "yes"){ echo '<li><a href="admin_dashboard.php" class="mdb-menutext">Admin Panel</a></li>'; } ?>
                 <li><a href="mydashboard.php" class="mdb-menutext">My Dashboard</a></li>
                 <li><a href="viewprofile.php" class="mdb-menutext">view profile</a></li>
                 <li><a href="logout.php" class="mdb-menutext">Logout</a></li>
@@ -50,7 +51,7 @@
                 <div class="mdb-heading">Students applied to <font color="#447fc8"><?php echo $compname; ?></font>
                 </div>
                 <div class="row ST-mdb-select">
-                  <a href="admin-dashboard.php" class="btn btn-primary ST-a-add-btn">
+                  <a href="admin_dashboard.php" class="btn btn-primary ST-a-add-btn">
                       Back to Companies
                   </a>
                 </div>       
