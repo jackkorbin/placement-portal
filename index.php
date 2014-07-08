@@ -22,7 +22,8 @@
 <?php
 
     if( isset($_GET['msg']) ){
-        $message = $_GET['msg'];
+        if( $_GET['msg'] == 0 )
+        $message = "Invalid Rollnum or Password";
     }
     else {
         $message="";
@@ -44,7 +45,7 @@
             exit;
         }
         else {
-            header("Location:index.php?msg=Invalid Rollnum or Password");
+            header("Location:index.php?msg=0");
             exit;
         }
         
@@ -189,11 +190,11 @@
             'bottom':'0px'
         },200);
         
-        
+        /*
          $('.jack-link, .signinpagefooter').textillate({
             loop: true
          });
-        
+        */
             
         
         

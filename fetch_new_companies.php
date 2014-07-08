@@ -84,7 +84,7 @@
                         </button>
                     </div>
                     <div class="col-xs-3 ">
-                        <button class="btn '.$type.' company-btn pull-left" id="'.$companyid.'" onClick="javascript:publish_comp('.$comid.');">
+                        <button class="btn '.$type.' company-btn pull-left" id="'.$companyid.'" onClick="javascript:publish_comp('.$comid.');" disabled>
                             '.$pub.'
                         </button>
                     </div>

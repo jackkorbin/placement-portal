@@ -421,6 +421,10 @@ mdb-com-sidelinks{
     display: none;
 }
 
+.company-register-button{
+    margin:23px 0;
+}
+
 /* end of edit profile CSS starting ViewprofileCSS --> */
 
 .vpp-labelname{

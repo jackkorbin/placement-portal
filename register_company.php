@@ -13,10 +13,10 @@
         $password = check_input($_POST['password']);
         $repasword = check_input($_POST['repasword']);
         
-        if( strlen($password) > 3 && $password == $repasword && strlen($organization) > 2 && strlen($contact) > 2 && strlen($email) > 2){
+        if( strlen($password) > 4 && $password == $repasword && strlen($organization) > 1 && strlen($contact) > 2 && strlen($email) > 2 &&  check_company_email($email)){
             $result = register_company( $organization,$contact,$designation,$email,$password );
             if($result){
-                header("Location:register_company.php?msg=done");
+                header("Location:register_company.php?msg=1");
                 exit;
             }
             else {
@@ -25,16 +25,18 @@
             }
         }
         else {
-            header("Location:register_company.php?msg=Please Fill properly");
+            header("Location:register_company.php?msg=0");
             exit;
         }
     }
     
-    if( $_GET['msg'] == 'done' ){
-        $msg = "<font color='black'>Registered Successfully. Wait for Admin Approval.</font>";
-    }
-    else if( isset($_GET['msg']) ){
-        $msg = $_GET['msg'];
+    if( isset($_GET['msg']) ){
+        if( $_GET['msg'] == 1 ){
+            $msg = "<font color='#447fc8'>Registered Successfully.Please wait for admin approval.</font>";
+        }
+        else if ( $_GET['msg'] == 0 ){
+            $msg = "<font color='red'>Email already Exist.</font>";
+        }
     }
     else {
         $msg = '';
@@ -53,17 +55,18 @@
   <div class="container mpp-contentdiv">
 
       <div class='mpp-compl-profl text-center'>
-      <?php
-                echo $msg;
-        ?>
+      
       </div>
     
 
-      <form action="register_company.php" method="post" role="form" id="epp-form">
+      <form action="register_company.php" method="post" role="form" id="register-form">
           <div class="row">
               <div class="col-md-6">
                 <div class="thumbnail mpp-divs">
-             
+                      <div class="form-group">
+                          <label class="mpp-labelname">Name</label>
+                          <input type=text name="name" class="form-control" rows="4" id="" placeholder="Organization">
+                      </div>
                      <div class="form-group">
                           <label class="mpp-labelname">Organization</label>
                         <input type=text name="organization" class="form-control" rows="4" id="" placeholder="Organization">
@@ -86,12 +89,12 @@
               <div class="col-md-6 ">
                   <div class="thumbnail mpp-divs">
                      <div class="form-group">
-                          <label class="mpp-labelname">email</label>
-                        <input type=email name="email" class="form-control" rows="4" id="" placeholder="Your Email address">
+                          <label class="mpp-labelname">Email address</label>
+                        <input type="email" name="email" class="form-control" rows="4" id="" placeholder="Your Email address">
                       </div>
 
                       <div class="form-group">
-                          <label class="mpp-labelname">password</label>
+                          <label class="mpp-labelname">Password</label>
                         <input type=password name="password" class="form-control" id="" placeholder="Password">
                       </div>
                       
@@ -99,24 +102,33 @@
                           <label class="mpp-labelname">Confirm password</label>
                         <input type=password name="repasword" class="form-control" id="" placeholder="Re-type Password">
                       </div>
+                      <div class="form-group company-register-button">
+                        <button class="btn btn-success btn-signin" name="register" onClick="check_fields();">Register</button>
+                      </div>
                   </div>
               </div>
-              <div class="col-md-12">
+              
+              
+              
+              <div class="col-md-9">
                   <div class="thumbnail mpp-divs">
-                     <input type=submit class="btn btn-success btn-signin" name=register  value ="Register">
+                     
+                         <span id="error">
+                             <?php
+                                    if( $msg != '' ){
+                                        echo $msg;
+                                    }else {
+                                        echo '<font color="#447fc8">please fill and save all the information, your account will be allowed to login after verification.</font>';
+                                    }
+                            ?>
+                             
+                         </span>
+                      
                   </div>
               </div>
           </div>
       </form>
   </div>
-      
-      <form action="uploadpp.php" method="POST" enctype="multipart/form-data">
-        <input type="file" name="pp" id="chooseprofilepic" >
-      </form>
-      
-      <form action="uploadcv.php" method="POST" enctype="multipart/form-data">
-        <input type="file" name="cv" id="choosecv" >
-      </form>
 
 
 <?php require('includes/footerscriptjs.php'); ?>  
@@ -144,8 +156,42 @@
       $("#filter-date").datepicker({
                 dateFormat: 'yy-mm-dd'
         });
+      
+      $('button[name=register]').click(function(e){
+          e.preventDefault();
+          check_fields();
+      });
+      
+
   });
 
+function check_fields(){     
+  
+    
+   if( $('input[name=organization]').val().length < 1 ) {
+       $('#error').html('Please enter a Valid Organization');
+      
+   }else if( $('input[name=contact]').val().length != 10 ) {
+       $('#error').html('Please enter a Valid contact number.');
+       
+   }else if( $('textarea[name=designation]').val().length < 2 ) {
+       $('#error').html('Please provide a valid designation');
+       
+   }else if( $('input[name=email]').val().length < 3 ) {
+       $('#error').html('Please enter Email');
+      
+   }else if( $('input[name=password]').val() < 5 ) {
+       $('#error').html('Password should be atleast 5 digits');
+      
+   }else if( $('input[name=password]').val() != $('input[name=repasword]').val() ) {
+       $('#error').html('Passwords dont match.');
+      
+   }else {
+        $('#register-form').submit();
+      
+   }
+}
+    
 
 </script>
 

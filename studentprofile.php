@@ -1,7 +1,15 @@
 <?php session_start(); ?>
 <?php
 
-    
+    if( isset($_GET['rollnum']) ){
+        $rollnum = $_GET['rollnum'];
+        $admin = "yes";
+    }
+    else
+    {
+        header("Location:index.php");
+        exit;
+    }
    
    
 ?>

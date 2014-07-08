@@ -43,7 +43,7 @@
            
             $value = updateUserProfile($rollnum,$name,$birthDate,$sex,$alternateEmail,$currentsem,$institute,$cgpa,$education,$technicalExp,$projects, $areaofint,$halfsubmit); 
             if ($value == 1) {
-                header("Location:editprofile.php?message=Updated");
+                header("Location:viewprofile.php?message=Updated");
                 exit;
             }
             else{
