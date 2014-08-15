@@ -78,10 +78,9 @@
           <div class="mdb-students-list thumbnail">
               <div class="mdb-heading"><font color="#447fc8">Download</font></div>
                 <form action="downloadfile.php" method="post">
-                    <input type="hidden" value="<?php echo $content; ?>" name="content">
-                    <input type="hidden" value="<?php echo $compname; ?>" name="compname">
+                    <input type="hidden" value="<?php echo $id; ?>" name="id">
                     <button type="input"  class="btn btn-block btn-md btn-danger sl-custom-btn">
-                        Download whole List as Text<span class="glyphicon glyphicon-cloud-download gly-sort"> </span>
+                        Download whole List as Excel<span class="glyphicon glyphicon-cloud-download gly-sort"> </span>
                     </button>
                 </form>
                 <a href="downloadresumeallzip.php" class="btn btn-block btn-md btn-success sl-custom-btn">

@@ -23,7 +23,7 @@
 
     if( isset($_GET['msg']) ){
         if( $_GET['msg'] == 0 )
-        $message = "Invalid Rollnum or Password";
+        $message = "Invalid Roll number or Password";
     }
     else {
         $message="";

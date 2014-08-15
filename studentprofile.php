@@ -1,7 +1,7 @@
 <?php session_start(); ?>
 <?php
 
-    if( isset($_GET['rollnum']) ){
+    if(isset($_SESSION['Adminrollnum']) && isset($_GET['rollnum']) ){
         $rollnum = $_GET['rollnum'];
         $admin = "yes";
     }

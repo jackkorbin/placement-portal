@@ -5,6 +5,26 @@
               <div class="col-md-4 ">
                   <div class="thumbnail mpp-divs">
                        <form class="" role="form">
+                       
+                            <div class="form-group">
+                                  <label class="vpp-labelname">Phone Number</label>
+                                  <div class="vpp-content-text">'.$phoneNum.'</div>
+                              </div>
+                          
+                              <div class="form-group">
+                                  <label class="vpp-labelname">Birth Date</label>
+                                  <div class="vpp-content-text">'.$birthDate.'</div>
+                              </div>
+                              
+                              <div class="form-group">
+                                  <label class="vpp-labelname"> Alternate Email id</label>
+                                  <div class="vpp-content-text">'.$alternateEmail.'</div>
+                              </div>
+                              
+                              <div class="form-group">
+                                  <label class="vpp-labelname">Current semester</label>
+                                  <div class="vpp-content-text">'.$currentsem.'</div>
+                              </div>
                       
                              <div class="form-group">
                                 <label class="vpp-labelname">Education</label>

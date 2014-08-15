@@ -13,4 +13,10 @@
         $projects = nl2br(check_input($details['projects']));
         $areaofint = nl2br(check_input($details['areaOfIntrest']));
         $phoneNum = check_input($details['phoneNum']);
+
+        $course = check_input($details['course']);
+        $stream = check_input($details['stream']); 
+        $tenth = check_input($details['tenth']);
+        $twelth = check_input($details['twelth']);
+
 ?>

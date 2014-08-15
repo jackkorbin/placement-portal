@@ -67,7 +67,7 @@
         
     }
 	
-	function saveUserProfile( $rollnum,$name,$phoneNum,$birthDate,$sex,$alternateEmail,$currentsem,$institute,$cgpa,$education,$technicalExp,$projects, $areaofint){
+	function saveUserProfile( $rollnum,$name,$phoneNum,$birthDate,$sex,$alternateEmail,$currentsem,$institute,$cgpa,$education,$technicalExp,$projects, $areaofint,$course,$stream,$tenth,$twelth){
 	   global $dbh1;
         
         $result = check_all_fields( $name,$phoneNum,$birthDate,$alternateEmail,$cgpa );
@@ -77,9 +77,9 @@
         } 
         else {
             $query = "INSERT INTO studentsdata
-                    (name,phoneNum,birthdate,sex,alternateEmail,currentSemester,institute,cgpa,
+                    (name,phoneNum,birthdate,sex,alternateEmail,currentSemester,institute,course,stream,tenth,twelth,cgpa,
                     education,technicalExperience,projects,areaOfIntrest, modified_on,rollnum,isProfileComplete,isActive,added_on) 
-                    VALUES ('{$name}','{$phoneNum}','{$birthDate}','{$sex}','{$alternateEmail}','{$currentsem}','{$institute}',
+                    VALUES ('{$name}','{$phoneNum}','{$birthDate}','{$sex}','{$alternateEmail}','{$currentsem}','{$institute}','{$course}','{$stream}','{$tenth}','{$twelth}'
                     '{$cgpa}','{$education}','{$technicalExp}','{$projects}','{$areaofint}', '{$currenttime}','{$rollnum}','1','1',NOW())";
 
             $result = mysql_query($query,$dbh1);
@@ -93,7 +93,7 @@
         }
 	}
     
-	function updateUserProfile( $rollnum,$name,$phoneNum,$birthDate,$sex,$alternateEmail,$currentsem,$institute,$cgpa,$education,$technicalExp,$projects, $areaofint,$halfsubmit){
+	function updateUserProfile( $rollnum,$name,$phoneNum,$birthDate,$sex,$alternateEmail,$currentsem,$institute,$cgpa,$education,$technicalExp,$projects, $areaofint,$halfsubmit,$course,$stream,$tenth,$twelth){
 	
 		//$currenttime = date('Y-m-d');
        // $currenttime = date("M jS, Y", strtotime($currenttime));
@@ -111,6 +111,10 @@
                             alternateEmail='{$alternateEmail}',
                             currentSemester='{$currentsem}',
                             institute='{$institute}',
+                            course='{$course}',
+                            stream='{$stream}',
+                            tenth='{$tenth}',
+                            twelth='{$twelth}',
                             cgpa='{$cgpa}',
                             education='{$education}',
                             technicalExperience='{$technicalExp}',
@@ -126,6 +130,10 @@
             }
             else {
                 $query = "UPDATE studentsdata SET 
+                        phoneNum = '{$phoneNum}',
+                        birthDate = '{$birthDate}',
+                        alternateEmail = '{$alternateEmail}',
+                        currentsem = '{$currentsem}',
                         education='{$education}',
                         technicalExperience='{$technicalExp}',
                         projects='{$projects}',

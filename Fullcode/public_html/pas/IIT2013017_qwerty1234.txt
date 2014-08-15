@@ -1,2 +1,0 @@
-rollnum:IIT2013017
-password:qwerty1234

@@ -18,25 +18,14 @@
                                   <div class="vpp-content-text">'.$name.'</div>
                               </div>
                               
-                              <div class="form-group">
-                                  <label class="vpp-labelname">Phone Number</label>
-                                  <div class="vpp-content-text">'.$phoneNum.'</div>
-                              </div>
-                          
-                              <div class="form-group">
-                                  <label class="vpp-labelname">Birth Date</label>
-                                  <div class="vpp-content-text">'.$birthDate.'</div>
-                              </div>
+                              
                           
                               <div class="form-group">
                                   <label class="vpp-labelname">Sex</label>
                                   <div class="vpp-content-text">'.$sex.'</div>
                               </div>
                           
-                              <div class="form-group">
-                                  <label class="vpp-labelname"> Alternate Email id</label>
-                                  <div class="vpp-content-text">'.$alternateEmail.'</div>
-                              </div>
+                              
                           
                               <div class="form-group">
                                   <label class="vpp-labelname">Institute</label>
@@ -44,9 +33,27 @@
                               </div>
                           
                               <div class="form-group">
-                                  <label class="vpp-labelname">Current semester</label>
-                                  <div class="vpp-content-text">'.$currentsem.'</div>
+                                  <label class="vpp-labelname">Btech/Mtech</label>
+                                  <div class="vpp-content-text">'.$course.'</div>
                               </div>
+
+                              <div class="form-group">
+                                  <label class="vpp-labelname">IT/ECE</label>
+                                  <div class="vpp-content-text">'.$stream.'</div>
+                              </div>
+
+
+                              <div class="form-group">
+                                  <label class="vpp-labelname">CGPA</label>
+                                  <div class="vpp-content-text">'.$tenth.'</div>
+                              </div>
+
+                              <div class="form-group">
+                                  <label class="vpp-labelname">CGPA</label>
+                                  <div class="vpp-content-text">'.$twelth.'</div>
+                              </div>
+                              
+                              
                               <div class="form-group">
                                   <label class="vpp-labelname">CGPA</label>
                                   <div class="vpp-content-text">'.$cgpa.'</div>

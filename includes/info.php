@@ -22,7 +22,7 @@
 
     define("LDAP_LOGIN", false);
 
-    define("ALLOW_PROFILE_EDIT", true);
+    define("ALLOW_PROFILE_EDIT", false);
 	
 
 ?>

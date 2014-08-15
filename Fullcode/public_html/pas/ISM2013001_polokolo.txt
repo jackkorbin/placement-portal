@@ -1,2 +1,0 @@
-rollnum:ISM2013001
-password:polokolo

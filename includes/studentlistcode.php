@@ -22,12 +22,13 @@
                 </tr> ';
                 echo $list;
                 $i++;
-
+                
                 $content .= "name : ".$name;
                 $content .= "\r\nRollnum : ".$rollnum;
                 $content .= "\r\nCGPA : ".$cgpa;
                 $content .= "\r\nInstitute : ".$institute;
                 $content .= "\r\n---------------------------\r\n\r\n";
+                
             }
         }
         else {

@@ -1,2 +1,0 @@
-rollnum:IIT
-password:ww
